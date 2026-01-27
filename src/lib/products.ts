@@ -4,7 +4,7 @@ export const products: Product[] = [
   {
     id: 'sigma-hoodie-black',
     name: 'Sigma Oversized Hoodie',
-    price: 285,
+    price: 500,
     image: '/products/hoodie-black.jpg',
     images: ['/products/hoodie-black.jpg', '/products/hoodie-black-2.jpg'],
     category: 'Hoodies',

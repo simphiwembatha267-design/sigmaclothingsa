@@ -96,7 +96,7 @@ export default function ProductPage() {
               {product.category}
             </p>
             <h1 className="font-display text-display-md mb-2">{product.name}</h1>
-            <p className="text-body-lg mb-6">€{product.price}</p>
+            <p className="text-body-lg mb-6">R{product.price}</p>
             
             <p className="text-muted-foreground mb-8">{product.description}</p>
 
@@ -167,7 +167,7 @@ export default function ProductPage() {
                   <Check className="w-4 h-4" /> Added to Cart
                 </span>
               ) : selectedSize ? (
-                `Add to Cart — €${product.price * quantity}`
+                `Add to Cart — R${product.price * quantity}`
               ) : (
                 'Select a Size'
               )}
