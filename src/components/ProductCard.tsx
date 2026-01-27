@@ -34,7 +34,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
           <h3 className="text-body-sm font-medium group-hover:underline underline-offset-4 transition-all">
             {product.name}
           </h3>
-          <p className="text-body-sm text-muted-foreground">€{product.price}</p>
+          <p className="text-body-sm text-muted-foreground">R{product.price}</p>
         </div>
       </Link>
     </motion.div>
