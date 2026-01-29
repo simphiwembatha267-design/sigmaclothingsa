@@ -47,8 +47,8 @@ export function Header() {
             </button>
 
             {/* Logo */}
-            <Link to="/" className="text-xl md:text-2xl tracking-widest uppercase font-serif">
-              Sigma
+            <Link to="/" className="text-xl md:text-2xl tracking-wide font-bold" style={{ fontFamily: "'Noto Serif Display', serif", fontVariantCaps: 'small-caps' }}>
+              sigma.
             </Link>
 
             {/* Desktop nav */}
@@ -90,8 +90,8 @@ export function Header() {
           duration: 0.3
         }} className="fixed top-0 left-0 bottom-0 w-[280px] bg-background z-50 md:hidden">
               <div className="flex items-center justify-between h-16 px-4">
-                <span className="font-display text-xl tracking-widest uppercase">
-                  Sigma
+                <span className="text-xl tracking-wide font-bold" style={{ fontFamily: "'Noto Serif Display', serif", fontVariantCaps: 'small-caps' }}>
+                  sigma.
                 </span>
                 <button onClick={() => setIsMenuOpen(false)} className="p-2 -mr-2" aria-label="Close menu">
                   <X className="w-5 h-5" />
