@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Instagram } from 'lucide-react';
+import logo from '@/assets/logo.png';
 
 const footerLinks = {
   shop: [
@@ -30,8 +31,8 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link to="/" className="text-2xl tracking-wide font-bold" style={{ fontFamily: "'Noto Serif Display', serif", fontVariantCaps: 'small-caps' }}>
-              sigma.
+            <Link to="/">
+              <img src={logo} alt="sigma." className="h-8 w-auto invert" />
             </Link>
             <p className="mt-4 text-body-sm text-background/60 max-w-xs">
               Avant-garde streetwear for the modern individual. Tokyo. Paris. London.
