@@ -11,6 +11,7 @@ export interface Product {
   description: string;
   sizes: string[];
   color?: string;
+  colorVariants?: string[];
 }
 
 export interface CartItem {

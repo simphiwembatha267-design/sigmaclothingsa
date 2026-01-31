@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getProductById, products } from '@/lib/products';
 import { useCartStore } from '@/lib/store';
@@ -14,14 +14,29 @@ const sizeGuide = [
   { size: 'XL', chest: '107-112', waist: '91-97', hips: '107-112' },
 ];
 
+const getColorHex = (color?: string) => {
+  switch (color) {
+    case 'Black': return '#000';
+    case 'White': return '#fff';
+    case 'Cream': return '#f5f5dc';
+    case 'Olive': return '#556b2f';
+    default: return '#888';
+  }
+};
+
 export default function ProductPage() {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const product = getProductById(id || '');
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [showSizeGuide, setShowSizeGuide] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
   const { addItem, openCart } = useCartStore();
+  
+  const colorVariants = product?.colorVariants 
+    ? products.filter(p => product.colorVariants?.includes(p.id))
+    : [];
 
   if (!product) {
     return (
@@ -76,12 +91,20 @@ export default function ProductPage() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="aspect-[3/4] bg-muted relative sticky top-24">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="font-display text-[8rem] text-muted-foreground/20 uppercase">
-                  {product.name.charAt(0)}
-                </span>
-              </div>
+            <div className="aspect-[3/4] bg-muted relative sticky top-24 overflow-hidden">
+              {product.image.startsWith('/assets') || product.image.startsWith('http') ? (
+                <img 
+                  src={product.image} 
+                  alt={product.name}
+                  className="w-full h-full object-cover object-center"
+                />
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="font-display text-[8rem] text-muted-foreground/20 uppercase">
+                    {product.name.charAt(0)}
+                  </span>
+                </div>
+              )}
             </div>
           </motion.div>
 
@@ -99,6 +122,31 @@ export default function ProductPage() {
             <p className="text-body-lg mb-6">R{product.price}</p>
             
             <p className="text-muted-foreground mb-8">{product.description}</p>
+
+            {/* Color Selection */}
+            {colorVariants.length > 1 && (
+              <div className="mb-6">
+                <span className="text-caption uppercase block mb-3">Color — {product.color}</span>
+                <div className="flex gap-3">
+                  {colorVariants.map((variant) => (
+                    <button
+                      key={variant.id}
+                      onClick={() => navigate(`/product/${variant.id}`)}
+                      className={`w-8 h-8 rounded-full border-2 transition-all ${
+                        variant.id === product.id 
+                          ? 'ring-2 ring-offset-2 ring-foreground' 
+                          : 'hover:scale-110'
+                      }`}
+                      style={{
+                        backgroundColor: getColorHex(variant.color),
+                        borderColor: variant.color === 'White' ? '#ddd' : 'transparent'
+                      }}
+                      title={variant.color}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Size Selection */}
             <div className="mb-6">
