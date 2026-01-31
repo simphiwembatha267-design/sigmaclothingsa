@@ -20,25 +20,6 @@ export default function Shop() {
     setSearchParams(searchParams);
   };
   return <div className="pt-20 md:pt-24">
-      {/* Header */}
-      <section className="container-editorial py-12 md:py-16">
-        <motion.div initial={{
-        opacity: 0,
-        y: 20
-      }} animate={{
-        opacity: 1,
-        y: 0
-      }} transition={{
-        duration: 0.6
-      }}>
-          <h1 className="text-display-lg mb-4 font-serif">Shop</h1>
-          <p className="text-muted-foreground max-w-lg">
-            Curated essentials and statement pieces. Each garment is designed 
-            to transcend seasons and trends.
-          </p>
-        </motion.div>
-      </section>
-
       {/* Filters */}
       <section className="sticky top-16 md:top-20 z-40 bg-background/95 backdrop-blur-sm border-b border-border">
         <div className="container-editorial">
