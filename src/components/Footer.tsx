@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Instagram } from 'lucide-react';
-import logo from '@/assets/logo.png';
+import { Logo } from './Logo';
 
 const footerLinks = {
   shop: [
@@ -32,7 +32,7 @@ export function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link to="/">
-              <img src={logo} alt="S." className="h-12 invert" />
+              <Logo className="h-14" />
             </Link>
             <p className="mt-4 text-body-sm text-background/60 max-w-xs">
               Avant-garde streetwear for the modern individual. Tokyo. Paris. London.

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCartStore } from '@/lib/store';
 import { Menu, X, ShoppingBag } from 'lucide-react';
-import logo from '@/assets/logo.png';
+import { Logo } from './Logo';
 
 const navLinks = [{
   href: '/',
@@ -50,7 +50,7 @@ export function Header() {
 
             {/* Logo */}
             <Link to="/">
-              <img src={logo} alt="S." className="h-10 md:h-12" />
+              <Logo className="h-12 md:h-14" />
             </Link>
 
             {/* Desktop nav */}
@@ -92,7 +92,7 @@ export function Header() {
           duration: 0.3
         }} className="fixed top-0 left-0 bottom-0 w-[280px] bg-background z-50 md:hidden">
               <div className="flex items-center justify-between h-16 px-4">
-                <img src={logo} alt="S." className="h-10" />
+                <Logo className="h-12" />
                 <button onClick={() => setIsMenuOpen(false)} className="p-2 -mr-2" aria-label="Close menu">
                   <X className="w-5 h-5" />
                 </button>
