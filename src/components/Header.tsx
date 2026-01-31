@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCartStore } from '@/lib/store';
 import { Menu, X, ShoppingBag } from 'lucide-react';
+import logo from '@/assets/logo.png';
+
 const navLinks = [{
   href: '/',
   label: 'Home'
@@ -47,8 +49,8 @@ export function Header() {
             </button>
 
             {/* Logo */}
-            <Link to="/" className="text-2xl md:text-3xl font-black lowercase" style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '-0.05em' }}>
-              sigma.
+            <Link to="/">
+              <img src={logo} alt="S." className="h-10 md:h-12" />
             </Link>
 
             {/* Desktop nav */}
@@ -90,9 +92,7 @@ export function Header() {
           duration: 0.3
         }} className="fixed top-0 left-0 bottom-0 w-[280px] bg-background z-50 md:hidden">
               <div className="flex items-center justify-between h-16 px-4">
-                <span className="text-2xl font-black lowercase" style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '-0.05em' }}>
-                  sigma.
-                </span>
+                <img src={logo} alt="S." className="h-10" />
                 <button onClick={() => setIsMenuOpen(false)} className="p-2 -mr-2" aria-label="Close menu">
                   <X className="w-5 h-5" />
                 </button>
