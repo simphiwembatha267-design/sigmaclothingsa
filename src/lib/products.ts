@@ -1,4 +1,6 @@
 import { Product } from './store';
+import teeBlack from '@/assets/tee-black.png';
+import teeWhite from '@/assets/tee-white.png';
 
 export const products: Product[] = [
   {
@@ -16,8 +18,8 @@ export const products: Product[] = [
     id: 'sigma-tee-black',
     name: 'Essential Tee',
     price: 125,
-    image: '/assets/tee-black.png',
-    images: ['/assets/tee-black.png'],
+    image: teeBlack,
+    images: [teeBlack],
     category: 'T-Shirts',
     description: 'Premium 280gsm organic cotton jersey. Boxy fit with ribbed crew neck. Screen-printed Sigma wordmark at back. Made in Portugal.',
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
@@ -28,8 +30,8 @@ export const products: Product[] = [
     id: 'sigma-tee-white',
     name: 'Essential Tee',
     price: 125,
-    image: '/assets/tee-white.png',
-    images: ['/assets/tee-white.png'],
+    image: teeWhite,
+    images: [teeWhite],
     category: 'T-Shirts',
     description: 'Premium 280gsm organic cotton jersey. Boxy fit with ribbed crew neck. Screen-printed Sigma wordmark at back. Made in Portugal.',
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
