@@ -16,11 +16,11 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{
-            opacity: [0, 1, 0.1, 1, 0.1, 1],
+            opacity: [0, 1, 0, 1, 0, 1],
           }}
           transition={{
-            duration: 2,
-            times: [0, 0.2, 0.35, 0.5, 0.65, 0.8],
+            duration: 3.5,
+            times: [0, 0.15, 0.3, 0.5, 0.65, 0.85],
             ease: 'easeInOut',
           }}
           onAnimationComplete={onComplete}
