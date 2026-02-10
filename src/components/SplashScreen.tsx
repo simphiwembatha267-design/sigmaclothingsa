@@ -19,8 +19,8 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
             opacity: [0, 1, 0, 1, 0, 1],
           }}
           transition={{
-            duration: 3.5,
-            times: [0, 0.15, 0.3, 0.5, 0.65, 0.85],
+            duration: 5.5,
+            times: [0, 0.12, 0.28, 0.45, 0.62, 0.82],
             ease: 'easeInOut',
           }}
           onAnimationComplete={onComplete}
