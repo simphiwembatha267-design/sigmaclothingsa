@@ -111,9 +111,10 @@ export function Header() {
                 >
                   <Link
                     to={link.href}
-                    className={`block py-4 font-display text-3xl uppercase tracking-wide border-b border-white/10 ${
+                    className={`block py-3 text-xl font-bold uppercase tracking-widest ${
                       location.pathname === link.href ? 'text-white' : 'text-white/60'
                     }`}
+                    style={{ fontFamily: 'var(--font-body)' }}
                   >
                     {link.label}
                   </Link>
