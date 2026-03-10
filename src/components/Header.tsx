@@ -79,7 +79,7 @@ export function Header() {
             {/* Background hero image with dark overlay */}
             <div className="absolute inset-0">
               <img src={heroImage} alt="" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-foreground/75" />
+              <div className="absolute inset-0 bg-foreground/90" />
             </div>
 
             {/* Top bar */}
