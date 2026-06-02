@@ -1,6 +1,8 @@
 import { Product } from './store';
 import teeBlack from '@/assets/tee-black.png';
 import teeWhite from '@/assets/tee-white.png';
+import loopTeeBlack from '@/assets/sigma-loop-tee-black.jpg.asset.json';
+import loopTeeWhite from '@/assets/sigma-loop-tee-white.jpg.asset.json';
 
 export const products: Product[] = [
   {
