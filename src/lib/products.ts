@@ -1,6 +1,8 @@
 import { Product } from './store';
 import teeBlack from '@/assets/tee-black.png';
 import teeWhite from '@/assets/tee-white.png';
+import loopTeeBlack from '@/assets/sigma-loop-tee-black.jpg.asset.json';
+import loopTeeWhite from '@/assets/sigma-loop-tee-white.jpg.asset.json';
 
 export const products: Product[] = [
   {
@@ -37,6 +39,30 @@ export const products: Product[] = [
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     color: 'White',
     colorVariants: ['sigma-tee-black', 'sigma-tee-white'],
+  },
+  {
+    id: 'sigma-loop-tee-black',
+    name: 'Loop Logo Tee',
+    price: 145,
+    image: loopTeeBlack.url,
+    images: [loopTeeBlack.url],
+    category: 'T-Shirts',
+    description: 'Heavyweight 280gsm cotton jersey. Boxy oversized fit. Signature Sigma loop logo at chest and oversized graphic at back. Made in Portugal.',
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    color: 'Black',
+    colorVariants: ['sigma-loop-tee-black', 'sigma-loop-tee-white'],
+  },
+  {
+    id: 'sigma-loop-tee-white',
+    name: 'Loop Logo Tee',
+    price: 145,
+    image: loopTeeWhite.url,
+    images: [loopTeeWhite.url],
+    category: 'T-Shirts',
+    description: 'Heavyweight 280gsm cotton jersey. Boxy oversized fit. Signature Sigma loop logo at chest and oversized graphic at back. Made in Portugal.',
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    color: 'White',
+    colorVariants: ['sigma-loop-tee-black', 'sigma-loop-tee-white'],
   },
   {
     id: 'sigma-cargo-black',

@@ -21,7 +21,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
     >
       <Link to={`/product/${product.id}`} className="group block product-card">
         <div className="relative aspect-[3/4] bg-muted overflow-hidden mb-4">
-          {product.image.startsWith('/assets') || product.image.startsWith('http') ? (
+          {product.image.startsWith('/') || product.image.startsWith('http') ? (
             <img 
               src={product.image} 
               alt={product.name}

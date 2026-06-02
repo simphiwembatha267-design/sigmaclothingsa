@@ -92,7 +92,7 @@ export default function ProductPage() {
             transition={{ duration: 0.6 }}
           >
             <div className="aspect-[3/4] bg-muted relative sticky top-24 overflow-hidden">
-              {product.image.startsWith('/assets') || product.image.startsWith('http') ? (
+              {product.image.startsWith('/') || product.image.startsWith('http') ? (
                 <img 
                   src={product.image} 
                   alt={product.name}
