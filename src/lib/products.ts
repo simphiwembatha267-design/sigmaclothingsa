@@ -7,6 +7,8 @@ import renaissanceTeeBlack from '@/assets/sigma-renaissance-tee-black.jpg.asset.
 import renaissanceTeeWhite from '@/assets/sigma-renaissance-tee-white.jpg.asset.json';
 import exclusiveTeeBlack from '@/assets/sigma-exclusive-tee-black.jpg.asset.json';
 import exclusiveTeeWhite from '@/assets/sigma-exclusive-tee-white.jpg.asset.json';
+import renaissanceHoodieBlack from '@/assets/sigma-renaissance-hoodie-black.jpg.asset.json';
+import renaissanceHoodieWhite from '@/assets/sigma-renaissance-hoodie-white.jpg.asset.json';
 
 export const products: Product[] = [
   {
@@ -19,6 +21,30 @@ export const products: Product[] = [
     description: 'Heavyweight 450gsm French terry cotton. Dropped shoulders with elongated sleeves. Embroidered Sigma logo at chest. Made in Portugal.',
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     color: 'Black',
+  },
+  {
+    id: 'sigma-renaissance-hoodie-black',
+    name: 'Renaissance Hoodie',
+    price: 650,
+    image: renaissanceHoodieBlack.url,
+    images: [renaissanceHoodieBlack.url],
+    category: 'Hoodies',
+    description: 'Heavyweight 450gsm French terry cotton. Oversized fit with dropped shoulders. Sigma wordmark at front chest with Renaissance artwork graphic at back. Made in Portugal.',
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    color: 'Black',
+    colorVariants: ['sigma-renaissance-hoodie-black', 'sigma-renaissance-hoodie-white'],
+  },
+  {
+    id: 'sigma-renaissance-hoodie-white',
+    name: 'Renaissance Hoodie',
+    price: 650,
+    image: renaissanceHoodieWhite.url,
+    images: [renaissanceHoodieWhite.url],
+    category: 'Hoodies',
+    description: 'Heavyweight 450gsm French terry cotton. Oversized fit with dropped shoulders. Sigma wordmark at front chest with Renaissance artwork graphic at back. Made in Portugal.',
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    color: 'White',
+    colorVariants: ['sigma-renaissance-hoodie-black', 'sigma-renaissance-hoodie-white'],
   },
   {
     id: 'sigma-tee-black',
