@@ -5,6 +5,8 @@ import loopTeeBlack from '@/assets/sigma-loop-tee-black.jpg.asset.json';
 import loopTeeWhite from '@/assets/sigma-loop-tee-white.jpg.asset.json';
 import renaissanceTeeBlack from '@/assets/sigma-renaissance-tee-black.jpg.asset.json';
 import renaissanceTeeWhite from '@/assets/sigma-renaissance-tee-white.jpg.asset.json';
+import exclusiveTeeBlack from '@/assets/sigma-exclusive-tee-black.jpg.asset.json';
+import exclusiveTeeWhite from '@/assets/sigma-exclusive-tee-white.jpg.asset.json';
 
 export const products: Product[] = [
   {
@@ -89,6 +91,30 @@ export const products: Product[] = [
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     color: 'White',
     colorVariants: ['sigma-renaissance-tee-black', 'sigma-renaissance-tee-white'],
+  },
+  {
+    id: 'sigma-exclusive-tee-black',
+    name: 'Exclusive Tee',
+    price: 400,
+    image: exclusiveTeeBlack.url,
+    images: [exclusiveTeeBlack.url],
+    category: 'T-Shirts',
+    description: 'Heavyweight 280gsm cotton jersey. Boxy oversized fit. Outlined Sigma loop logo at chest with arched "SIGMA EXCLUSIVE" graphic at back. Made in Portugal.',
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    color: 'Black',
+    colorVariants: ['sigma-exclusive-tee-black', 'sigma-exclusive-tee-white'],
+  },
+  {
+    id: 'sigma-exclusive-tee-white',
+    name: 'Exclusive Tee',
+    price: 400,
+    image: exclusiveTeeWhite.url,
+    images: [exclusiveTeeWhite.url],
+    category: 'T-Shirts',
+    description: 'Heavyweight 280gsm cotton jersey. Boxy oversized fit. Outlined Sigma loop logo at chest with arched "SIGMA EXCLUSIVE" graphic at back. Made in Portugal.',
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    color: 'White',
+    colorVariants: ['sigma-exclusive-tee-black', 'sigma-exclusive-tee-white'],
   },
   {
     id: 'sigma-cargo-black',
