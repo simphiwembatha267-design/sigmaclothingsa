@@ -7,6 +7,8 @@ import renaissanceTeeBlack from '@/assets/sigma-renaissance-tee-black.jpg.asset.
 import renaissanceTeeWhite from '@/assets/sigma-renaissance-tee-white.jpg.asset.json';
 import exclusiveTeeBlack from '@/assets/sigma-exclusive-tee-black.jpg.asset.json';
 import exclusiveTeeWhite from '@/assets/sigma-exclusive-tee-white.jpg.asset.json';
+import renaissanceHoodieBlack from '@/assets/sigma-renaissance-hoodie-black.jpg.asset.json';
+import renaissanceHoodieWhite from '@/assets/sigma-renaissance-hoodie-white.jpg.asset.json';
 
 export const products: Product[] = [
   {
