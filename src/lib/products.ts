@@ -3,6 +3,8 @@ import teeBlack from '@/assets/tee-black.png';
 import teeWhite from '@/assets/tee-white.png';
 import loopTeeBlack from '@/assets/sigma-loop-tee-black.jpg.asset.json';
 import loopTeeWhite from '@/assets/sigma-loop-tee-white.jpg.asset.json';
+import renaissanceTeeBlack from '@/assets/sigma-renaissance-tee-black.jpg.asset.json';
+import renaissanceTeeWhite from '@/assets/sigma-renaissance-tee-white.jpg.asset.json';
 
 export const products: Product[] = [
   {
@@ -63,6 +65,30 @@ export const products: Product[] = [
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     color: 'White',
     colorVariants: ['sigma-loop-tee-black', 'sigma-loop-tee-white'],
+  },
+  {
+    id: 'sigma-renaissance-tee-black',
+    name: 'Renaissance Tee',
+    price: 400,
+    image: renaissanceTeeBlack.url,
+    images: [renaissanceTeeBlack.url],
+    category: 'T-Shirts',
+    description: 'Heavyweight 280gsm cotton jersey. Boxy oversized fit. Sigma wordmark at front chest with Renaissance artwork graphic at back. Made in Portugal.',
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    color: 'Black',
+    colorVariants: ['sigma-renaissance-tee-black', 'sigma-renaissance-tee-white'],
+  },
+  {
+    id: 'sigma-renaissance-tee-white',
+    name: 'Renaissance Tee',
+    price: 400,
+    image: renaissanceTeeWhite.url,
+    images: [renaissanceTeeWhite.url],
+    category: 'T-Shirts',
+    description: 'Heavyweight 280gsm cotton jersey. Boxy oversized fit. Sigma wordmark at front chest with Renaissance artwork graphic at back. Made in Portugal.',
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    color: 'White',
+    colorVariants: ['sigma-renaissance-tee-black', 'sigma-renaissance-tee-white'],
   },
   {
     id: 'sigma-cargo-black',
