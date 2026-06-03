@@ -12,17 +12,6 @@ import renaissanceHoodieWhite from '@/assets/sigma-renaissance-hoodie-white.jpg.
 
 export const products: Product[] = [
   {
-    id: 'sigma-hoodie-black',
-    name: 'Sigma Oversized Hoodie',
-    price: 500,
-    image: '/products/hoodie-black.jpg',
-    images: ['/products/hoodie-black.jpg', '/products/hoodie-black-2.jpg'],
-    category: 'Hoodies',
-    description: 'Heavyweight 450gsm French terry cotton. Dropped shoulders with elongated sleeves. Embroidered Sigma logo at chest. Made in Portugal.',
-    sizes: ['XS', 'S', 'M', 'L', 'XL'],
-    color: 'Black',
-  },
-  {
     id: 'sigma-renaissance-hoodie-black',
     name: 'Renaissance Hoodie',
     price: 650,
@@ -49,7 +38,7 @@ export const products: Product[] = [
   {
     id: 'sigma-tee-black',
     name: 'Essential Tee',
-    price: 125,
+    price: 370,
     image: teeBlack,
     images: [teeBlack],
     category: 'T-Shirts',
@@ -61,7 +50,7 @@ export const products: Product[] = [
   {
     id: 'sigma-tee-white',
     name: 'Essential Tee',
-    price: 125,
+    price: 370,
     image: teeWhite,
     images: [teeWhite],
     category: 'T-Shirts',
@@ -73,7 +62,7 @@ export const products: Product[] = [
   {
     id: 'sigma-loop-tee-black',
     name: 'Loop Logo Tee',
-    price: 145,
+    price: 370,
     image: loopTeeBlack.url,
     images: [loopTeeBlack.url],
     category: 'T-Shirts',
@@ -85,7 +74,7 @@ export const products: Product[] = [
   {
     id: 'sigma-loop-tee-white',
     name: 'Loop Logo Tee',
-    price: 145,
+    price: 370,
     image: loopTeeWhite.url,
     images: [loopTeeWhite.url],
     category: 'T-Shirts',
@@ -97,7 +86,7 @@ export const products: Product[] = [
   {
     id: 'sigma-renaissance-tee-black',
     name: 'Renaissance Tee',
-    price: 400,
+    price: 370,
     image: renaissanceTeeBlack.url,
     images: [renaissanceTeeBlack.url],
     category: 'T-Shirts',
@@ -109,7 +98,7 @@ export const products: Product[] = [
   {
     id: 'sigma-renaissance-tee-white',
     name: 'Renaissance Tee',
-    price: 400,
+    price: 370,
     image: renaissanceTeeWhite.url,
     images: [renaissanceTeeWhite.url],
     category: 'T-Shirts',
@@ -121,7 +110,7 @@ export const products: Product[] = [
   {
     id: 'sigma-exclusive-tee-black',
     name: 'Exclusive Tee',
-    price: 400,
+    price: 370,
     image: exclusiveTeeBlack.url,
     images: [exclusiveTeeBlack.url],
     category: 'T-Shirts',
@@ -133,7 +122,7 @@ export const products: Product[] = [
   {
     id: 'sigma-exclusive-tee-white',
     name: 'Exclusive Tee',
-    price: 400,
+    price: 370,
     image: exclusiveTeeWhite.url,
     images: [exclusiveTeeWhite.url],
     category: 'T-Shirts',
@@ -200,7 +189,7 @@ export const products: Product[] = [
   {
     id: 'sigma-longsleeve-black',
     name: 'Thermal Long Sleeve',
-    price: 165,
+    price: 370,
     image: '/products/longsleeve-black.jpg',
     images: ['/products/longsleeve-black.jpg', '/products/longsleeve-black-2.jpg'],
     category: 'T-Shirts',
