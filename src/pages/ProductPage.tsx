@@ -118,7 +118,7 @@ export default function ProductPage() {
             <p className="text-caption uppercase text-muted-foreground mb-2">
               {product.category}
             </p>
-            <h1 className="font-display text-display-md mb-2">{product.name}</h1>
+            <h1 className="text-3xl md:text-4xl font-bold uppercase tracking-widest mb-2" style={{ fontFamily: 'var(--font-body)' }}>{product.name}</h1>
             <p className="text-body-lg mb-6">R{product.price}</p>
             
             <p className="text-muted-foreground mb-8">{product.description}</p>
@@ -224,7 +224,7 @@ export default function ProductPage() {
             {/* Details */}
             <div className="mt-12 pt-8 border-t border-border space-y-4">
               <div>
-                <h3 className="text-caption uppercase mb-2">Details</h3>
+                <h3 className="text-lg font-bold uppercase tracking-widest mb-2" style={{ fontFamily: 'var(--font-body)' }}>Details</h3>
                 <ul className="text-body-sm text-muted-foreground space-y-1">
                   <li>• Premium quality materials</li>
                   <li>• Made in Portugal</li>
@@ -232,7 +232,7 @@ export default function ProductPage() {
                 </ul>
               </div>
               <div>
-                <h3 className="text-caption uppercase mb-2">Shipping</h3>
+                <h3 className="text-lg font-bold uppercase tracking-widest mb-2" style={{ fontFamily: 'var(--font-body)' }}>Shipping</h3>
                 <p className="text-body-sm text-muted-foreground">
                   Free worldwide shipping on orders over €200. 
                   Standard delivery 3-7 business days.
@@ -246,7 +246,7 @@ export default function ProductPage() {
       {/* Related Products */}
       {relatedProducts.length > 0 && (
         <section className="container-editorial section-padding border-t border-border">
-          <h2 className="font-display text-display-md mb-12">You May Also Like</h2>
+          <h2 className="text-2xl md:text-3xl font-bold uppercase tracking-widest mb-12" style={{ fontFamily: 'var(--font-body)' }}>You May Also Like</h2>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
             {relatedProducts.map((product, index) => (
               <ProductCard key={product.id} product={product} index={index} />
