@@ -46,7 +46,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
         </div>
         
         <div className="space-y-2">
-          <h3 className="text-body-sm font-medium group-hover:underline underline-offset-4 transition-all">
+          <h3 className="text-sm font-bold uppercase tracking-widest group-hover:underline underline-offset-4 transition-all" style={{ fontFamily: 'var(--font-body)' }}>
             {product.name}
           </h3>
           <p className="text-body-sm text-muted-foreground">R{product.price}</p>
