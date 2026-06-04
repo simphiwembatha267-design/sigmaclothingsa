@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { Layout } from "./components/Layout";
 import { SplashScreen } from "./components/SplashScreen";
+import { ScrollToTop } from "./components/ScrollToTop";
 import Index from "./pages/Index";
 import Shop from "./pages/Shop";
 import ProductPage from "./pages/ProductPage";
@@ -36,6 +37,7 @@ const App = () => {
               transition={{ duration: 0.6 }}
             >
               <BrowserRouter>
+                <ScrollToTop />
                 <Routes>
                   <Route element={<Layout />}>
                     <Route path="/" element={<Index />} />
