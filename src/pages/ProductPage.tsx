@@ -118,7 +118,7 @@ export default function ProductPage() {
             <p className="text-caption uppercase text-muted-foreground mb-2">
               {product.category}
             </p>
-            <h1 className="text-3xl md:text-4xl font-bold uppercase tracking-widest mb-2" style={{ fontFamily: 'var(--font-body)' }}>{product.name}</h1>
+            <h1 className="text-3xl md:text-4xl font-bold tracking-wide mb-2" style={{ fontFamily: 'var(--font-body)' }}>{product.name}</h1>
             <p className="text-body-lg mb-6">R{product.price}</p>
             
             <p className="text-muted-foreground mb-8">{product.description}</p>
