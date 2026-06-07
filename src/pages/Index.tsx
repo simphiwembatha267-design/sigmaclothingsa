@@ -79,7 +79,7 @@ const Index = () => {
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
             <div>
               <p className="text-caption uppercase text-muted-foreground mb-2">Featured</p>
-              <h2 className="font-display text-display-md">New Arrivals</h2>
+              <h2 className="text-2xl md:text-3xl font-bold tracking-wide" style={{ fontFamily: 'var(--font-body)' }}>New Arrivals</h2>
             </div>
             <Link
               to="/shop"
