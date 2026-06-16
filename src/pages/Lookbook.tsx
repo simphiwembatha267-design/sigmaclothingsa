@@ -9,7 +9,7 @@ const images = [
   { src: sigmaExclusiveCover.url, title: 'Sigma Exclusive', season: 'FW25' },
   { src: lookbook2, title: 'Urban Poetry', season: 'FW25' },
   { src: lookbook3, title: 'Form & Function', season: 'FW25' },
-  { src: lookbookSS25Cover.url, title: 'Between Shadow and Light', season: 'SS25' },
+  { src: sigmaLookbookSS25.url, title: 'Between Shadow and Light', season: 'SS25' },
   { src: sigmaLookbookSS25.url, title: 'Dawn Walker', season: 'SS25' },
   { src: sigmaLookbookSS25.url, title: 'Shadow Play', season: 'SS25' },
 ];
