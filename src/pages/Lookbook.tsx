@@ -1,15 +1,15 @@
 import { motion } from 'framer-motion';
-import lookbook1 from '@/assets/lookbook-1.jpg';
+import sigmaExclusiveCover from '@/assets/sigma-exclusive-cover.jpg.asset.json';
 import lookbook2 from '@/assets/lookbook-2.jpg';
 import lookbook3 from '@/assets/lookbook-3.jpg';
 
 const images = [
-  { src: lookbook1, title: 'Silence Speaks', season: 'FW25' },
+  { src: sigmaExclusiveCover.url, title: 'Sigma Exclusive', season: 'FW25' },
   { src: lookbook2, title: 'Urban Poetry', season: 'FW25' },
   { src: lookbook3, title: 'Form & Function', season: 'FW25' },
-  { src: lookbook1, title: 'Night Ritual', season: 'SS25' },
-  { src: lookbook2, title: 'Dawn Walker', season: 'SS25' },
-  { src: lookbook3, title: 'Shadow Play', season: 'SS25' },
+  { src: lookbook2, title: 'Night Ritual', season: 'SS25' },
+  { src: lookbook3, title: 'Dawn Walker', season: 'SS25' },
+  { src: sigmaExclusiveCover.url, title: 'Shadow Play', season: 'SS25' },
 ];
 
 export default function Lookbook() {
