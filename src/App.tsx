@@ -29,7 +29,9 @@ const App = () => {
         <Toaster />
         <Sonner />
         <AnimatePresence mode="wait">
-          {showSplash ? (
+          {!authed ? (
+            <PasswordGate key="gate" onAuthenticated={() => setAuthed(true)} />
+          ) : showSplash ? (
             <SplashScreen key="splash" onComplete={() => setShowSplash(false)} />
           ) : (
             <motion.div
