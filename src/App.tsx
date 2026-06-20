@@ -8,6 +8,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Layout } from "./components/Layout";
 import { SplashScreen } from "./components/SplashScreen";
 import { ScrollToTop } from "./components/ScrollToTop";
+import { PasswordGate, isAuthenticated } from "./components/PasswordGate";
 import Index from "./pages/Index";
 import Shop from "./pages/Shop";
 import ProductPage from "./pages/ProductPage";
@@ -19,6 +20,7 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 
 const App = () => {
+  const [authed, setAuthed] = useState(() => isAuthenticated());
   const [showSplash, setShowSplash] = useState(true);
 
   return (
