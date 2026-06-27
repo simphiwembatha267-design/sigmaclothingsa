@@ -1,4 +1,4 @@
-import { useState, FormEvent } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Logo } from './Logo';
 
@@ -14,8 +14,7 @@ export function PasswordGate({ onAuthenticated }: PasswordGateProps) {
   const [error, setError] = useState(false);
   const [stage, setStage] = useState<'gate' | 'welcome'>('gate');
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
+  useEffect(() => {
     if (value === SITE_PASSWORD) {
       sessionStorage.setItem(STORAGE_KEY, 'true');
       setError(false);
@@ -23,10 +22,10 @@ export function PasswordGate({ onAuthenticated }: PasswordGateProps) {
       window.setTimeout(() => {
         onAuthenticated();
       }, 2600);
-    } else {
+    } else if (value.length >= SITE_PASSWORD.length) {
       setError(true);
     }
-  };
+  }, [value, onAuthenticated]);
 
   return (
     <AnimatePresence mode="wait">
@@ -42,7 +41,7 @@ export function PasswordGate({ onAuthenticated }: PasswordGateProps) {
           <div className="flex flex-col items-center w-full max-w-sm">
             <Logo className="h-16 mb-16" />
 
-            <form onSubmit={handleSubmit} className="w-full flex flex-col items-center">
+            <div className="w-full flex flex-col items-center">
               <input
                 type="password"
                 autoFocus
@@ -70,7 +69,7 @@ export function PasswordGate({ onAuthenticated }: PasswordGateProps) {
                   </motion.p>
                 )}
               </div>
-            </form>
+            </div>
           </div>
         </motion.div>
       ) : (
