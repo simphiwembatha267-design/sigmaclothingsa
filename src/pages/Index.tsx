@@ -161,21 +161,25 @@ const Index = () => {
             transition={{ duration: 0.6 }}
             className="max-w-xl mx-auto text-center"
           >
-            <h2 className="font-display text-display-md mb-4">Join the Inner Circle</h2>
+            <h2 className="text-2xl md:text-3xl font-bold tracking-wide mb-4" style={{ fontFamily: 'var(--font-body)' }}>Become a Sigma Member</h2>
+            <p className="text-muted-foreground mb-2">
+              For builders. Creators. Moguls.
+            </p>
             <p className="text-muted-foreground mb-8">
-              Early access to drops. Exclusive content. No spam.
+              Unlock first access to every collection and exclusive member releases.
             </p>
             <form className="flex flex-col sm:flex-row gap-3">
               <input
                 type="email"
-                placeholder="Enter your email"
+                placeholder="Your email address"
                 className="flex-1 h-12 px-4 bg-background border border-border text-body-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-foreground"
               />
               <button
                 type="submit"
-                className="h-12 px-8 bg-foreground text-background text-caption uppercase hover:bg-foreground/90 transition-colors"
+                className="h-12 px-8 bg-foreground text-background font-semibold tracking-wide hover:bg-foreground/90 transition-colors"
+                style={{ fontFamily: 'var(--font-body)' }}
               >
-                Subscribe
+                SIGMA
               </button>
             </form>
           </motion.div>
