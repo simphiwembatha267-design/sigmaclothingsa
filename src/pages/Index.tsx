@@ -48,30 +48,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Brand Statement */}
-      <section className="section-padding bg-secondary">
-        <div className="container-editorial">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto text-center"
-          >
-            <p className="text-caption uppercase text-muted-foreground mb-8">Philosophy</p>
-            <h2 className="font-body text-body-lg text-balance mb-8">
-              We believe clothing should be a canvas for identity—not a costume.
-              Sigma exists at the intersection of rebellion and refinement.
-            </h2>
-            <Link
-              to="/about"
-              className="inline-flex items-center gap-2 text-caption uppercase link-underline"
-            >
-              Our Story
-            </Link>
-          </motion.div>
-        </div>
-      </section>
 
       {/* Featured Products */}
       <section className="section-padding">
