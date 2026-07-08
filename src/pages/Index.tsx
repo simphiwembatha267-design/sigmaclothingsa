@@ -35,7 +35,7 @@ const Index = () => {
               The Art of Silence
             </h1>
             <p className="text-body-lg opacity-80 mb-8 max-w-md">
-              A meditation on form and function. Designed for those who speak through presence.
+              Built for moguls.
             </p>
             <Link
               to="/shop"

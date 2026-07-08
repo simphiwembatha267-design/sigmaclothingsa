@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useCartStore } from '@/lib/store';
 import { Menu, X, ShoppingBag } from 'lucide-react';
 import { Logo } from './Logo';
-import heroImage from '@/assets/hero-main.jpg';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -12,6 +11,26 @@ const navLinks = [
   { href: '/lookbook', label: 'Lookbook' },
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
+];
+
+const mobileNavGroups = [
+  {
+    label: 'Shop',
+    links: [
+      { href: '/shop', label: 'New Arrivals' },
+      { href: '/shop?category=T-Shirts', label: 'T-Shirts' },
+      { href: '/shop?category=Hoodies', label: 'Hoodies' },
+      { href: '/shop?category=Outerwear', label: 'Outerwear' },
+    ],
+  },
+  {
+    label: 'Info',
+    links: [
+      { href: '/about', label: 'About' },
+      { href: '/contact', label: 'Contact' },
+      { href: '/shop', label: 'Size Guide' },
+    ],
+  },
 ];
 
 export function Header() {
@@ -73,54 +92,70 @@ export function Header() {
             initial={{ opacity: 1 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-50 md:hidden"
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-50 md:hidden bg-background text-foreground"
           >
-            {/* Background hero image with dark overlay */}
-            <div className="absolute inset-0">
-              <img src={heroImage} alt="" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-foreground/90" />
+            {/* Top bar */}
+            <div className="relative flex items-center justify-between h-16 px-6 border-b border-border/40">
+              <Link to="/" onClick={() => setIsMenuOpen(false)}>
+                <Logo className="h-10" />
+              </Link>
+              <button onClick={() => setIsMenuOpen(false)} className="p-2 -mr-2" aria-label="Close menu">
+                <X className="w-5 h-5" strokeWidth={1.25} />
+              </button>
             </div>
 
-            {/* Top bar */}
-            <div className="relative flex items-center justify-between h-16 px-4">
-              <Link to="/" onClick={() => setIsMenuOpen(false)}>
-                <Logo className="h-12 brightness-0 invert" />
-              </Link>
-              <div className="flex items-center gap-4">
+            {/* Content */}
+            <div className="relative flex flex-col justify-between h-[calc(100vh-4rem)] px-8 py-14 overflow-y-auto">
+              <nav className="flex flex-col gap-16">
+                {mobileNavGroups.map((group, gIdx) => (
+                  <motion.div
+                    key={group.label}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 + gIdx * 0.08, duration: 0.5 }}
+                  >
+                    <p className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-6">
+                      {group.label}
+                    </p>
+                    <ul className="flex flex-col gap-5">
+                      {group.links.map((link) => (
+                        <li key={link.label}>
+                          <Link
+                            to={link.href}
+                            className="block text-2xl font-light tracking-wide text-foreground/90 hover:text-foreground transition-colors"
+                            style={{ fontFamily: 'var(--font-display), serif' }}
+                          >
+                            {link.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                ))}
+              </nav>
+
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4, duration: 0.6 }}
+                className="pt-12 mt-12 border-t border-border/40"
+              >
                 <button
                   onClick={() => { openCart(); setIsMenuOpen(false); }}
-                  className="text-white/70 text-caption uppercase tracking-wider"
+                  className="flex items-center gap-3 text-[11px] uppercase tracking-[0.25em] text-muted-foreground hover:text-foreground transition-colors mb-8"
                 >
+                  <ShoppingBag className="w-4 h-4" strokeWidth={1.25} />
                   Cart ({itemCount()})
                 </button>
-                <button onClick={() => setIsMenuOpen(false)} className="p-2 -mr-2 text-white" aria-label="Close menu">
-                  <X className="w-6 h-6" />
-                </button>
-              </div>
+                <p className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground/70">
+                  © {new Date().getFullYear()} Sigma
+                </p>
+                <p className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground/70 mt-2">
+                  Designed in South Africa
+                </p>
+              </motion.div>
             </div>
-
-            {/* Nav links */}
-            <nav className="relative flex flex-col px-6 pt-8">
-              {navLinks.map((link, index) => (
-                <motion.div
-                  key={link.href}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 + index * 0.06, duration: 0.4 }}
-                >
-                  <Link
-                    to={link.href}
-                    className={`block py-3 text-xl font-bold uppercase tracking-widest ${
-                      location.pathname === link.href ? 'text-white' : 'text-white/60'
-                    }`}
-                    style={{ fontFamily: 'var(--font-body)' }}
-                  >
-                    {link.label}
-                  </Link>
-                </motion.div>
-              ))}
-            </nav>
           </motion.div>
         )}
       </AnimatePresence>
