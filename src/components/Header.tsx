@@ -94,14 +94,24 @@ export function Header() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-50 md:hidden bg-background text-foreground"
+            className="fixed inset-0 z-50 md:hidden text-background"
           >
+            {/* Background image with dark overlay */}
+            <div className="absolute inset-0 -z-10">
+              <img
+                src={menuBg}
+                alt=""
+                className="w-full h-full object-cover grayscale"
+              />
+              <div className="absolute inset-0 bg-black/80" />
+            </div>
+
             {/* Top bar */}
-            <div className="relative flex items-center justify-between h-16 px-6 border-b border-border/40">
+            <div className="relative flex items-center justify-between h-16 px-6 border-b border-white/10">
               <Link to="/" onClick={() => setIsMenuOpen(false)}>
-                <Logo className="h-10" />
+                <Logo className="h-10 invert" />
               </Link>
-              <button onClick={() => setIsMenuOpen(false)} className="p-2 -mr-2" aria-label="Close menu">
+              <button onClick={() => setIsMenuOpen(false)} className="p-2 -mr-2 text-background" aria-label="Close menu">
                 <X className="w-5 h-5" strokeWidth={1.25} />
               </button>
             </div>
@@ -116,7 +126,7 @@ export function Header() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 + gIdx * 0.08, duration: 0.5 }}
                   >
-                    <p className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-6">
+                    <p className="text-[10px] uppercase tracking-[0.4em] text-background/50 mb-6">
                       {group.label}
                     </p>
                     <ul className="flex flex-col gap-5">
@@ -124,8 +134,8 @@ export function Header() {
                         <li key={link.label}>
                           <Link
                             to={link.href}
-                            className="block text-2xl font-light tracking-wide text-foreground/90 hover:text-foreground transition-colors"
-                            style={{ fontFamily: 'var(--font-display), serif' }}
+                            className="block text-3xl font-light tracking-[0.02em] text-background/95 hover:text-background transition-colors"
+                            style={{ fontFamily: 'var(--font-display), serif', fontWeight: 300 }}
                           >
                             {link.label}
                           </Link>
@@ -140,24 +150,25 @@ export function Header() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
-                className="pt-12 mt-12 border-t border-border/40"
+                className="pt-12 mt-12 border-t border-white/10"
               >
                 <button
                   onClick={() => { openCart(); setIsMenuOpen(false); }}
-                  className="flex items-center gap-3 text-[11px] uppercase tracking-[0.25em] text-muted-foreground hover:text-foreground transition-colors mb-8"
+                  className="flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-background/60 hover:text-background transition-colors mb-8"
                 >
                   <ShoppingBag className="w-4 h-4" strokeWidth={1.25} />
                   Cart ({itemCount()})
                 </button>
-                <p className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground/70">
+                <p className="text-[10px] uppercase tracking-[0.4em] text-background/40">
                   © {new Date().getFullYear()} Sigma
                 </p>
-                <p className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground/70 mt-2">
+                <p className="text-[10px] uppercase tracking-[0.4em] text-background/40 mt-2">
                   Designed in South Africa
                 </p>
               </motion.div>
             </div>
           </motion.div>
+
         )}
       </AnimatePresence>
     </>
