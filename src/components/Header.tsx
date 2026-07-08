@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useCartStore } from '@/lib/store';
 import { Menu, X, ShoppingBag } from 'lucide-react';
 import { Logo } from './Logo';
-import heroImage from '@/assets/hero-main.jpg';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -12,6 +11,26 @@ const navLinks = [
   { href: '/lookbook', label: 'Lookbook' },
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
+];
+
+const mobileNavGroups = [
+  {
+    label: 'Shop',
+    links: [
+      { href: '/shop', label: 'New Arrivals' },
+      { href: '/shop?category=T-Shirts', label: 'T-Shirts' },
+      { href: '/shop?category=Hoodies', label: 'Hoodies' },
+      { href: '/shop?category=Outerwear', label: 'Outerwear' },
+    ],
+  },
+  {
+    label: 'Info',
+    links: [
+      { href: '/about', label: 'About' },
+      { href: '/contact', label: 'Contact' },
+      { href: '/shop', label: 'Size Guide' },
+    ],
+  },
 ];
 
 export function Header() {
