@@ -1,28 +1,3 @@
-import { Link } from 'react-router-dom';
-import { Instagram } from 'lucide-react';
-import { Logo } from './Logo';
-
-const footerLinks = {
-  shop: [
-    { label: 'New Arrivals', href: '/shop' },
-    { label: 'Hoodies', href: '/shop?category=Hoodies' },
-    { label: 'T-Shirts', href: '/shop?category=T-Shirts' },
-    { label: 'Pants', href: '/shop?category=Pants' },
-    { label: 'Outerwear', href: '/shop?category=Outerwear' },
-  ],
-  info: [
-    { label: 'About', href: '/about' },
-    { label: 'Lookbook', href: '/lookbook' },
-    { label: 'Contact', href: '/contact' },
-    { label: 'Size Guide', href: '/shop' },
-  ],
-  legal: [
-    { label: 'Terms & Conditions', href: '#' },
-    { label: 'Privacy Policy', href: '#' },
-    { label: 'Shipping', href: '#' },
-    { label: 'Returns', href: '#' },
-  ],
-};
 
 export function Footer() {
   return (
