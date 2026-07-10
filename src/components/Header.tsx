@@ -134,8 +134,8 @@ export function Header() {
                         <li key={link.label}>
                           <Link
                             to={link.href}
-                            className="block text-3xl font-light tracking-[0.02em] text-background/95 hover:text-background transition-colors"
-                            style={{ fontFamily: 'var(--font-display), serif', fontWeight: 300 }}
+                            className="block text-3xl font-semibold tracking-[0.02em] text-background/95 hover:text-background transition-colors"
+                            style={{ fontFamily: 'var(--font-body), sans-serif' }}
                           >
                             {link.label}
                           </Link>
