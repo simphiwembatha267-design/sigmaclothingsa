@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useCartStore } from '@/lib/store';
 import { Menu, X, ShoppingBag } from 'lucide-react';
 import { Logo } from './Logo';
-import menuBg from '@/assets/lookbook-1.jpg';
+import heroImage from '@/assets/hero-main.jpg';
 
 const navLinks = [
   { href: '/', label: 'Home' },
