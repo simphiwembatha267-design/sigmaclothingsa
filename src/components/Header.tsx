@@ -99,7 +99,7 @@ export function Header() {
             {/* Background image with dark overlay */}
             <div className="absolute inset-0 -z-10">
               <img
-                src={menuBg}
+                src={heroImage}
                 alt=""
                 className="w-full h-full object-cover grayscale"
               />
