@@ -132,9 +132,9 @@ export function Header() {
                     <ul className="flex flex-col gap-5">
                       {group.links.map((link) => (
                         <li key={link.label}>
-                          <Link
+                            <Link
                             to={link.href}
-                            className="block text-3xl font-semibold tracking-[0.02em] text-background/95 hover:text-background transition-colors"
+                            className="block text-2xl font-semibold tracking-[0.02em] text-background/95 hover:text-background transition-colors"
                             style={{ fontFamily: 'var(--font-body), sans-serif' }}
                           >
                             {link.label}
