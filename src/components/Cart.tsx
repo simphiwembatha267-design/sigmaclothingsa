@@ -118,19 +118,20 @@ export function Cart() {
             {/* Footer */}
             {items.length > 0 && (
               <div className="border-t border-border p-6 space-y-4">
-                <div className="flex justify-between text-body-sm">
+                <div className="flex justify-between text-body-sm" style={{ fontFamily: 'var(--font-body), sans-serif' }}>
                   <span>Subtotal</span>
-                  <span>€{total()}</span>
+                  <span>R{total()}</span>
                 </div>
-                <p className="text-caption text-muted-foreground">
+                <p className="text-caption text-muted-foreground" style={{ fontFamily: 'var(--font-body), sans-serif' }}>
                   Shipping calculated at checkout
                 </p>
-                <button className="w-full h-12 bg-foreground text-background text-caption uppercase hover:bg-foreground/90 transition-colors">
+                <button className="w-full h-12 bg-foreground text-background text-caption uppercase font-semibold tracking-[0.02em] hover:bg-foreground/90 transition-colors" style={{ fontFamily: 'var(--font-body), sans-serif' }}>
                   Checkout
                 </button>
                 <button
                   onClick={closeCart}
-                  className="w-full text-center text-caption uppercase link-underline"
+                  className="w-full text-center text-caption uppercase link-underline font-semibold tracking-[0.02em]"
+                  style={{ fontFamily: 'var(--font-body), sans-serif' }}
                 >
                   Continue Shopping
                 </button>
