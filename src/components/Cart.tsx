@@ -69,8 +69,8 @@ export function Cart() {
                       <div className="flex-1 flex flex-col">
                         <div className="flex justify-between">
                           <div>
-                            <h3 className="text-body-sm font-medium">{item.product.name}</h3>
-                            <p className="text-caption text-muted-foreground mt-0.5">
+                            <h3 className="text-sm font-bold tracking-wide" style={{ fontFamily: 'var(--font-body), sans-serif' }}>{item.product.name}</h3>
+                            <p className="text-caption text-muted-foreground mt-0.5" style={{ fontFamily: 'var(--font-body), sans-serif' }}>
                               Size: {item.size}
                             </p>
                           </div>
