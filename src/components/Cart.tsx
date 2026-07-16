@@ -95,7 +95,7 @@ export function Cart() {
                             >
                               <Minus className="w-3 h-3" />
                             </button>
-                            <span className="w-8 text-center text-body-sm">{item.quantity}</span>
+                            <span className="w-8 text-center text-body-sm" style={{ fontFamily: 'var(--font-body), sans-serif' }}>{item.quantity}</span>
                             <button
                               onClick={() =>
                                 updateQuantity(item.product.id, item.size, item.quantity + 1)
@@ -106,7 +106,7 @@ export function Cart() {
                               <Plus className="w-3 h-3" />
                             </button>
                           </div>
-                          <p className="text-body-sm">€{item.product.price * item.quantity}</p>
+                          <p className="text-body-sm" style={{ fontFamily: 'var(--font-body), sans-serif' }}>R{item.product.price * item.quantity}</p>
                         </div>
                       </div>
                     </li>
