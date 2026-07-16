@@ -44,10 +44,11 @@ export function Cart() {
               {items.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full text-center px-6">
                   <ShoppingBag className="w-12 h-12 text-muted-foreground mb-4" />
-                  <p className="text-muted-foreground mb-6">Your cart is empty</p>
+                  <p className="text-muted-foreground mb-6" style={{ fontFamily: 'var(--font-body), sans-serif' }}>Your cart is empty</p>
                   <button
                     onClick={closeCart}
-                    className="text-caption uppercase link-underline"
+                    className="text-caption uppercase link-underline font-semibold tracking-[0.02em]"
+                    style={{ fontFamily: 'var(--font-body), sans-serif' }}
                   >
                     Continue Shopping
                   </button>
