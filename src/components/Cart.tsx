@@ -29,7 +29,7 @@ export function Cart() {
           >
             {/* Header */}
             <div className="flex items-center justify-between h-16 px-6 border-b border-border">
-              <h2 className="text-caption uppercase font-semibold tracking-[0.02em]">Cart ({items.length})</h2>
+              <h2 className="text-caption uppercase font-semibold tracking-[0.02em]" style={{ fontFamily: 'var(--font-body), sans-serif' }}>Cart ({items.length})</h2>
               <button
                 onClick={closeCart}
                 className="p-2 -mr-2 hover:opacity-60 transition-opacity"
