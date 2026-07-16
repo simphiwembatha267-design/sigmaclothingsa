@@ -29,7 +29,7 @@ export function Cart() {
           >
             {/* Header */}
             <div className="flex items-center justify-between h-16 px-6 border-b border-border">
-              <h2 className="text-caption uppercase font-semibold tracking-[0.02em]">Cart ({items.length})</h2>
+              <h2 className="text-caption uppercase font-semibold tracking-[0.02em]" style={{ fontFamily: 'var(--font-body), sans-serif' }}>Cart ({items.length})</h2>
               <button
                 onClick={closeCart}
                 className="p-2 -mr-2 hover:opacity-60 transition-opacity"
@@ -44,10 +44,11 @@ export function Cart() {
               {items.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full text-center px-6">
                   <ShoppingBag className="w-12 h-12 text-muted-foreground mb-4" />
-                  <p className="text-muted-foreground mb-6">Your cart is empty</p>
+                  <p className="text-muted-foreground mb-6" style={{ fontFamily: 'var(--font-body), sans-serif' }}>Your cart is empty</p>
                   <button
                     onClick={closeCart}
-                    className="text-caption uppercase link-underline"
+                    className="text-caption uppercase link-underline font-semibold tracking-[0.02em]"
+                    style={{ fontFamily: 'var(--font-body), sans-serif' }}
                   >
                     Continue Shopping
                   </button>
@@ -69,8 +70,8 @@ export function Cart() {
                       <div className="flex-1 flex flex-col">
                         <div className="flex justify-between">
                           <div>
-                            <h3 className="text-body-sm font-medium">{item.product.name}</h3>
-                            <p className="text-caption text-muted-foreground mt-0.5">
+                            <h3 className="text-sm font-bold tracking-wide" style={{ fontFamily: 'var(--font-body), sans-serif' }}>{item.product.name}</h3>
+                            <p className="text-caption text-muted-foreground mt-0.5" style={{ fontFamily: 'var(--font-body), sans-serif' }}>
                               Size: {item.size}
                             </p>
                           </div>
@@ -94,7 +95,7 @@ export function Cart() {
                             >
                               <Minus className="w-3 h-3" />
                             </button>
-                            <span className="w-8 text-center text-body-sm">{item.quantity}</span>
+                            <span className="w-8 text-center text-body-sm" style={{ fontFamily: 'var(--font-body), sans-serif' }}>{item.quantity}</span>
                             <button
                               onClick={() =>
                                 updateQuantity(item.product.id, item.size, item.quantity + 1)
@@ -105,7 +106,7 @@ export function Cart() {
                               <Plus className="w-3 h-3" />
                             </button>
                           </div>
-                          <p className="text-body-sm">€{item.product.price * item.quantity}</p>
+                          <p className="text-body-sm" style={{ fontFamily: 'var(--font-body), sans-serif' }}>R{item.product.price * item.quantity}</p>
                         </div>
                       </div>
                     </li>
@@ -117,19 +118,20 @@ export function Cart() {
             {/* Footer */}
             {items.length > 0 && (
               <div className="border-t border-border p-6 space-y-4">
-                <div className="flex justify-between text-body-sm">
+                <div className="flex justify-between text-body-sm" style={{ fontFamily: 'var(--font-body), sans-serif' }}>
                   <span>Subtotal</span>
-                  <span>€{total()}</span>
+                  <span>R{total()}</span>
                 </div>
-                <p className="text-caption text-muted-foreground">
+                <p className="text-caption text-muted-foreground" style={{ fontFamily: 'var(--font-body), sans-serif' }}>
                   Shipping calculated at checkout
                 </p>
-                <button className="w-full h-12 bg-foreground text-background text-caption uppercase hover:bg-foreground/90 transition-colors">
+                <button className="w-full h-12 bg-foreground text-background text-caption uppercase font-semibold tracking-[0.02em] hover:bg-foreground/90 transition-colors" style={{ fontFamily: 'var(--font-body), sans-serif' }}>
                   Checkout
                 </button>
                 <button
                   onClick={closeCart}
-                  className="w-full text-center text-caption uppercase link-underline"
+                  className="w-full text-center text-caption uppercase link-underline font-semibold tracking-[0.02em]"
+                  style={{ fontFamily: 'var(--font-body), sans-serif' }}
                 >
                   Continue Shopping
                 </button>
