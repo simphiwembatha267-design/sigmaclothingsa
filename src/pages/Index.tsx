@@ -1,7 +1,10 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { products } from '@/lib/products';
 import { ProductCard } from '@/components/ProductCard';
+import { Input } from '@/components/ui/input';
+import { Checkbox } from '@/components/ui/checkbox';
 import heroImage from '@/assets/hero-main.jpg';
 import lookbook1 from '@/assets/lookbook-1.jpg';
 import lookbook2 from '@/assets/lookbook-2.jpg';
@@ -152,31 +155,63 @@ const Index = () => {
       </section>
 
       {/* Newsletter */}
-      <section className="section-padding bg-secondary">
+      <section className="section-padding bg-[#FFFFFF]">
         <div className="container-editorial">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="max-w-xl mx-auto text-center"
+            className="max-w-[520px] mx-auto text-center"
           >
-            <h2 className="text-2xl md:text-3xl font-bold tracking-wide mb-4" style={{ fontFamily: 'var(--font-body)' }}>Membership</h2>
-            <p className="text-muted-foreground mb-8">
-              Early access to drops. Exclusive content. No spam.
+            <h2
+              className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-black mb-3"
+              style={{ fontFamily: 'var(--font-body), sans-serif' }}
+            >
+              Join the Movement
+            </h2>
+            <p
+              className="text-sm sm:text-base font-semibold tracking-wide text-black/70 mb-8 sm:mb-10"
+              style={{ fontFamily: 'var(--font-body), sans-serif' }}
+            >
+              Get exclusive access to every drop.
             </p>
-            <form className="flex flex-col sm:flex-row gap-4">
-              <input
+            <form className="w-full space-y-4 sm:space-y-5">
+              <Input
                 type="email"
                 placeholder="Email"
-                className="flex-1 h-14 px-5 bg-background border border-border text-body-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-foreground"
+                required
+                className="h-12 sm:h-14 w-full rounded-none border-0 border-b border-black bg-transparent px-0 text-sm sm:text-base font-medium text-black placeholder:text-black/40 focus-visible:ring-0 focus-visible:border-black"
+                style={{ fontFamily: 'var(--font-body), sans-serif' }}
               />
+              <Input
+                type="text"
+                placeholder="Name"
+                className="h-12 sm:h-14 w-full rounded-none border-0 border-b border-black bg-transparent px-0 text-sm sm:text-base font-medium text-black placeholder:text-black/40 focus-visible:ring-0 focus-visible:border-black"
+                style={{ fontFamily: 'var(--font-body), sans-serif' }}
+              />
+
+              <div className="flex items-start gap-3 pt-2">
+                <Checkbox
+                  id="membership-agree"
+                  required
+                  className="mt-0.5 h-4 w-4 rounded-none border-black data-[state=checked]:bg-black data-[state=checked]:text-white"
+                />
+                <label
+                  htmlFor="membership-agree"
+                  className="text-xs sm:text-sm font-medium text-black/70 text-left leading-relaxed cursor-pointer"
+                  style={{ fontFamily: 'var(--font-body), sans-serif' }}
+                >
+                  I agree to receive emails from SIGMA and accept the Privacy Policy.
+                </label>
+              </div>
+
               <button
                 type="submit"
-                className="h-14 px-8 bg-foreground text-background font-bold tracking-wide hover:bg-foreground/90 transition-colors"
-                style={{ fontFamily: 'var(--font-body)' }}
+                className="mt-4 sm:mt-6 h-11 sm:h-12 px-8 sm:px-10 rounded-full border border-black bg-white text-black text-xs sm:text-sm font-semibold tracking-wide uppercase hover:bg-black hover:text-white transition-colors duration-300"
+                style={{ fontFamily: 'var(--font-body), sans-serif' }}
               >
-                JOIN SIGMA
+                Join Now
               </button>
             </form>
           </motion.div>
