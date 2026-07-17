@@ -6,8 +6,8 @@
 
 @layer base {
   :root {
-    /* Core palette - warm monochrome with champagne accent */
-    --background: 0 0% 98%;
+    /* Core palette - pure white with black accents */
+    --background: 0 0% 100%;
     --foreground: 0 0% 6%;
     
     --card: 0 0% 100%;
@@ -18,22 +18,22 @@
     
     /* Primary - deep black */
     --primary: 0 0% 6%;
-    --primary-foreground: 0 0% 98%;
+    --primary-foreground: 0 0% 100%;
     
-    /* Secondary - warm off-white */
-    --secondary: 40 20% 96%;
+    /* Secondary - pure white */
+    --secondary: 0 0% 100%;
     --secondary-foreground: 0 0% 6%;
     
-    /* Muted - soft grey */
-    --muted: 40 10% 94%;
+    /* Muted - pure white */
+    --muted: 0 0% 100%;
     --muted-foreground: 0 0% 45%;
     
-    /* Accent - champagne gold */
-    --accent: 40 30% 90%;
+    /* Accent - pure white */
+    --accent: 0 0% 100%;
     --accent-foreground: 0 0% 6%;
     
-    /* Champagne highlight */
-    --champagne: 42 35% 85%;
+    /* Champagne highlight - now pure white */
+    --champagne: 0 0% 100%;
     --champagne-foreground: 0 0% 6%;
     
     --destructive: 0 72% 51%;
