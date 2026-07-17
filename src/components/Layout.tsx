@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { Cart } from './Cart';
+import { NewsletterModal } from './NewsletterModal';
 
 export function Layout() {
   return (
@@ -12,6 +13,7 @@ export function Layout() {
       </main>
       <Footer />
       <Cart />
+      <NewsletterModal />
     </div>
   );
 }
