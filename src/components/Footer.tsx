@@ -1,13 +1,13 @@
 
 export function Footer() {
   return (
-    <footer className="bg-foreground text-background">
-      <div className="container-editorial py-12">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-3">
-          <p className="text-caption text-background/40">
+    <footer className="bg-[#FFFFFF] border-t border-[#EAEAEA]">
+      <div className="container-editorial py-16 md:py-20">
+        <div className="flex flex-col items-center text-center gap-4">
+          <p className="text-caption text-[#111111]">
             © {new Date().getFullYear()} Sigma. All rights reserved.
           </p>
-          <p className="text-caption text-background/40">
+          <p className="text-caption text-[#111111]">
             Designed in South Africa.
           </p>
         </div>
@@ -15,3 +15,4 @@ export function Footer() {
     </footer>
   );
 }
+
