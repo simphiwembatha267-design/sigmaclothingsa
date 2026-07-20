@@ -12,7 +12,6 @@ import { PasswordGate, isAuthenticated } from "./components/PasswordGate";
 import Index from "./pages/Index";
 import Shop from "./pages/Shop";
 import ProductPage from "./pages/ProductPage";
-import Lookbook from "./pages/Lookbook";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
