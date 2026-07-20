@@ -2,9 +2,53 @@ import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCartStore } from '@/lib/store';
-import { Menu, X, ShoppingBag } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Logo } from './Logo';
 import heroImage from '@/assets/hero-main.jpg';
+
+function DurbanClock() {
+  const [time, setTime] = useState('');
+  useEffect(() => {
+    const update = () => {
+      setTime(
+        new Intl.DateTimeFormat('en-US', {
+          timeZone: 'Africa/Johannesburg',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: true,
+        }).format(new Date())
+      );
+    };
+    update();
+    const id = setInterval(update, 1000);
+    return () => clearInterval(id);
+  }, []);
+  return (
+    <div className="flex flex-col leading-tight select-none" style={{ fontFamily: 'var(--font-body), sans-serif' }}>
+      <span className="text-[9px] md:text-[10px] font-semibold tracking-[0.2em] uppercase">Durban</span>
+      <span className="text-[9px] md:text-[10px] font-normal tracking-[0.1em] tabular-nums text-foreground/70">{time}</span>
+    </div>
+  );
+}
+
+function BagIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M5 8h14l-1 12a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 8Z" />
+      <path d="M9 8V6a3 3 0 0 1 6 0v2" />
+    </svg>
+  );
+}
 
 const navLinks = [
   { href: '/', label: 'Home' },
