@@ -1,14 +1,8 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { products } from '@/lib/products';
 import { ProductCard } from '@/components/ProductCard';
-import { Input } from '@/components/ui/input';
-import { Checkbox } from '@/components/ui/checkbox';
 import heroImage from '@/assets/hero-main.jpg';
-import lookbook1 from '@/assets/lookbook-1.jpg';
-import lookbook2 from '@/assets/lookbook-2.jpg';
-import { ArrowRight } from 'lucide-react';
 
 const Index = () => {
   const featuredProducts = products.slice(0, 4);
