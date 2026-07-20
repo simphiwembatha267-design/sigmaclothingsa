@@ -201,7 +201,7 @@ export function Header() {
                   onClick={() => { openCart(); setIsMenuOpen(false); }}
                   className="flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-background/60 hover:text-background transition-colors mb-8"
                 >
-                  <ShoppingBag className="w-4 h-4" strokeWidth={1.25} />
+                  <BagIcon className="w-4 h-4" />
                   Cart ({itemCount()})
                 </button>
                 <p className="text-[10px] uppercase tracking-[0.4em] text-background/40">
