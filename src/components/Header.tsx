@@ -6,6 +6,13 @@ import { Menu, X, ShoppingBag } from 'lucide-react';
 import { Logo } from './Logo';
 import heroImage from '@/assets/hero-main.jpg';
 
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/shop', label: 'Shop' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
+];
+
 const mobileNavGroups = [
   {
     label: 'Shop',
