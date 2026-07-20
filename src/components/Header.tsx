@@ -9,7 +9,6 @@ import heroImage from '@/assets/hero-main.jpg';
 const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/shop', label: 'Shop' },
-  { href: '/lookbook', label: 'Lookbook' },
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
 ];
