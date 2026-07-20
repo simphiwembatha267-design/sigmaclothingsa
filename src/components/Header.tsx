@@ -100,34 +100,36 @@ export function Header() {
     <>
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-background/95 backdrop-blur-sm' : 'bg-transparent'}`}>
         <div className="container-editorial">
-          <nav className="flex items-center justify-between h-16 md:h-20">
-            <button onClick={() => setIsMenuOpen(true)} className="md:hidden p-2 -ml-2" aria-label="Open menu">
-              <Menu className="w-5 h-5" />
-            </button>
+          <div className="relative flex items-center h-16 md:h-20">
+            {/* Left: hamburger + clock */}
+            <div className="flex items-center gap-3 md:gap-5">
+              <button onClick={() => setIsMenuOpen(true)} className="p-2 -ml-2" aria-label="Open menu">
+                <Menu className="w-5 h-5" strokeWidth={1.5} />
+              </button>
+              <DurbanClock />
+            </div>
 
-            <Link to="/">
+            {/* Center: logo */}
+            <Link to="/" className="absolute left-1/2 -translate-x-1/2">
               <Logo className="h-12 md:h-14" />
             </Link>
 
-            <nav className="hidden md:flex items-center gap-8">
-              {navLinks.map(link => (
-                <Link key={link.href} to={link.href} className={`text-caption uppercase link-underline transition-colors ${location.pathname === link.href ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'}`}>
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
-
-            <button onClick={openCart} className="relative p-2 -mr-2" aria-label="Open cart">
-              <ShoppingBag className="w-5 h-5" />
+            {/* Right: bag */}
+            <button onClick={openCart} className="relative p-2 -mr-2 ml-auto" aria-label="Open cart">
+              <BagIcon className="w-6 h-6" />
               {itemCount() > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-foreground text-background text-[10px] flex items-center justify-center">
+                <span
+                  className="absolute top-0 right-0 text-[10px] font-bold text-foreground leading-none tabular-nums"
+                  style={{ fontFamily: 'var(--font-body), sans-serif' }}
+                >
                   {itemCount()}
                 </span>
               )}
             </button>
-          </nav>
+          </div>
         </div>
       </header>
+
 
       {/* Full-screen mobile menu overlay */}
       <AnimatePresence>
