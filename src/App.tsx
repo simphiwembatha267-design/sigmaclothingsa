@@ -43,12 +43,11 @@ const App = () => {
                 <ScrollToTop />
                 <Routes>
                   <Route element={<Layout />}>
-                    <Route path="/" element={<Index />} />
-                    <Route path="/shop" element={<Shop />} />
-                    <Route path="/product/:id" element={<ProductPage />} />
-                    <Route path="/lookbook" element={<Lookbook />} />
-                    <Route path="/about" element={<About />} />
-                    <Route path="/contact" element={<Contact />} />
+                  <Route path="/" element={<Index />} />
+                  <Route path="/shop" element={<Shop />} />
+                  <Route path="/product/:id" element={<ProductPage />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/contact" element={<Contact />} />
                   </Route>
                   <Route path="*" element={<NotFound />} />
                 </Routes>
