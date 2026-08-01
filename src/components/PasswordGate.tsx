@@ -94,7 +94,7 @@ export function PasswordGate({ onAuthenticated }: PasswordGateProps) {
             {...fade}
             className="min-h-full flex flex-col items-center justify-center px-6"
           >
-            <h1 className="font-display text-5xl md:text-7xl italic font-light tracking-wide">
+            <h1 className="font-display text-5xl md:text-7xl italic font-bold tracking-[0.1em] uppercase">
               you're in.
             </h1>
           </motion.div>
