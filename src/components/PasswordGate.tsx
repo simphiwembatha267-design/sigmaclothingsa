@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Lock } from 'lucide-react';
 import { Logo } from './Logo';
 
 const SITE_PASSWORD = 'SIGMA2024';
@@ -94,7 +94,7 @@ export function PasswordGate({ onAuthenticated }: PasswordGateProps) {
             {...fade}
             className="min-h-full flex flex-col items-center justify-center px-6"
           >
-            <h1 className="font-display text-5xl md:text-7xl italic font-light tracking-wide">
+            <h1 className="font-display text-5xl md:text-7xl italic font-bold tracking-[0.1em] uppercase">
               you're in.
             </h1>
           </motion.div>
@@ -149,7 +149,10 @@ export function PasswordGate({ onAuthenticated }: PasswordGateProps) {
                     className="mt-10 w-full text-center text-[11px] lowercase tracking-[0.2em] text-foreground/60 hover:text-foreground transition-colors"
                     style={MONO}
                   >
-                    🔒 Enter using password
+                    <span className="inline-flex items-center gap-3">
+                      <Lock size={16} strokeWidth={1.5} color="#111111" />
+                      Enter using password
+                    </span>
                   </button>
                 </form>
               )}
@@ -199,7 +202,7 @@ export function PasswordGate({ onAuthenticated }: PasswordGateProps) {
 
               {stage === 'phone' && (
                 <form onSubmit={submitPhone} className="w-full">
-                  <h2 className="text-center text-sm uppercase tracking-[0.3em] font-semibold mb-12">
+                  <h2 className="text-center font-display text-3xl md:text-4xl uppercase tracking-[0.1em] font-bold mb-12">
                     Get Access
                   </h2>
 
@@ -257,7 +260,7 @@ export function PasswordGate({ onAuthenticated }: PasswordGateProps) {
 
               {stage === 'success' && (
                 <div className="w-full text-center">
-                  <h2 className="text-sm uppercase tracking-[0.3em] font-semibold">You're In.</h2>
+                  <h2 className="text-center font-display text-3xl md:text-4xl uppercase tracking-[0.1em] font-bold">You're In.</h2>
                   <p className="mt-8 text-xs leading-relaxed tracking-wide text-muted-foreground">
                     You'll be the first to know when SIGMA officially launches.
                   </p>
