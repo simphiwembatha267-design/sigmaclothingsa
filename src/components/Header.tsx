@@ -28,7 +28,8 @@ function DurbanClock() {
   return (
     <div className="flex flex-col leading-tight select-none" style={{ fontFamily: 'var(--font-body), sans-serif' }}>
       <span className="text-[9px] md:text-[10px] font-semibold tracking-[0.2em] uppercase">Durban</span>
-      <span className="text-[9px] md:text-[10px] font-normal tracking-[0.1em] tabular-nums text-foreground/70">{time}</span>
+      <span className="text-[9px] md:text-[10px] font-light tracking-[0.1em] tabular-nums text-foreground/70">{time}</span>
+
     </div>
   );
 }
