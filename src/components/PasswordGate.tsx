@@ -149,7 +149,10 @@ export function PasswordGate({ onAuthenticated }: PasswordGateProps) {
                     className="mt-10 w-full text-center text-[11px] lowercase tracking-[0.2em] text-foreground/60 hover:text-foreground transition-colors"
                     style={MONO}
                   >
-                    🔒 Enter using password
+                    <span className="inline-flex items-center gap-3">
+                      <Lock size={16} strokeWidth={1.5} color="#111111" />
+                      Enter using password
+                    </span>
                   </button>
                 </form>
               )}
