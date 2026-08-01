@@ -1,9 +1,10 @@
 import { Link, useLocation } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCartStore } from '@/lib/store';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Search } from 'lucide-react';
 import { Logo } from './Logo';
+import { products } from '@/lib/products';
 import heroImage from '@/assets/hero-main.jpg';
 
 function DurbanClock() {
