@@ -257,7 +257,7 @@ export function PasswordGate({ onAuthenticated }: PasswordGateProps) {
 
               {stage === 'success' && (
                 <div className="w-full text-center">
-                  <h2 className="text-sm uppercase tracking-[0.3em] font-semibold">You're In.</h2>
+                  <h2 className="text-center font-display text-3xl md:text-4xl uppercase tracking-[0.1em] font-bold">You're In.</h2>
                   <p className="mt-8 text-xs leading-relaxed tracking-wide text-muted-foreground">
                     You'll be the first to know when SIGMA officially launches.
                   </p>
