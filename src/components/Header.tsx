@@ -1,9 +1,10 @@
 import { Link, useLocation } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCartStore } from '@/lib/store';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Search } from 'lucide-react';
 import { Logo } from './Logo';
+import { products } from '@/lib/products';
 import heroImage from '@/assets/hero-main.jpg';
 
 function DurbanClock() {
@@ -27,7 +28,8 @@ function DurbanClock() {
   return (
     <div className="flex flex-col leading-tight select-none" style={{ fontFamily: 'var(--font-body), sans-serif' }}>
       <span className="text-[9px] md:text-[10px] font-semibold tracking-[0.2em] uppercase">Durban</span>
-      <span className="text-[9px] md:text-[10px] font-normal tracking-[0.1em] tabular-nums text-foreground/70">{time}</span>
+      <span className="text-[9px] md:text-[10px] font-light tracking-[0.1em] tabular-nums text-foreground/70">{time}</span>
+
     </div>
   );
 }
@@ -79,9 +81,22 @@ const mobileNavGroups = [
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [query, setQuery] = useState('');
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const { openCart, itemCount } = useCartStore();
+
+  const results = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return [];
+    return products.filter(
+      (p) =>
+        p.name.toLowerCase().includes(q) ||
+        p.category.toLowerCase().includes(q) ||
+        (p.color?.toLowerCase().includes(q) ?? false)
+    );
+  }, [query]);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -89,12 +104,13 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => { setIsMenuOpen(false); }, [location]);
+  useEffect(() => { setIsMenuOpen(false); setIsSearchOpen(false); }, [location]);
 
   useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+    document.body.style.overflow = isMenuOpen || isSearchOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
-  }, [isMenuOpen]);
+  }, [isMenuOpen, isSearchOpen]);
+
 
   return (
     <>
@@ -102,7 +118,7 @@ export function Header() {
         <div className="container-editorial">
           <div className="relative flex items-center h-16 md:h-20">
             {/* Left: hamburger + clock */}
-            <div className="flex items-center gap-3 md:gap-5">
+            <div className="flex items-center gap-3 md:gap-4">
               <button onClick={() => setIsMenuOpen(true)} className="p-2 -ml-2" aria-label="Open menu">
                 <Menu className="w-5 h-5" strokeWidth={1.5} />
               </button>
@@ -114,21 +130,99 @@ export function Header() {
               <Logo className="h-12 md:h-14" />
             </Link>
 
-            {/* Right: bag */}
-            <button onClick={openCart} className="relative p-2 -mr-2 ml-auto" aria-label="Open cart">
-              <BagIcon className="w-6 h-6" />
-              {itemCount() > 0 && (
-                <span
-                  className="absolute top-0 right-0 text-[10px] font-bold text-foreground leading-none tabular-nums"
-                  style={{ fontFamily: 'var(--font-body), sans-serif' }}
-                >
-                  {itemCount()}
-                </span>
-              )}
-            </button>
+            {/* Right: search + bag */}
+            <div className="flex items-center gap-3 md:gap-4 ml-auto">
+              <button onClick={() => setIsSearchOpen(true)} className="p-2" aria-label="Search">
+                <Search className="w-6 h-6" strokeWidth={1.5} />
+              </button>
+              <button onClick={openCart} className="relative p-2 -mr-2" aria-label="Open cart">
+                <BagIcon className="w-6 h-6" />
+                {itemCount() > 0 && (
+                  <span
+                    className="absolute top-0 right-0 text-[10px] font-bold text-foreground leading-none tabular-nums"
+                    style={{ fontFamily: 'var(--font-body), sans-serif' }}
+                  >
+                    {itemCount()}
+                  </span>
+                )}
+              </button>
+            </div>
           </div>
         </div>
       </header>
+
+      {/* Full-screen search overlay */}
+      <AnimatePresence>
+        {isSearchOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-[60] bg-background"
+            onClick={() => { setIsSearchOpen(false); setQuery(''); }}
+          >
+            <motion.div
+              initial={{ opacity: 0, y: -16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
+              className="container-editorial pt-6 md:pt-10"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-start gap-4">
+                <input
+                  autoFocus
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="Search products..."
+                  className="flex-1 bg-transparent border-b border-foreground/20 focus:border-foreground outline-none py-3 text-xl md:text-3xl font-light placeholder:text-foreground/30 transition-colors"
+                  style={{ fontFamily: 'var(--font-body), sans-serif' }}
+                />
+                <button
+                  onClick={() => { setIsSearchOpen(false); setQuery(''); }}
+                  className="p-2 -mr-2 mt-2"
+                  aria-label="Close search"
+                >
+                  <X className="w-5 h-5" strokeWidth={1.25} />
+                </button>
+              </div>
+
+              <div className="mt-10 max-h-[70vh] overflow-y-auto">
+                {query.trim() && results.length === 0 && (
+                  <p className="text-caption text-muted-foreground">No products found.</p>
+                )}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+                  {results.map((p) => (
+                    <Link
+                      key={p.id}
+                      to={`/product/${p.id}`}
+                      onClick={() => { setIsSearchOpen(false); setQuery(''); }}
+                      className="group block"
+                    >
+                      <div className="aspect-[3/4] bg-muted overflow-hidden mb-3">
+                        <img
+                          src={p.image}
+                          alt={p.name}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                      </div>
+                      <p
+                        className="text-sm font-bold tracking-wide"
+                        style={{ fontFamily: 'var(--font-body), sans-serif' }}
+                      >
+                        {p.name}
+                      </p>
+                      <p className="text-caption text-muted-foreground">R{p.price}</p>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
 
 
       {/* Full-screen mobile menu overlay */}
