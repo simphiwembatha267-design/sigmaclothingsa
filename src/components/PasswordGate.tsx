@@ -11,7 +11,7 @@ interface PasswordGateProps {
   onAuthenticated: () => void;
 }
 
-type Stage = 'email' | 'password' | 'phone' | 'success' | 'welcome';
+type Stage = 'email' | 'password' | 'phone' | 'success';
 
 const COUNTRIES = [
   { code: '+27', label: 'ZA' },
