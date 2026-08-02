@@ -190,7 +190,7 @@ export function PasswordGate({ onAuthenticated }: PasswordGateProps) {
 
             {stage === 'phone' && (
               <form onSubmit={submitPhone} className="w-full">
-                <h2 className="text-center text-2xl md:text-3xl font-bold tracking-[-0.03em] uppercase" style={{ fontFamily: 'var(--font-body)' }}>
+                <h2 className="text-center text-xl md:text-2xl font-bold tracking-[-0.03em] uppercase" style={{ fontFamily: 'var(--font-body)' }}>
                   GET ACCESS
                 </h2>
 
@@ -248,7 +248,7 @@ export function PasswordGate({ onAuthenticated }: PasswordGateProps) {
 
             {stage === 'success' && (
               <div className="w-full text-center">
-                <h2 className="text-center text-2xl md:text-3xl font-bold tracking-[-0.03em] uppercase" style={{ fontFamily: 'var(--font-body)' }}>YOU'RE IN.</h2>
+                <h2 className="text-center text-xl md:text-2xl font-bold tracking-[-0.03em] uppercase" style={{ fontFamily: 'var(--font-body)' }}>YOU'RE IN.</h2>
                 <p className="mt-8 text-xs leading-relaxed tracking-wide text-muted-foreground">
                   You'll be the first to know when SIGMA officially launches.
                 </p>
