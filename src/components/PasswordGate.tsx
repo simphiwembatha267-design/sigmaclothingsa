@@ -190,7 +190,7 @@ export function PasswordGate({ onAuthenticated }: PasswordGateProps) {
 
             {stage === 'phone' && (
               <form onSubmit={submitPhone} className="w-full">
-                <h2 className="text-center text-xl md:text-2xl font-bold tracking-[-0.03em] uppercase" style={{ fontFamily: 'var(--font-body)' }}>
+                <h2 className="text-center text-xl md:text-2xl font-bold tracking-[-0.03em] uppercase mb-8" style={{ fontFamily: 'var(--font-body)' }}>
                   GET ACCESS
                 </h2>
 
