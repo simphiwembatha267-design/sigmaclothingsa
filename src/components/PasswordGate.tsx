@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Lock } from 'lucide-react';
 import { Logo } from './Logo';
+import { supabase } from '@/integrations/supabase/client';
 
-const SITE_PASSWORD = 'SIGMA2024';
 const STORAGE_KEY = 'sigma-authed';
 const MONO = { fontFamily: "'DM Mono', monospace" } as const;
 
@@ -38,6 +38,7 @@ export function PasswordGate({ onAuthenticated }: PasswordGateProps) {
   const [dial, setDial] = useState('+27');
   const [phone, setPhone] = useState('');
   const [error, setError] = useState('');
+  const [checking, setChecking] = useState(false);
 
   const enterSite = () => {
     sessionStorage.setItem(STORAGE_KEY, 'true');
@@ -54,13 +55,24 @@ export function PasswordGate({ onAuthenticated }: PasswordGateProps) {
     setStage('phone');
   };
 
-  const submitPassword = (e: React.FormEvent) => {
+  const submitPassword = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === SITE_PASSWORD) {
-      setError('');
+    if (checking) return;
+    setChecking(true);
+    setError('');
+    try {
+      const { data, error: fnError } = await supabase.functions.invoke('site-access', {
+        body: { password },
+      });
+      if (fnError || !data?.valid) {
+        setError('incorrect.');
+        return;
+      }
       enterSite();
-    } else {
-      setError('incorrect.');
+    } catch {
+      setError('something went wrong. try again.');
+    } finally {
+      setChecking(false);
     }
   };
 
