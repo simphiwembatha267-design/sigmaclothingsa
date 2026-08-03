@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Lock } from 'lucide-react';
 import { Logo } from './Logo';
+import { supabase } from '@/integrations/supabase/client';
 
-const SITE_PASSWORD = 'SIGMA2024';
 const STORAGE_KEY = 'sigma-authed';
 const MONO = { fontFamily: "'DM Mono', monospace" } as const;
 
