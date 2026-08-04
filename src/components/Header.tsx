@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCartStore } from '@/lib/store';
-import { Menu, X, Search } from 'lucide-react';
+import { Menu, X, Search, ShoppingCart } from 'lucide-react';
 import { Logo } from './Logo';
 import { products } from '@/lib/products';
 import heroImage from '@/assets/hero-main.jpg';
@@ -35,21 +35,7 @@ function DurbanClock() {
 }
 
 function BagIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M5 8h14l-1 12a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 8Z" />
-      <path d="M9 8V6a3 3 0 0 1 6 0v2" />
-    </svg>
-  );
+  return <ShoppingCart className={className} strokeWidth={1.25} />;
 }
 
 const navLinks = [
@@ -115,12 +101,23 @@ export function Header() {
   return (
     <>
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-background/95 backdrop-blur-sm' : 'bg-transparent'}`}>
+        {/* Feathered readability scrim behind the left cluster only */}
+        <div
+          aria-hidden="true"
+          className={`pointer-events-none absolute inset-y-0 left-0 w-[46%] max-w-[300px] transition-opacity duration-500 ${isScrolled ? 'opacity-0' : 'opacity-100'}`}
+          style={{
+            background:
+              'radial-gradient(120% 130% at 0% 30%, hsl(var(--background) / 0.55) 0%, hsl(var(--background) / 0.28) 42%, hsl(var(--background) / 0) 78%)',
+            maskImage: 'linear-gradient(to right, black 40%, transparent 100%)',
+            WebkitMaskImage: 'linear-gradient(to right, black 40%, transparent 100%)',
+          }}
+        />
         <div className="container-editorial">
           <div className="relative flex items-center h-16 md:h-20">
             {/* Left: hamburger + clock */}
             <div className="flex items-center gap-3 md:gap-4">
               <button onClick={() => setIsMenuOpen(true)} className="p-2 -ml-2" aria-label="Open menu">
-                <Menu className="w-5 h-5" strokeWidth={1.5} />
+                <Menu className="w-5 h-5" strokeWidth={1.25} />
               </button>
               <DurbanClock />
             </div>
@@ -133,7 +130,7 @@ export function Header() {
             {/* Right: search + bag */}
             <div className="flex items-center gap-3 md:gap-4 ml-auto">
               <button onClick={() => setIsSearchOpen(true)} className="p-2" aria-label="Search">
-                <Search className="w-6 h-6" strokeWidth={1.5} />
+                <Search className="w-6 h-6" strokeWidth={1.25} />
               </button>
               <button onClick={openCart} className="relative p-2 -mr-2" aria-label="Open cart">
                 <BagIcon className="w-6 h-6" />

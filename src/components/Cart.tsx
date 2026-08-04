@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCartStore } from '@/lib/store';
-import { X, Plus, Minus, ShoppingBag } from 'lucide-react';
+import { X, Plus, Minus, ShoppingCart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export function Cart() {
@@ -43,7 +43,7 @@ export function Cart() {
             <div className="flex-1 overflow-y-auto">
               {items.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full text-center px-6">
-                  <ShoppingBag className="w-12 h-12 text-muted-foreground mb-4" />
+                  <ShoppingCart className="w-12 h-12 text-muted-foreground mb-4" strokeWidth={1.25} />
                   <p className="text-muted-foreground mb-6" style={{ fontFamily: 'var(--font-body), sans-serif' }}>Your cart is empty</p>
                   <button
                     onClick={closeCart}
