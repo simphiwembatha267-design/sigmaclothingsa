@@ -30,7 +30,9 @@ const Index = () => {
           >
             <p className="text-caption uppercase mb-4 opacity-80">FW25 Collection</p>
             <h1 className="font-display text-display-xl mb-6">
-              The Art of Silence
+              Uncommon
+              <br />
+              By Design
             </h1>
             <p className="text-body-lg opacity-80 mb-8 max-w-md">
               Built for moguls.
