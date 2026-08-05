@@ -5,8 +5,6 @@ import loopTeeBlack from '@/assets/sigma-loop-tee-black.jpg.asset.json';
 import loopTeeWhite from '@/assets/sigma-loop-tee-white.jpg.asset.json';
 import renaissanceTeeBlack from '@/assets/sigma-renaissance-tee-black.jpg.asset.json';
 import renaissanceTeeWhite from '@/assets/sigma-renaissance-tee-white.jpg.asset.json';
-import exclusiveTeeBlack from '@/assets/sigma-exclusive-tee-black.jpg.asset.json';
-import exclusiveTeeWhite from '@/assets/sigma-exclusive-tee-white.jpg.asset.json';
 import renaissanceHoodieBlack from '@/assets/sigma-renaissance-hoodie-black.jpg.asset.json';
 import renaissanceHoodieWhite from '@/assets/sigma-renaissance-hoodie-white.jpg.asset.json';
 import galleryTopBlack from '@/assets/sigma-gallery-top-black.jpg.asset.json';
