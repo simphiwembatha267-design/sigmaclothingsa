@@ -206,12 +206,12 @@ export function PasswordGate({ onAuthenticated }: PasswordGateProps) {
                   GET ACCESS
                 </h2>
 
-                <div className="flex items-stretch gap-2">
-                  <div className="flex flex-1 items-center rounded-full bg-muted-foreground/10 pl-4 pr-2 focus-within:ring-1 focus-within:ring-foreground/30 transition-shadow">
+                <div className="flex w-full items-stretch gap-2">
+                  <div className="flex flex-1 min-w-0 items-center rounded-full bg-muted-foreground/10 pl-3 pr-1">
                     <select
                       value={dial}
                       onChange={(e) => setDial(e.target.value)}
-                      className="bg-transparent border-0 focus:outline-none text-[11px] tracking-wide text-foreground/70 pr-1 cursor-pointer"
+                      className="shrink-0 bg-transparent border-0 focus:outline-none text-[10px] tracking-tight text-foreground/70 pr-1 cursor-pointer"
                       style={MONO}
                       aria-label="Country code"
                     >
@@ -230,19 +230,20 @@ export function PasswordGate({ onAuthenticated }: PasswordGateProps) {
                         setError('');
                       }}
                       placeholder="PHONE NUMBER"
-                      className="flex-1 min-w-0 bg-transparent border-0 focus:outline-none py-3.5 text-sm tracking-[0.08em] placeholder:text-foreground/40 placeholder:tracking-[0.12em]"
+                      className="w-full min-w-0 bg-transparent border-0 focus:outline-none py-3.5 text-xs tracking-[0.06em] placeholder:text-foreground/40"
                       style={MONO}
                       autoComplete="tel"
                     />
                   </div>
                   <button
                     type="submit"
-                    className="shrink-0 rounded-full bg-foreground text-background px-6 text-[11px] uppercase tracking-[0.22em] font-semibold hover:opacity-90 transition-opacity"
+                    className="shrink-0 rounded-full bg-foreground text-background px-4 text-[10px] uppercase tracking-[0.14em] font-semibold hover:opacity-90 transition-opacity"
                     style={{ fontFamily: 'var(--font-body)' }}
                   >
                     Sign Up
                   </button>
                 </div>
+
 
                 <div className="h-5 mt-4 text-center">
                   {error && (
