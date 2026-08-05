@@ -1,12 +1,11 @@
 import { Link, useLocation } from 'react-router-dom';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCartStore } from '@/lib/store';
-import { Menu, X, Search, ShoppingCart, User } from 'lucide-react';
+import { Menu, X, ShoppingCart, User } from 'lucide-react';
 import { Logo } from './Logo';
-import { products } from '@/lib/products';
 import heroImage from '@/assets/hero-main.jpg';
-import { formatPrice } from '@/lib/format';
+
 
 
 function DurbanClock() {
@@ -69,22 +68,9 @@ const mobileNavGroups = [
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [query, setQuery] = useState('');
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const { openCart, itemCount } = useCartStore();
-
-  const results = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    if (!q) return [];
-    return products.filter(
-      (p) =>
-        p.name.toLowerCase().includes(q) ||
-        p.category.toLowerCase().includes(q) ||
-        (p.color?.toLowerCase().includes(q) ?? false)
-    );
-  }, [query]);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -92,26 +78,24 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => { setIsMenuOpen(false); setIsSearchOpen(false); }, [location]);
+  useEffect(() => { setIsMenuOpen(false); }, [location]);
 
   useEffect(() => {
-    document.body.style.overflow = isMenuOpen || isSearchOpen ? 'hidden' : '';
+    document.body.style.overflow = isMenuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
-  }, [isMenuOpen, isSearchOpen]);
+  }, [isMenuOpen]);
 
 
   return (
     <>
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-background/95 backdrop-blur-sm' : 'bg-transparent'}`}>
-        {/* Feathered readability scrim behind the left cluster only */}
+        {/* Readability scrim across the full header */}
         <div
           aria-hidden="true"
-          className={`pointer-events-none absolute inset-y-0 left-0 w-[46%] max-w-[300px] transition-opacity duration-500 ${isScrolled ? 'opacity-0' : 'opacity-100'}`}
+          className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ${isScrolled ? 'opacity-0' : 'opacity-100'}`}
           style={{
             background:
-              'radial-gradient(120% 130% at 0% 30%, hsl(var(--background) / 0.55) 0%, hsl(var(--background) / 0.28) 42%, hsl(var(--background) / 0) 78%)',
-            maskImage: 'linear-gradient(to right, black 40%, transparent 100%)',
-            WebkitMaskImage: 'linear-gradient(to right, black 40%, transparent 100%)',
+              'linear-gradient(to bottom, hsl(var(--background) / 0.75) 0%, hsl(var(--background) / 0.45) 55%, hsl(var(--background) / 0) 100%)',
           }}
         />
         <div className="container-editorial">
@@ -129,11 +113,8 @@ export function Header() {
               <Logo className="h-12 md:h-14" />
             </Link>
 
-            {/* Right: search + account + bag */}
+            {/* Right: account + bag */}
             <div className="flex items-center gap-2 md:gap-4 ml-auto">
-              <button onClick={() => setIsSearchOpen(true)} className="p-2" aria-label="Search">
-                <Search className="w-6 h-6" strokeWidth={1.25} />
-              </button>
               <Link to="/admin" className="p-2" aria-label="Account">
                 <User className="w-6 h-6" strokeWidth={1.25} />
               </Link>
@@ -154,80 +135,6 @@ export function Header() {
         </div>
       </header>
 
-      {/* Full-screen search overlay */}
-      <AnimatePresence>
-        {isSearchOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-[60] bg-background"
-            onClick={() => { setIsSearchOpen(false); setQuery(''); }}
-          >
-            <motion.div
-              initial={{ opacity: 0, y: -16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.3, ease: 'easeOut' }}
-              className="container-editorial pt-6 md:pt-10"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="flex items-start gap-4">
-                <input
-                  autoFocus
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Search products..."
-                  className="flex-1 bg-transparent border-b border-foreground/20 focus:border-foreground outline-none py-3 text-xl md:text-3xl font-light placeholder:text-foreground/30 transition-colors"
-                  style={{ fontFamily: 'var(--font-body), sans-serif' }}
-                />
-                <button
-                  onClick={() => { setIsSearchOpen(false); setQuery(''); }}
-                  className="p-2 -mr-2 mt-2"
-                  aria-label="Close search"
-                >
-                  <X className="w-5 h-5" strokeWidth={1.25} />
-                </button>
-              </div>
-
-              <div className="mt-10 max-h-[70vh] overflow-y-auto">
-                {query.trim() && results.length === 0 && (
-                  <p className="text-caption text-muted-foreground">No products found.</p>
-                )}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-                  {results.map((p) => (
-                    <Link
-                      key={p.id}
-                      to={`/product/${p.id}`}
-                      onClick={() => { setIsSearchOpen(false); setQuery(''); }}
-                      className="group block"
-                    >
-                      <div className="aspect-[3/4] bg-muted overflow-hidden mb-3">
-                        <img
-                          src={p.image}
-                          alt={p.name}
-                          loading="lazy"
-                          decoding="async"
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
-                      </div>
-                      <p
-                        className="text-sm font-bold tracking-wide"
-                        style={{ fontFamily: 'var(--font-body), sans-serif' }}
-                      >
-                        {p.name}
-                      </p>
-                      <p className="text-caption text-muted-foreground">{formatPrice(p.price)}</p>
-
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
 
 
