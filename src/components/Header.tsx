@@ -127,11 +127,8 @@ export function Header() {
               <Logo className="h-12 md:h-14" />
             </Link>
 
-            {/* Right: search + account + bag */}
+            {/* Right: account + bag */}
             <div className="flex items-center gap-2 md:gap-4 ml-auto">
-              <button onClick={() => setIsSearchOpen(true)} className="p-2" aria-label="Search">
-                <Search className="w-6 h-6" strokeWidth={1.25} />
-              </button>
               <Link to="/admin" className="p-2" aria-label="Account">
                 <User className="w-6 h-6" strokeWidth={1.25} />
               </Link>
