@@ -8,7 +8,7 @@ import heroImage from '@/assets/hero-main.jpg';
 
 
 
-function DurbanClock({ subdued = false }: { subdued?: boolean }) {
+function DurbanClock() {
   const [time, setTime] = useState('');
   useEffect(() => {
     const update = () => {
@@ -27,9 +27,7 @@ function DurbanClock({ subdued = false }: { subdued?: boolean }) {
   }, []);
   return (
     <div
-      className={`hidden sm:flex flex-col leading-tight select-none transition-opacity duration-500 ${
-        subdued ? 'opacity-40' : 'opacity-70'
-      }`}
+      className="hidden sm:flex flex-col leading-tight select-none opacity-70"
       style={{ fontFamily: 'var(--font-body), sans-serif' }}
     >
       <span className="text-[9px] md:text-[10px] font-medium tracking-[0.28em] uppercase">Durban</span>
@@ -75,7 +73,7 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const { openCart, itemCount } = useCartStore();
-  const isCollectionPage = location.pathname.startsWith('/shop') || location.pathname.startsWith('/product');
+  const isHomePage = location.pathname === '/';
 
 
   useEffect(() => {
@@ -111,7 +109,7 @@ export function Header() {
               <button onClick={() => setIsMenuOpen(true)} className="p-2 -ml-2" aria-label="Open menu">
                 <Menu className="w-5 h-5" strokeWidth={1.25} />
               </button>
-              <DurbanClock subdued={isCollectionPage} />
+              {isHomePage && <DurbanClock />}
             </div>
 
             {/* Center: logo */}
