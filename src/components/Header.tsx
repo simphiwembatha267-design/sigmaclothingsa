@@ -109,7 +109,7 @@ export function Header() {
               <button onClick={() => setIsMenuOpen(true)} className="p-2 -ml-2" aria-label="Open menu">
                 <Menu className="w-5 h-5" strokeWidth={1.25} />
               </button>
-              <DurbanClock subdued={isCollectionPage} />
+              {isHomePage && <DurbanClock />}
             </div>
 
             {/* Center: logo */}
