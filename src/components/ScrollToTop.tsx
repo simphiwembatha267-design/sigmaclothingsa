@@ -13,18 +13,20 @@ export function ScrollToTop() {
   useLayoutEffect(() => {
     if (hash) {
       let tries = 0;
-      let raf = 0;
-      const scrollToHash = () => {
+      const interval = window.setInterval(() => {
         const el = document.querySelector(hash);
         if (el) {
           el.scrollIntoView({ behavior: "auto", block: "start" });
-          return;
+          if (window.scrollY > 0) {
+            window.clearInterval(interval);
+            return;
+          }
         }
-        if (tries++ < 60) raf = window.requestAnimationFrame(scrollToHash);
-      };
-      scrollToHash();
-      return () => window.cancelAnimationFrame(raf);
+        if (tries++ > 80) window.clearInterval(interval);
+      }, 100);
+      return () => window.clearInterval(interval);
     }
+
 
 
     const resetScroll = () => {
