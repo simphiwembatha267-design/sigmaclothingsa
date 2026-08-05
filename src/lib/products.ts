@@ -5,12 +5,70 @@ import loopTeeBlack from '@/assets/sigma-loop-tee-black.jpg.asset.json';
 import loopTeeWhite from '@/assets/sigma-loop-tee-white.jpg.asset.json';
 import renaissanceTeeBlack from '@/assets/sigma-renaissance-tee-black.jpg.asset.json';
 import renaissanceTeeWhite from '@/assets/sigma-renaissance-tee-white.jpg.asset.json';
-import exclusiveTeeBlack from '@/assets/sigma-exclusive-tee-black.jpg.asset.json';
-import exclusiveTeeWhite from '@/assets/sigma-exclusive-tee-white.jpg.asset.json';
 import renaissanceHoodieBlack from '@/assets/sigma-renaissance-hoodie-black.jpg.asset.json';
 import renaissanceHoodieWhite from '@/assets/sigma-renaissance-hoodie-white.jpg.asset.json';
+import galleryTopBlack from '@/assets/sigma-gallery-top-black.jpg.asset.json';
+import galleryTopBlackBack from '@/assets/sigma-gallery-top-black-back.jpg.asset.json';
+import galleryTopWhite from '@/assets/sigma-gallery-top-white.jpg.asset.json';
+import galleryTopWhiteBack from '@/assets/sigma-gallery-top-white-back.jpg.asset.json';
+import lancetTopBlack from '@/assets/sigma-lancet-top-black.jpg.asset.json';
+import lancetTopBlackBack from '@/assets/sigma-lancet-top-black-back.jpg.asset.json';
+import lancetTopWhite from '@/assets/sigma-lancet-top-white.jpg.asset.json';
+import lancetTopWhiteBack from '@/assets/sigma-lancet-top-white-back.jpg.asset.json';
+import exclusiveTopBlack from '@/assets/sigma-exclusive-top-black.jpg.asset.json';
+import exclusiveTopBlackBack from '@/assets/sigma-exclusive-top-black-back.jpg.asset.json';
+import exclusiveTopWhite from '@/assets/sigma-exclusive-top-white.jpg.asset.json';
+import exclusiveTopWhiteBack from '@/assets/sigma-exclusive-top-white-back.jpg.asset.json';
 
 export const products: Product[] = [
+  {
+    id: 'sigma-gallery-top-black',
+    name: 'Gallery Collection Top',
+    price: 370,
+    image: galleryTopBlack.url,
+    images: [galleryTopBlack.url, galleryTopBlackBack.url],
+    category: 'Tops',
+    description: 'Heavyweight 280gsm cotton jersey. Boxy oversized fit. Gallery Collection artwork printed at chest and oversized at back. Made in Portugal.',
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    color: 'Black',
+    colorVariants: ['sigma-gallery-top-black', 'sigma-gallery-top-white'],
+  },
+  {
+    id: 'sigma-gallery-top-white',
+    name: 'Gallery Collection Top',
+    price: 370,
+    image: galleryTopWhite.url,
+    images: [galleryTopWhite.url, galleryTopWhiteBack.url],
+    category: 'Tops',
+    description: 'Heavyweight 280gsm cotton jersey. Boxy oversized fit. Gallery Collection artwork printed at chest and oversized at back. Made in Portugal.',
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    color: 'White',
+    colorVariants: ['sigma-gallery-top-black', 'sigma-gallery-top-white'],
+  },
+  {
+    id: 'sigma-lancet-top-black',
+    name: 'Lancet Collection Top',
+    price: 370,
+    image: lancetTopBlack.url,
+    images: [lancetTopBlack.url, lancetTopBlackBack.url],
+    category: 'Tops',
+    description: 'Heavyweight 280gsm cotton jersey. Boxy oversized fit. Sigma loop logo at chest with Lancet arch graphic at back. Made in Portugal.',
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    color: 'Black',
+    colorVariants: ['sigma-lancet-top-black', 'sigma-lancet-top-white'],
+  },
+  {
+    id: 'sigma-lancet-top-white',
+    name: 'Lancet Collection Top',
+    price: 370,
+    image: lancetTopWhite.url,
+    images: [lancetTopWhite.url, lancetTopWhiteBack.url],
+    category: 'Tops',
+    description: 'Heavyweight 280gsm cotton jersey. Boxy oversized fit. Sigma loop logo at chest with Lancet arch graphic at back. Made in Portugal.',
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    color: 'White',
+    colorVariants: ['sigma-lancet-top-black', 'sigma-lancet-top-white'],
+  },
   {
     id: 'sigma-renaissance-hoodie-black',
     name: 'Renaissance Hoodie',
@@ -41,7 +99,7 @@ export const products: Product[] = [
     price: 370,
     image: teeBlack,
     images: [teeBlack],
-    category: 'T-Shirts',
+    category: 'Tops',
     description: 'Premium 280gsm organic cotton jersey. Boxy fit with ribbed crew neck. Screen-printed Sigma wordmark at back. Made in Portugal.',
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     color: 'Black',
@@ -53,7 +111,7 @@ export const products: Product[] = [
     price: 370,
     image: teeWhite,
     images: [teeWhite],
-    category: 'T-Shirts',
+    category: 'Tops',
     description: 'Premium 280gsm organic cotton jersey. Boxy fit with ribbed crew neck. Screen-printed Sigma wordmark at back. Made in Portugal.',
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     color: 'White',
@@ -65,7 +123,7 @@ export const products: Product[] = [
     price: 370,
     image: loopTeeBlack.url,
     images: [loopTeeBlack.url],
-    category: 'T-Shirts',
+    category: 'Tops',
     description: 'Heavyweight 280gsm cotton jersey. Boxy oversized fit. Signature Sigma loop logo at chest and oversized graphic at back. Made in Portugal.',
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     color: 'Black',
@@ -77,7 +135,7 @@ export const products: Product[] = [
     price: 370,
     image: loopTeeWhite.url,
     images: [loopTeeWhite.url],
-    category: 'T-Shirts',
+    category: 'Tops',
     description: 'Heavyweight 280gsm cotton jersey. Boxy oversized fit. Signature Sigma loop logo at chest and oversized graphic at back. Made in Portugal.',
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     color: 'White',
@@ -89,7 +147,7 @@ export const products: Product[] = [
     price: 370,
     image: renaissanceTeeBlack.url,
     images: [renaissanceTeeBlack.url],
-    category: 'T-Shirts',
+    category: 'Tops',
     description: 'Heavyweight 280gsm cotton jersey. Boxy oversized fit. Sigma wordmark at front chest with Renaissance artwork graphic at back. Made in Portugal.',
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     color: 'Black',
@@ -101,7 +159,7 @@ export const products: Product[] = [
     price: 370,
     image: renaissanceTeeWhite.url,
     images: [renaissanceTeeWhite.url],
-    category: 'T-Shirts',
+    category: 'Tops',
     description: 'Heavyweight 280gsm cotton jersey. Boxy oversized fit. Sigma wordmark at front chest with Renaissance artwork graphic at back. Made in Portugal.',
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     color: 'White',
@@ -111,9 +169,9 @@ export const products: Product[] = [
     id: 'sigma-exclusive-tee-black',
     name: 'Exclusive Tee',
     price: 370,
-    image: exclusiveTeeBlack.url,
-    images: [exclusiveTeeBlack.url],
-    category: 'T-Shirts',
+    image: exclusiveTopBlack.url,
+    images: [exclusiveTopBlack.url, exclusiveTopBlackBack.url],
+    category: 'Tops',
     description: 'Heavyweight 280gsm cotton jersey. Boxy oversized fit. Outlined Sigma loop logo at chest with arched "SIGMA EXCLUSIVE" graphic at back. Made in Portugal.',
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     color: 'Black',
@@ -123,9 +181,9 @@ export const products: Product[] = [
     id: 'sigma-exclusive-tee-white',
     name: 'Exclusive Tee',
     price: 370,
-    image: exclusiveTeeWhite.url,
-    images: [exclusiveTeeWhite.url],
-    category: 'T-Shirts',
+    image: exclusiveTopWhite.url,
+    images: [exclusiveTopWhite.url, exclusiveTopWhiteBack.url],
+    category: 'Tops',
     description: 'Heavyweight 280gsm cotton jersey. Boxy oversized fit. Outlined Sigma loop logo at chest with arched "SIGMA EXCLUSIVE" graphic at back. Made in Portugal.',
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     color: 'White',
@@ -192,14 +250,14 @@ export const products: Product[] = [
     price: 370,
     image: '/products/longsleeve-black.jpg',
     images: ['/products/longsleeve-black.jpg', '/products/longsleeve-black-2.jpg'],
-    category: 'T-Shirts',
+    category: 'Tops',
     description: 'Double-layer thermal cotton with waffle texture interior. Elongated body with curved hem. Made in Portugal.',
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     color: 'Black',
   },
 ];
 
-export const categories = ['All', 'Hoodies', 'T-Shirts', 'Pants', 'Outerwear', 'Accessories'];
+export const categories = ['All', 'Hoodies', 'Tops', 'Pants', 'Outerwear', 'Accessories'];
 
 export const getProductById = (id: string): Product | undefined => {
   return products.find((product) => product.id === id);

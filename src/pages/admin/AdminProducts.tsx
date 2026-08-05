@@ -41,7 +41,7 @@ const EMPTY: Omit<ProductRow, 'id'> = {
   compare_at_price: null,
   sku: '',
   barcode: '',
-  category: 'T-Shirts',
+  category: 'Tops',
   sizes: ['XS', 'S', 'M', 'L', 'XL'],
   colors: ['Black'],
   images: [],
@@ -54,7 +54,7 @@ const EMPTY: Omit<ProductRow, 'id'> = {
   seo_description: '',
 };
 
-const CATEGORIES = ['T-Shirts', 'Hoodies', 'Pants', 'Outerwear', 'Accessories'];
+const CATEGORIES = ['Tops', 'Hoodies', 'Pants', 'Outerwear', 'Accessories'];
 const PAGE_SIZE = 12;
 
 export default function AdminProducts() {
