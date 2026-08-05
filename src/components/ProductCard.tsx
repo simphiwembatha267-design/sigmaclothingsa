@@ -21,13 +21,14 @@ function ProductCardBase({ product, index = 0, priority = false }: ProductCardPr
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 16 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
-      transition={{ delay: Math.min(index, 3) * 0.06, duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
+      transition={{ delay: Math.min(index, 4) * 0.08, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      whileTap={{ scale: 0.985 }}
     >
       <Link to={`/product/${product.id}`} className="group block product-card">
-        <div className="relative aspect-[3/4] bg-muted overflow-hidden mb-4">
+        <div className="relative aspect-[4/5] bg-muted overflow-hidden mb-6">
           {hasImage ? (
             <img
               src={product.image}
@@ -37,7 +38,7 @@ function ProductCardBase({ product, index = 0, priority = false }: ProductCardPr
               loading={priority ? 'eager' : 'lazy'}
               decoding="async"
               fetchPriority={priority ? 'high' : 'auto'}
-              className="w-full h-full object-cover object-center will-change-transform group-hover:scale-[1.04] transition-transform duration-700 ease-[cubic-bezier(0.4,0,0.2,1)]"
+              className="w-full h-full object-cover object-center will-change-transform group-hover:scale-[1.03] transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
             />
           ) : (
             <>
@@ -49,19 +50,14 @@ function ProductCardBase({ product, index = 0, priority = false }: ProductCardPr
               </div>
             </>
           )}
-          {/* Quick add button - shows on hover */}
-          <div className="absolute inset-x-0 bottom-0 p-4 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-            <div className="bg-background/95 backdrop-blur-sm py-3 text-center text-caption uppercase">
-              Quick View
-            </div>
-          </div>
         </div>
 
-        <div className="space-y-2">
-          <h3 className="text-sm font-bold tracking-wide group-hover:underline underline-offset-4 transition-all" style={{ fontFamily: 'var(--font-body)' }}>
+        <div className="space-y-3">
+          <h3 className="text-sm font-semibold tracking-[0.02em]" style={{ fontFamily: 'var(--font-body)' }}>
             {product.name}
           </h3>
-          <p className="text-body-sm text-muted-foreground">{formatPrice(product.price)}</p>
+          <p className="text-xs font-light tracking-[0.08em] text-muted-foreground">{formatPrice(product.price)}</p>
+
 
           {/* Color swatches */}
           {colorVariants.length > 1 && (
