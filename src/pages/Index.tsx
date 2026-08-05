@@ -16,6 +16,8 @@ const Index = () => {
           <img
             src={heroImage}
             alt="Sigma Collection"
+            fetchPriority="high"
+            decoding="async"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent" />
@@ -67,7 +69,7 @@ const Index = () => {
           
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
             {featuredProducts.map((product, index) => (
-              <ProductCard key={product.id} product={product} index={index} />
+              <ProductCard key={product.id} product={product} index={index} priority={index < 2} />
             ))}
           </div>
         </div>

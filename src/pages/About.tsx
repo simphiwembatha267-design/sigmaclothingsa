@@ -54,6 +54,8 @@ export default function About() {
           >
             <div className="aspect-[4/5] overflow-hidden">
               <img
+                loading="lazy"
+                decoding="async"
                 src={lookbook2}
                 alt="Sigma Atelier"
                 className="w-full h-full object-cover"
@@ -129,6 +131,8 @@ export default function About() {
         >
           <div className="aspect-[21/9] overflow-hidden">
             <img
+              loading="lazy"
+              decoding="async"
               src={lookbook3}
               alt="Sigma Studio"
               className="w-full h-full object-cover"

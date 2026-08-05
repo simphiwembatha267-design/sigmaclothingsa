@@ -48,6 +48,8 @@ export default function Lookbook() {
             >
               <div className="relative overflow-hidden">
                 <img
+                  loading="lazy"
+                  decoding="async"
                   src={image.src}
                   alt={image.title}
                   className="w-full object-cover group-hover:scale-[1.02] transition-transform duration-700"

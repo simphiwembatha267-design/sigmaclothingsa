@@ -6,6 +6,8 @@ import { Menu, X, Search, ShoppingCart } from 'lucide-react';
 import { Logo } from './Logo';
 import { products } from '@/lib/products';
 import heroImage from '@/assets/hero-main.jpg';
+import { formatPrice } from '@/lib/format';
+
 
 function DurbanClock() {
   const [time, setTime] = useState('');
@@ -201,6 +203,8 @@ export function Header() {
                         <img
                           src={p.image}
                           alt={p.name}
+                          loading="lazy"
+                          decoding="async"
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         />
                       </div>
@@ -210,7 +214,8 @@ export function Header() {
                       >
                         {p.name}
                       </p>
-                      <p className="text-caption text-muted-foreground">R{p.price}</p>
+                      <p className="text-caption text-muted-foreground">{formatPrice(p.price)}</p>
+
                     </Link>
                   ))}
                 </div>
@@ -237,8 +242,11 @@ export function Header() {
               <img
                 src={heroImage}
                 alt=""
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover grayscale"
               />
+
               <div className="absolute inset-0 bg-black/80" />
             </div>
 
