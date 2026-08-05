@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCartStore } from '@/lib/store';
-import { Menu, X, ShoppingCart, User } from 'lucide-react';
+import { Menu, X, ShoppingBag, User } from 'lucide-react';
 import { Logo } from './Logo';
 import heroImage from '@/assets/hero-main.jpg';
 
@@ -28,15 +28,16 @@ function DurbanClock() {
   }, []);
   return (
     <div className="flex flex-col leading-tight select-none" style={{ fontFamily: 'var(--font-body), sans-serif' }}>
-      <span className="text-[9px] md:text-[10px] font-semibold tracking-[0.2em] uppercase">Durban</span>
-      <span className="text-[9px] md:text-[10px] font-light tracking-[0.1em] tabular-nums text-foreground/70">{time}</span>
+      <span className="text-[9px] md:text-[10px] font-bold tracking-[0.2em] uppercase">Durban</span>
+      <span className="text-[9px] md:text-[10px] font-bold tracking-[0.1em] tabular-nums">{time}</span>
+
 
     </div>
   );
 }
 
 function BagIcon({ className }: { className?: string }) {
-  return <ShoppingCart className={className} strokeWidth={1.25} />;
+  return <ShoppingBag className={className} strokeWidth={2} />;
 }
 
 const navLinks = [
@@ -116,7 +117,7 @@ export function Header() {
             {/* Right: account + bag */}
             <div className="flex items-center gap-2 md:gap-4 ml-auto">
               <Link to="/admin" className="p-2" aria-label="Account">
-                <User className="w-6 h-6" strokeWidth={1.25} />
+                <User className="w-6 h-6" strokeWidth={2} />
               </Link>
 
               <button onClick={openCart} className="relative p-2 -mr-2" aria-label="Open cart">
