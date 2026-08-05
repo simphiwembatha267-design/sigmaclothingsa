@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 export function ScrollToTop() {
-  const { pathname, search } = useLocation();
+  const { pathname, search, hash } = useLocation();
 
   useEffect(() => {
     if ("scrollRestoration" in window.history) {
@@ -11,6 +11,24 @@ export function ScrollToTop() {
   }, []);
 
   useLayoutEffect(() => {
+    if (hash) {
+      let tries = 0;
+      const interval = window.setInterval(() => {
+        const el = document.querySelector(hash);
+        if (el) {
+          el.scrollIntoView({ behavior: "auto", block: "start" });
+          if (window.scrollY > 0) {
+            window.clearInterval(interval);
+            return;
+          }
+        }
+        if (tries++ > 80) window.clearInterval(interval);
+      }, 100);
+      return () => window.clearInterval(interval);
+    }
+
+
+
     const resetScroll = () => {
       window.scrollTo(0, 0);
       document.documentElement.scrollTop = 0;
@@ -25,7 +43,8 @@ export function ScrollToTop() {
       window.cancelAnimationFrame(frame);
       window.clearTimeout(timeout);
     };
-  }, [pathname, search]);
+  }, [pathname, search, hash]);
+
 
 
   return null;

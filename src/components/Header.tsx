@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCartStore } from '@/lib/store';
-import { Menu, X, Search, ShoppingCart } from 'lucide-react';
+import { Menu, X, Search, ShoppingCart, User } from 'lucide-react';
 import { Logo } from './Logo';
 import { products } from '@/lib/products';
 import heroImage from '@/assets/hero-main.jpg';
@@ -129,11 +129,15 @@ export function Header() {
               <Logo className="h-12 md:h-14" />
             </Link>
 
-            {/* Right: search + bag */}
-            <div className="flex items-center gap-3 md:gap-4 ml-auto">
+            {/* Right: search + account + bag */}
+            <div className="flex items-center gap-2 md:gap-4 ml-auto">
               <button onClick={() => setIsSearchOpen(true)} className="p-2" aria-label="Search">
                 <Search className="w-6 h-6" strokeWidth={1.25} />
               </button>
+              <Link to="/admin" className="p-2" aria-label="Account">
+                <User className="w-6 h-6" strokeWidth={1.25} />
+              </Link>
+
               <button onClick={openCart} className="relative p-2 -mr-2" aria-label="Open cart">
                 <BagIcon className="w-6 h-6" />
                 {itemCount() > 0 && (
