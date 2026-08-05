@@ -69,22 +69,9 @@ const mobileNavGroups = [
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [query, setQuery] = useState('');
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const { openCart, itemCount } = useCartStore();
-
-  const results = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    if (!q) return [];
-    return products.filter(
-      (p) =>
-        p.name.toLowerCase().includes(q) ||
-        p.category.toLowerCase().includes(q) ||
-        (p.color?.toLowerCase().includes(q) ?? false)
-    );
-  }, [query]);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -92,12 +79,12 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => { setIsMenuOpen(false); setIsSearchOpen(false); }, [location]);
+  useEffect(() => { setIsMenuOpen(false); }, [location]);
 
   useEffect(() => {
-    document.body.style.overflow = isMenuOpen || isSearchOpen ? 'hidden' : '';
+    document.body.style.overflow = isMenuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
-  }, [isMenuOpen, isSearchOpen]);
+  }, [isMenuOpen]);
 
 
   return (
