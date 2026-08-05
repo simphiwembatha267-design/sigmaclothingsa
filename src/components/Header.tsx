@@ -8,7 +8,7 @@ import heroImage from '@/assets/hero-main.jpg';
 
 
 
-function DurbanClock({ subdued = false }: { subdued?: boolean }) {
+function DurbanClock() {
   const [time, setTime] = useState('');
   useEffect(() => {
     const update = () => {
@@ -27,9 +27,7 @@ function DurbanClock({ subdued = false }: { subdued?: boolean }) {
   }, []);
   return (
     <div
-      className={`hidden sm:flex flex-col leading-tight select-none transition-opacity duration-500 ${
-        subdued ? 'opacity-40' : 'opacity-70'
-      }`}
+      className="hidden sm:flex flex-col leading-tight select-none opacity-70"
       style={{ fontFamily: 'var(--font-body), sans-serif' }}
     >
       <span className="text-[9px] md:text-[10px] font-medium tracking-[0.28em] uppercase">Durban</span>
