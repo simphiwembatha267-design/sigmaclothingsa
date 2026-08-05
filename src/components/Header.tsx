@@ -103,15 +103,13 @@ export function Header() {
   return (
     <>
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-background/95 backdrop-blur-sm' : 'bg-transparent'}`}>
-        {/* Feathered readability scrim behind the left cluster only */}
+        {/* Readability scrim across the full header */}
         <div
           aria-hidden="true"
-          className={`pointer-events-none absolute inset-y-0 left-0 w-[46%] max-w-[300px] transition-opacity duration-500 ${isScrolled ? 'opacity-0' : 'opacity-100'}`}
+          className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ${isScrolled ? 'opacity-0' : 'opacity-100'}`}
           style={{
             background:
-              'radial-gradient(120% 130% at 0% 30%, hsl(var(--background) / 0.55) 0%, hsl(var(--background) / 0.28) 42%, hsl(var(--background) / 0) 78%)',
-            maskImage: 'linear-gradient(to right, black 40%, transparent 100%)',
-            WebkitMaskImage: 'linear-gradient(to right, black 40%, transparent 100%)',
+              'linear-gradient(to bottom, hsl(var(--background) / 0.75) 0%, hsl(var(--background) / 0.45) 55%, hsl(var(--background) / 0) 100%)',
           }}
         />
         <div className="container-editorial">

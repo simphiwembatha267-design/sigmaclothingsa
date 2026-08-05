@@ -109,24 +109,26 @@ export function PasswordGate({ onAuthenticated }: PasswordGateProps) {
 
             {stage === 'email' && (
               <form onSubmit={submitEmail} className="w-full">
-                <div className="relative">
-                  <input
-                    type="email"
-                    autoFocus
-                    value={email}
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                      setError('');
-                    }}
-                    placeholder="Enter your email"
-                    className={`${inputClass} pr-10`}
-                    style={MONO}
-                    autoComplete="email"
-                  />
+                <div className="flex w-full items-stretch gap-2">
+                  <div className="flex flex-1 min-w-0 items-center rounded-full bg-muted-foreground/10 px-4">
+                    <input
+                      type="email"
+                      autoFocus
+                      value={email}
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                        setError('');
+                      }}
+                      placeholder="EMAIL ADDRESS"
+                      className="w-full min-w-0 bg-transparent border-0 focus:outline-none py-3.5 text-xs tracking-[0.06em] placeholder:text-foreground/40"
+                      style={MONO}
+                      autoComplete="email"
+                    />
+                  </div>
                   <button
                     type="submit"
                     aria-label="Continue"
-                    className="absolute right-0 top-1/2 -translate-y-1/2 p-2 hover:translate-x-0.5 transition-transform"
+                    className="shrink-0 rounded-full bg-foreground text-background px-5 flex items-center justify-center hover:opacity-90 transition-opacity"
                   >
                     <ArrowRight className="w-4 h-4" strokeWidth={1.5} />
                   </button>
@@ -159,20 +161,32 @@ export function PasswordGate({ onAuthenticated }: PasswordGateProps) {
 
             {stage === 'password' && (
               <form onSubmit={submitPassword} className="w-full">
-                <input
-                  type="password"
-                  autoFocus
-                  value={password}
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                    setError('');
-                  }}
-                  placeholder="Enter password"
-                  className={`${inputClass} text-center`}
-                  style={MONO}
-                  autoComplete="off"
-                  spellCheck={false}
-                />
+                <div className="flex w-full items-stretch gap-2">
+                  <div className="flex flex-1 min-w-0 items-center rounded-full bg-muted-foreground/10 px-4">
+                    <input
+                      type="password"
+                      autoFocus
+                      value={password}
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                        setError('');
+                      }}
+                      placeholder="PASSWORD"
+                      className="w-full min-w-0 bg-transparent border-0 focus:outline-none py-3.5 text-xs tracking-[0.06em] placeholder:text-foreground/40"
+                      style={MONO}
+                      autoComplete="off"
+                      spellCheck={false}
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={checking}
+                    className="shrink-0 rounded-full bg-foreground text-background px-5 text-[10px] uppercase tracking-[0.14em] font-semibold hover:opacity-90 disabled:opacity-60 transition-opacity"
+                    style={{ fontFamily: 'var(--font-body)' }}
+                  >
+                    {checking ? '...' : 'Enter'}
+                  </button>
+                </div>
                 <div className="h-5 mt-4 text-center">
                   {error && (
                     <p className="text-xs lowercase tracking-wider text-muted-foreground" style={MONO}>
@@ -180,12 +194,6 @@ export function PasswordGate({ onAuthenticated }: PasswordGateProps) {
                     </p>
                   )}
                 </div>
-                <button
-                  type="submit"
-                  className="mt-8 w-full rounded-full border border-foreground py-3 text-[11px] uppercase tracking-[0.25em] font-semibold hover:bg-foreground hover:text-background transition-colors"
-                >
-                  Enter
-                </button>
                 <button
                   type="button"
                   onClick={() => {
@@ -199,6 +207,7 @@ export function PasswordGate({ onAuthenticated }: PasswordGateProps) {
                 </button>
               </form>
             )}
+
 
             {stage === 'phone' && (
               <form onSubmit={submitPhone} className="w-full">
