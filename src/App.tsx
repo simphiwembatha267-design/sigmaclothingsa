@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -12,18 +12,18 @@ import { PasswordGate, isAuthenticated } from "./components/PasswordGate";
 import { AdminAuthProvider } from "./hooks/useAdminAuth";
 import { AdminLayout } from "./components/admin/AdminLayout";
 import { AdminProtectedRoute } from "./components/admin/AdminProtectedRoute";
-import AdminLogin from "./pages/admin/AdminLogin";
-import AdminResetPassword from "./pages/admin/AdminResetPassword";
-import AdminDashboard from "./pages/admin/AdminDashboard";
-import AdminOrders from "./pages/admin/AdminOrders";
-import AdminProducts from "./pages/admin/AdminProducts";
-import AdminPlaceholder from "./pages/admin/AdminPlaceholder";
+const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
+const AdminResetPassword = lazy(() => import("./pages/admin/AdminResetPassword"));
+const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
+const AdminOrders = lazy(() => import("./pages/admin/AdminOrders"));
+const AdminProducts = lazy(() => import("./pages/admin/AdminProducts"));
+const AdminPlaceholder = lazy(() => import("./pages/admin/AdminPlaceholder"));
 import Index from "./pages/Index";
-import Shop from "./pages/Shop";
-import ProductPage from "./pages/ProductPage";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import NotFound from "./pages/NotFound";
+const Shop = lazy(() => import("./pages/Shop"));
+const ProductPage = lazy(() => import("./pages/ProductPage"));
+const About = lazy(() => import("./pages/About"));
+const Contact = lazy(() => import("./pages/Contact"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
 
@@ -44,6 +44,7 @@ function Storefront() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
         >
+          <Suspense fallback={<div className="min-h-screen" />}>
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Index />} />
@@ -54,6 +55,7 @@ function Storefront() {
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
+          </Suspense>
         </motion.div>
       )}
     </AnimatePresence>
@@ -68,6 +70,7 @@ const App = () => (
       <BrowserRouter>
         <ScrollToTop />
         <AdminAuthProvider>
+          <Suspense fallback={<div className="min-h-screen" />}>
           <Routes>
             <Route path="/admin" element={<AdminLogin />} />
             <Route path="/admin/reset-password" element={<AdminResetPassword />} />
@@ -216,6 +219,7 @@ const App = () => (
             </Route>
             <Route path="*" element={<Storefront />} />
           </Routes>
+          </Suspense>
         </AdminAuthProvider>
       </BrowserRouter>
     </TooltipProvider>
