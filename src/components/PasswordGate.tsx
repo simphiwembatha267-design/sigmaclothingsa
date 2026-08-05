@@ -206,33 +206,42 @@ export function PasswordGate({ onAuthenticated }: PasswordGateProps) {
                   GET ACCESS
                 </h2>
 
-                <div className="flex items-end gap-4">
-                  <select
-                    value={dial}
-                    onChange={(e) => setDial(e.target.value)}
-                    className="bg-transparent border-0 border-b border-foreground/20 focus:border-foreground focus:outline-none py-3 text-sm tracking-wide"
-                    style={MONO}
-                    aria-label="Country code"
+                <div className="flex items-stretch gap-2">
+                  <div className="flex flex-1 items-center rounded-full bg-muted-foreground/10 pl-4 pr-2 focus-within:ring-1 focus-within:ring-foreground/30 transition-shadow">
+                    <select
+                      value={dial}
+                      onChange={(e) => setDial(e.target.value)}
+                      className="bg-transparent border-0 focus:outline-none text-[11px] tracking-wide text-foreground/70 pr-1 cursor-pointer"
+                      style={MONO}
+                      aria-label="Country code"
+                    >
+                      {COUNTRIES.map((c) => (
+                        <option key={c.code} value={c.code}>
+                          {c.label} {c.code}
+                        </option>
+                      ))}
+                    </select>
+                    <input
+                      type="tel"
+                      autoFocus
+                      value={phone}
+                      onChange={(e) => {
+                        setPhone(e.target.value);
+                        setError('');
+                      }}
+                      placeholder="PHONE NUMBER"
+                      className="flex-1 min-w-0 bg-transparent border-0 focus:outline-none py-3.5 text-sm tracking-[0.08em] placeholder:text-foreground/40 placeholder:tracking-[0.12em]"
+                      style={MONO}
+                      autoComplete="tel"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="shrink-0 rounded-full bg-foreground text-background px-6 text-[11px] uppercase tracking-[0.22em] font-semibold hover:opacity-90 transition-opacity"
+                    style={{ fontFamily: 'var(--font-body)' }}
                   >
-                    {COUNTRIES.map((c) => (
-                      <option key={c.code} value={c.code}>
-                        {c.label} {c.code}
-                      </option>
-                    ))}
-                  </select>
-                  <input
-                    type="tel"
-                    autoFocus
-                    value={phone}
-                    onChange={(e) => {
-                      setPhone(e.target.value);
-                      setError('');
-                    }}
-                    placeholder="Phone number"
-                    className={inputClass}
-                    style={MONO}
-                    autoComplete="tel"
-                  />
+                    Sign Up
+                  </button>
                 </div>
 
                 <div className="h-5 mt-4 text-center">
@@ -243,12 +252,6 @@ export function PasswordGate({ onAuthenticated }: PasswordGateProps) {
                   )}
                 </div>
 
-                <button
-                  type="submit"
-                  className="mt-8 w-full rounded-full border border-foreground py-3 text-[11px] uppercase tracking-[0.25em] font-semibold hover:bg-foreground hover:text-background transition-colors"
-                >
-                  Sign Up
-                </button>
 
                 <p className="mt-10 text-center text-[10px] leading-relaxed tracking-wide text-muted-foreground">
                   By signing up you agree to receive updates about future drops, launch
