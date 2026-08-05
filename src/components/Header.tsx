@@ -8,7 +8,7 @@ import heroImage from '@/assets/hero-main.jpg';
 
 
 
-function DurbanClock() {
+function DurbanClock({ subdued = false }: { subdued?: boolean }) {
   const [time, setTime] = useState('');
   useEffect(() => {
     const update = () => {
@@ -17,7 +17,6 @@ function DurbanClock() {
           timeZone: 'Africa/Johannesburg',
           hour: '2-digit',
           minute: '2-digit',
-          second: '2-digit',
           hour12: true,
         }).format(new Date())
       );
@@ -27,18 +26,22 @@ function DurbanClock() {
     return () => clearInterval(id);
   }, []);
   return (
-    <div className="flex flex-col leading-tight select-none" style={{ fontFamily: 'var(--font-body), sans-serif' }}>
-      <span className="text-[9px] md:text-[10px] font-bold tracking-[0.2em] uppercase">Durban</span>
-      <span className="text-[9px] md:text-[10px] font-bold tracking-[0.1em] tabular-nums">{time}</span>
-
-
+    <div
+      className={`hidden sm:flex flex-col leading-tight select-none transition-opacity duration-500 ${
+        subdued ? 'opacity-40' : 'opacity-70'
+      }`}
+      style={{ fontFamily: 'var(--font-body), sans-serif' }}
+    >
+      <span className="text-[9px] md:text-[10px] font-medium tracking-[0.28em] uppercase">Durban</span>
+      <span className="text-[9px] md:text-[10px] font-medium tracking-[0.14em] tabular-nums">{time}</span>
     </div>
   );
 }
 
 function BagIcon({ className }: { className?: string }) {
-  return <ShoppingBag className={className} strokeWidth={2} />;
+  return <ShoppingBag className={className} strokeWidth={1.25} />;
 }
+
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -72,6 +75,8 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const { openCart, itemCount } = useCartStore();
+  const isCollectionPage = location.pathname.startsWith('/shop') || location.pathname.startsWith('/product');
+
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -89,24 +94,24 @@ export function Header() {
 
   return (
     <>
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-background/95 backdrop-blur-sm' : 'bg-transparent'}`}>
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-background/80 backdrop-blur-md' : 'bg-transparent'}`}>
         {/* Readability scrim across the full header */}
         <div
           aria-hidden="true"
           className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ${isScrolled ? 'opacity-0' : 'opacity-100'}`}
           style={{
             background:
-              'linear-gradient(to bottom, hsl(var(--background) / 0.75) 0%, hsl(var(--background) / 0.45) 55%, hsl(var(--background) / 0) 100%)',
+              'linear-gradient(to bottom, hsl(var(--background) / 0.45) 0%, hsl(var(--background) / 0.2) 55%, hsl(var(--background) / 0) 100%)',
           }}
         />
         <div className="container-editorial">
           <div className="relative flex items-center h-16 md:h-20">
             {/* Left: hamburger + clock */}
-            <div className="flex items-center gap-3 md:gap-4">
+            <div className="flex items-center gap-5 md:gap-8">
               <button onClick={() => setIsMenuOpen(true)} className="p-2 -ml-2" aria-label="Open menu">
                 <Menu className="w-5 h-5" strokeWidth={1.25} />
               </button>
-              <DurbanClock />
+              <DurbanClock subdued={isCollectionPage} />
             </div>
 
             {/* Center: logo */}
@@ -115,16 +120,16 @@ export function Header() {
             </Link>
 
             {/* Right: account + bag */}
-            <div className="flex items-center gap-2 md:gap-4 ml-auto">
+            <div className="flex items-center gap-5 md:gap-8 ml-auto">
               <Link to="/admin" className="p-2" aria-label="Account">
-                <User className="w-6 h-6" strokeWidth={2} />
+                <User className="w-5 h-5" strokeWidth={1.25} />
               </Link>
 
               <button onClick={openCart} className="relative p-2 -mr-2" aria-label="Open cart">
-                <BagIcon className="w-6 h-6" />
+                <BagIcon className="w-5 h-5" />
                 {itemCount() > 0 && (
                   <span
-                    className="absolute top-0 right-0 text-[10px] font-bold text-foreground leading-none tabular-nums"
+                    className="absolute top-0 right-0 text-[10px] font-medium text-foreground leading-none tabular-nums"
                     style={{ fontFamily: 'var(--font-body), sans-serif' }}
                   >
                     {itemCount()}
@@ -134,6 +139,7 @@ export function Header() {
             </div>
           </div>
         </div>
+
       </header>
 
 
