@@ -101,7 +101,7 @@ export function Header() {
           className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ${isScrolled ? 'opacity-0' : 'opacity-100'}`}
           style={{
             background:
-              'linear-gradient(to bottom, hsl(var(--background) / 0.75) 0%, hsl(var(--background) / 0.45) 55%, hsl(var(--background) / 0) 100%)',
+              'linear-gradient(to bottom, hsl(var(--background) / 0.45) 0%, hsl(var(--background) / 0.2) 55%, hsl(var(--background) / 0) 100%)',
           }}
         />
         <div className="container-editorial">
