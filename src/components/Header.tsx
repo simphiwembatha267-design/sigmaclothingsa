@@ -105,11 +105,11 @@ export function Header() {
         <div className="container-editorial">
           <div className="relative flex items-center h-16 md:h-20">
             {/* Left: hamburger + clock */}
-            <div className="flex items-center gap-3 md:gap-4">
+            <div className="flex items-center gap-5 md:gap-8">
               <button onClick={() => setIsMenuOpen(true)} className="p-2 -ml-2" aria-label="Open menu">
                 <Menu className="w-5 h-5" strokeWidth={1.25} />
               </button>
-              <DurbanClock />
+              <DurbanClock subdued={isCollectionPage} />
             </div>
 
             {/* Center: logo */}
@@ -118,16 +118,16 @@ export function Header() {
             </Link>
 
             {/* Right: account + bag */}
-            <div className="flex items-center gap-2 md:gap-4 ml-auto">
+            <div className="flex items-center gap-5 md:gap-8 ml-auto">
               <Link to="/admin" className="p-2" aria-label="Account">
-                <User className="w-6 h-6" strokeWidth={2} />
+                <User className="w-5 h-5" strokeWidth={1.25} />
               </Link>
 
               <button onClick={openCart} className="relative p-2 -mr-2" aria-label="Open cart">
-                <BagIcon className="w-6 h-6" />
+                <BagIcon className="w-5 h-5" />
                 {itemCount() > 0 && (
                   <span
-                    className="absolute top-0 right-0 text-[10px] font-bold text-foreground leading-none tabular-nums"
+                    className="absolute top-0 right-0 text-[10px] font-medium text-foreground leading-none tabular-nums"
                     style={{ fontFamily: 'var(--font-body), sans-serif' }}
                   >
                     {itemCount()}
@@ -137,6 +137,7 @@ export function Header() {
             </div>
           </div>
         </div>
+
       </header>
 
 
