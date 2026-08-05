@@ -17,6 +17,7 @@ function DurbanClock() {
           timeZone: 'Africa/Johannesburg',
           hour: '2-digit',
           minute: '2-digit',
+          second: '2-digit',
           hour12: true,
         }).format(new Date())
       );
@@ -27,18 +28,19 @@ function DurbanClock() {
   }, []);
   return (
     <div
-      className="hidden sm:flex flex-col leading-tight select-none opacity-70"
+      className="flex flex-col leading-tight select-none"
       style={{ fontFamily: 'var(--font-body), sans-serif' }}
     >
-      <span className="text-[9px] md:text-[10px] font-medium tracking-[0.28em] uppercase">Durban</span>
-      <span className="text-[9px] md:text-[10px] font-medium tracking-[0.14em] tabular-nums">{time}</span>
+      <span className="text-[11px] md:text-[13px] font-bold tracking-[0.01em]">Durban</span>
+      <span className="text-[11px] md:text-[13px] font-bold tracking-[0.01em] tabular-nums">{time}</span>
     </div>
   );
 }
 
 function BagIcon({ className }: { className?: string }) {
-  return <ShoppingBag className={className} strokeWidth={1.25} />;
+  return <ShoppingBag className={className} strokeWidth={1.5} />;
 }
+
 
 
 const navLinks = [
