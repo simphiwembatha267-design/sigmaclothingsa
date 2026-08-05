@@ -9,6 +9,18 @@ import exclusiveTeeBlack from '@/assets/sigma-exclusive-tee-black.jpg.asset.json
 import exclusiveTeeWhite from '@/assets/sigma-exclusive-tee-white.jpg.asset.json';
 import renaissanceHoodieBlack from '@/assets/sigma-renaissance-hoodie-black.jpg.asset.json';
 import renaissanceHoodieWhite from '@/assets/sigma-renaissance-hoodie-white.jpg.asset.json';
+import galleryTopBlack from '@/assets/sigma-gallery-top-black.jpg.asset.json';
+import galleryTopBlackBack from '@/assets/sigma-gallery-top-black-back.jpg.asset.json';
+import galleryTopWhite from '@/assets/sigma-gallery-top-white.jpg.asset.json';
+import galleryTopWhiteBack from '@/assets/sigma-gallery-top-white-back.jpg.asset.json';
+import lancetTopBlack from '@/assets/sigma-lancet-top-black.jpg.asset.json';
+import lancetTopBlackBack from '@/assets/sigma-lancet-top-black-back.jpg.asset.json';
+import lancetTopWhite from '@/assets/sigma-lancet-top-white.jpg.asset.json';
+import lancetTopWhiteBack from '@/assets/sigma-lancet-top-white-back.jpg.asset.json';
+import exclusiveTopBlack from '@/assets/sigma-exclusive-top-black.jpg.asset.json';
+import exclusiveTopBlackBack from '@/assets/sigma-exclusive-top-black-back.jpg.asset.json';
+import exclusiveTopWhite from '@/assets/sigma-exclusive-top-white.jpg.asset.json';
+import exclusiveTopWhiteBack from '@/assets/sigma-exclusive-top-white-back.jpg.asset.json';
 
 export const products: Product[] = [
   {
