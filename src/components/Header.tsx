@@ -6,6 +6,8 @@ import { Menu, X, Search, ShoppingCart } from 'lucide-react';
 import { Logo } from './Logo';
 import { products } from '@/lib/products';
 import heroImage from '@/assets/hero-main.jpg';
+import { formatPrice } from '@/lib/format';
+
 
 function DurbanClock() {
   const [time, setTime] = useState('');
