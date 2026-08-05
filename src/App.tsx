@@ -54,6 +54,8 @@ function Storefront() {
               <Route path="/product/:id" element={<ProductPage />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/legal" element={<Legal />} />
+
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
