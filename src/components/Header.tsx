@@ -94,42 +94,39 @@ export function Header() {
 
   return (
     <>
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-background/80 backdrop-blur-md' : 'bg-transparent'}`}>
-        {/* Readability scrim across the full header */}
+      <header className="fixed top-0 left-0 right-0 z-50 px-3 sm:px-5 lg:px-8 pt-3 sm:pt-4">
         <div
-          aria-hidden="true"
-          className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ${isScrolled ? 'opacity-0' : 'opacity-100'}`}
-          style={{
-            background:
-              'linear-gradient(to bottom, hsl(var(--background) / 0.45) 0%, hsl(var(--background) / 0.2) 55%, hsl(var(--background) / 0) 100%)',
-          }}
-        />
-        <div className="container-editorial">
-          <div className="relative flex items-center h-16 md:h-20">
+          className={`relative rounded-[28px] md:rounded-[36px] transition-all duration-500 ${
+            isScrolled
+              ? 'bg-background/90 backdrop-blur-md shadow-[0_8px_30px_-12px_hsl(var(--foreground)/0.25)]'
+              : 'bg-background/75 backdrop-blur-md shadow-[0_8px_30px_-14px_hsl(var(--foreground)/0.2)]'
+          }`}
+        >
+          <div className="relative flex items-center h-14 md:h-20 px-4 sm:px-6 md:px-10">
             {/* Left: hamburger + clock */}
-            <div className="flex items-center gap-5 md:gap-8">
-              <button onClick={() => setIsMenuOpen(true)} className="p-2 -ml-2" aria-label="Open menu">
-                <Menu className="w-5 h-5" strokeWidth={1.25} />
+            <div className="flex items-center gap-4 md:gap-8">
+              <button onClick={() => setIsMenuOpen(true)} className="p-1.5 -ml-1.5" aria-label="Open menu">
+                <Menu className="w-5 h-5" strokeWidth={1.5} />
               </button>
-              {isHomePage && <DurbanClock />}
+              <DurbanClock />
             </div>
 
             {/* Center: logo */}
             <Link to="/" className="absolute left-1/2 -translate-x-1/2">
-              <Logo className="h-12 md:h-14" />
+              <Logo className="h-10 md:h-14" />
             </Link>
 
             {/* Right: account + bag */}
-            <div className="flex items-center gap-5 md:gap-8 ml-auto">
-              <Link to="/admin" className="p-2" aria-label="Account">
-                <User className="w-5 h-5" strokeWidth={1.25} />
+            <div className="flex items-center gap-4 md:gap-8 ml-auto">
+              <Link to="/admin" className="p-1.5" aria-label="Account">
+                <User className="w-5 h-5" strokeWidth={1.5} />
               </Link>
 
-              <button onClick={openCart} className="relative p-2 -mr-2" aria-label="Open cart">
+              <button onClick={openCart} className="relative p-1.5 -mr-1.5" aria-label="Open cart">
                 <BagIcon className="w-5 h-5" />
                 {itemCount() > 0 && (
                   <span
-                    className="absolute top-0 right-0 text-[10px] font-medium text-foreground leading-none tabular-nums"
+                    className="absolute top-0 right-0 text-[10px] font-semibold text-foreground leading-none tabular-nums"
                     style={{ fontFamily: 'var(--font-body), sans-serif' }}
                   >
                     {itemCount()}
@@ -139,6 +136,7 @@ export function Header() {
             </div>
           </div>
         </div>
+
 
       </header>
 
