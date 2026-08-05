@@ -1,10 +1,11 @@
 import { motion, AnimatePresence } from 'framer-motion';
+import { formatPrice } from '@/lib/format';
 import { useCartStore } from '@/lib/store';
 import { X, Plus, Minus, ShoppingCart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export function Cart() {
-  const { items, isOpen, closeCart, removeItem, updateQuantity, total } = useCartStore();
+  const { items, isOpen, closeCart, removeItem, updateQuantity, total, itemCount } = useCartStore();
 
   return (
     <AnimatePresence>
@@ -29,7 +30,7 @@ export function Cart() {
           >
             {/* Header */}
             <div className="flex items-center justify-between h-16 px-6 border-b border-border">
-              <h2 className="text-caption uppercase font-semibold tracking-[0.02em]" style={{ fontFamily: 'var(--font-body), sans-serif' }}>Cart ({items.length})</h2>
+              <h2 className="text-caption uppercase font-semibold tracking-[0.02em]" style={{ fontFamily: 'var(--font-body), sans-serif' }}>Cart ({itemCount()})</h2>
               <button
                 onClick={closeCart}
                 className="p-2 -mr-2 hover:opacity-60 transition-opacity"
@@ -62,6 +63,8 @@ export function Cart() {
                           <img
                             src={item.product.image}
                             alt={item.product.name}
+                            loading="lazy"
+                            decoding="async"
                             className="w-full h-full object-cover object-center"
                           />
                         ) : null}
@@ -106,7 +109,7 @@ export function Cart() {
                               <Plus className="w-3 h-3" />
                             </button>
                           </div>
-                          <p className="text-body-sm" style={{ fontFamily: 'var(--font-body), sans-serif' }}>R{item.product.price * item.quantity}</p>
+                          <p className="text-body-sm" style={{ fontFamily: 'var(--font-body), sans-serif' }}>{formatPrice(item.product.price * item.quantity)}</p>
                         </div>
                       </div>
                     </li>
@@ -120,7 +123,7 @@ export function Cart() {
               <div className="border-t border-border p-6 space-y-4">
                 <div className="flex justify-between text-body-sm" style={{ fontFamily: 'var(--font-body), sans-serif' }}>
                   <span>Subtotal</span>
-                  <span>R{total()}</span>
+                  <span>{formatPrice(total())}</span>
                 </div>
                 <p className="text-caption text-muted-foreground" style={{ fontFamily: 'var(--font-body), sans-serif' }}>
                   Shipping calculated at checkout

@@ -5,6 +5,7 @@ import { getProductById, products } from '@/lib/products';
 import { useCartStore } from '@/lib/store';
 import { ProductCard } from '@/components/ProductCard';
 import { ChevronLeft, Plus, Minus, Check, X } from 'lucide-react';
+import { formatPrice } from '@/lib/format';
 
 const sizeGuide = [
   { size: 'XS', chest: '86-91', waist: '71-76', hips: '86-91' },
@@ -96,6 +97,10 @@ export default function ProductPage() {
                 <img 
                   src={product.image} 
                   alt={product.name}
+                  width={900}
+                  height={1200}
+                  fetchPriority="high"
+                  decoding="async"
                   className="w-full h-full object-cover object-center"
                 />
               ) : (
@@ -119,7 +124,7 @@ export default function ProductPage() {
               {product.category}
             </p>
             <h1 className="text-3xl md:text-4xl font-bold tracking-wide mb-2" style={{ fontFamily: 'var(--font-body)' }}>{product.name}</h1>
-            <p className="text-body-lg mb-6">R{product.price}</p>
+            <p className="text-body-lg mb-6">{formatPrice(product.price)}</p>
             
             <p className="text-muted-foreground mb-8">{product.description}</p>
 
@@ -215,7 +220,7 @@ export default function ProductPage() {
                   <Check className="w-4 h-4" /> Added to Cart
                 </span>
               ) : selectedSize ? (
-                `Add to Cart — R${product.price * quantity}`
+                `Add to Cart — ${formatPrice(product.price * quantity)}`
               ) : (
                 'Select a Size'
               )}
