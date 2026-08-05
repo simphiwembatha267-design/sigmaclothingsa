@@ -8,7 +8,7 @@ import heroImage from '@/assets/hero-main.jpg';
 
 
 
-function DurbanClock() {
+function DurbanClock({ subdued = false }: { subdued?: boolean }) {
   const [time, setTime] = useState('');
   useEffect(() => {
     const update = () => {
@@ -17,7 +17,6 @@ function DurbanClock() {
           timeZone: 'Africa/Johannesburg',
           hour: '2-digit',
           minute: '2-digit',
-          second: '2-digit',
           hour12: true,
         }).format(new Date())
       );
@@ -27,18 +26,22 @@ function DurbanClock() {
     return () => clearInterval(id);
   }, []);
   return (
-    <div className="flex flex-col leading-tight select-none" style={{ fontFamily: 'var(--font-body), sans-serif' }}>
-      <span className="text-[9px] md:text-[10px] font-bold tracking-[0.2em] uppercase">Durban</span>
-      <span className="text-[9px] md:text-[10px] font-bold tracking-[0.1em] tabular-nums">{time}</span>
-
-
+    <div
+      className={`hidden sm:flex flex-col leading-tight select-none transition-opacity duration-500 ${
+        subdued ? 'opacity-40' : 'opacity-70'
+      }`}
+      style={{ fontFamily: 'var(--font-body), sans-serif' }}
+    >
+      <span className="text-[9px] md:text-[10px] font-medium tracking-[0.28em] uppercase">Durban</span>
+      <span className="text-[9px] md:text-[10px] font-medium tracking-[0.14em] tabular-nums">{time}</span>
     </div>
   );
 }
 
 function BagIcon({ className }: { className?: string }) {
-  return <ShoppingBag className={className} strokeWidth={2} />;
+  return <ShoppingBag className={className} strokeWidth={1.25} />;
 }
+
 
 const navLinks = [
   { href: '/', label: 'Home' },
