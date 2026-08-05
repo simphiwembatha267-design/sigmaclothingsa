@@ -134,7 +134,7 @@ export function Header() {
               <button onClick={() => setIsSearchOpen(true)} className="p-2" aria-label="Search">
                 <Search className="w-6 h-6" strokeWidth={1.25} />
               </button>
-              <Link to="/admin/login" className="p-2" aria-label="Account">
+              <Link to="/admin" className="p-2" aria-label="Account">
                 <User className="w-6 h-6" strokeWidth={1.25} />
               </Link>
 
