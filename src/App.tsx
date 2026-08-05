@@ -96,7 +96,7 @@ const App = () => (
                     description="Group products into curated drops and edits."
                     features={[
                       "Create and edit collections",
-                      "T-Shirts, Hoodies, Accessories",
+                      "Tops, Hoodies, Accessories",
                       "New Arrivals and Best Sellers",
                       "Limited Drops and Archive",
                       "Assign products to collections",
