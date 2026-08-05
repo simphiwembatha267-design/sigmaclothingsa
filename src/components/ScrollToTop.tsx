@@ -12,18 +12,20 @@ export function ScrollToTop() {
 
   useLayoutEffect(() => {
     if (hash) {
+      let tries = 0;
+      let raf = 0;
       const scrollToHash = () => {
         const el = document.querySelector(hash);
-        if (el) el.scrollIntoView({ behavior: "auto", block: "start" });
+        if (el) {
+          el.scrollIntoView({ behavior: "auto", block: "start" });
+          return;
+        }
+        if (tries++ < 60) raf = window.requestAnimationFrame(scrollToHash);
       };
       scrollToHash();
-      const frame = window.requestAnimationFrame(scrollToHash);
-      const timeout = window.setTimeout(scrollToHash, 150);
-      return () => {
-        window.cancelAnimationFrame(frame);
-        window.clearTimeout(timeout);
-      };
+      return () => window.cancelAnimationFrame(raf);
     }
+
 
     const resetScroll = () => {
       window.scrollTo(0, 0);
