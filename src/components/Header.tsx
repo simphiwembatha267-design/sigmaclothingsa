@@ -73,7 +73,7 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const { openCart, itemCount } = useCartStore();
-  const isCollectionPage = location.pathname.startsWith('/shop') || location.pathname.startsWith('/product');
+  const isHomePage = location.pathname === '/';
 
 
   useEffect(() => {
