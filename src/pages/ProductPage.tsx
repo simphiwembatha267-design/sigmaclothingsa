@@ -34,10 +34,30 @@ export default function ProductPage() {
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
   const { addItem, openCart } = useCartStore();
-  
+  const galleryRef = useRef<HTMLDivElement>(null);
+  const [activeImage, setActiveImage] = useState(0);
+
+  const galleryImages = useMemo(() => {
+    const list = product?.images?.length ? product.images : product?.image ? [product.image] : [];
+    return list.filter((src) => src.startsWith('/') || src.startsWith('http'));
+  }, [product]);
+
+  const handleGalleryScroll = () => {
+    const el = galleryRef.current;
+    if (!el) return;
+    setActiveImage(Math.round(el.scrollLeft / el.clientWidth));
+  };
+
+  const scrollToImage = (i: number) => {
+    const el = galleryRef.current;
+    if (!el) return;
+    el.scrollTo({ left: i * el.clientWidth, behavior: 'smooth' });
+  };
+
   const colorVariants = product?.colorVariants 
     ? products.filter(p => product.colorVariants?.includes(p.id))
     : [];
+
 
   if (!product) {
     return (
