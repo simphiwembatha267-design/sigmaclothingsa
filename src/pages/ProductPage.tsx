@@ -86,25 +86,52 @@ export default function ProductPage() {
       {/* Product Details */}
       <section className="container-editorial pb-16 md:pb-24">
         <div className="grid md:grid-cols-2 gap-8 lg:gap-16">
-          {/* Image */}
+          {/* Images */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="aspect-[3/4] bg-muted relative sticky top-24 overflow-hidden">
-              {product.image.startsWith('/') || product.image.startsWith('http') ? (
-                <img 
-                  src={product.image} 
-                  alt={product.name}
-                  width={900}
-                  height={1200}
-                  fetchPriority="high"
-                  decoding="async"
-                  className="w-full h-full object-cover object-center"
-                />
+            <div className="sticky top-24">
+              {galleryImages.length > 0 ? (
+                <>
+                  <div
+                    ref={galleryRef}
+                    onScroll={handleGalleryScroll}
+                    className="flex snap-x snap-mandatory overflow-x-auto scroll-smooth no-scrollbar"
+                  >
+                    {galleryImages.map((src, i) => (
+                      <div key={src} className="min-w-full snap-center aspect-[3/4] bg-muted overflow-hidden">
+                        <img
+                          src={src}
+                          alt={`${product.name} — ${i === 0 ? 'back design' : 'front design'}`}
+                          width={900}
+                          height={1200}
+                          fetchPriority={i === 0 ? 'high' : 'auto'}
+                          loading={i === 0 ? 'eager' : 'lazy'}
+                          decoding="async"
+                          className="w-full h-full object-cover object-center"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                  {galleryImages.length > 1 && (
+                    <div className="flex justify-center gap-2 pt-4">
+                      {galleryImages.map((src, i) => (
+                        <button
+                          key={src}
+                          onClick={() => scrollToImage(i)}
+                          aria-label={`View image ${i + 1}`}
+                          className={`h-1.5 rounded-full transition-all ${
+                            activeImage === i ? 'w-6 bg-foreground' : 'w-1.5 bg-foreground/25'
+                          }`}
+                        />
+                      ))}
+                    </div>
+                  )}
+                </>
               ) : (
-                <div className="absolute inset-0 flex items-center justify-center">
+                <div className="aspect-[3/4] bg-muted relative flex items-center justify-center">
                   <span className="font-display text-[8rem] text-muted-foreground/20 uppercase">
                     {product.name.charAt(0)}
                   </span>
@@ -112,6 +139,7 @@ export default function ProductPage() {
               )}
             </div>
           </motion.div>
+
 
           {/* Info */}
           <motion.div
