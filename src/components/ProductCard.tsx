@@ -28,7 +28,7 @@ function ProductCardBase({ product, index = 0, priority = false }: ProductCardPr
       whileTap={{ scale: 0.985 }}
     >
       <Link to={`/product/${product.id}`} className="group block product-card">
-        <div className="relative aspect-[4/5] bg-muted overflow-hidden mb-6">
+        <div className="relative aspect-[4/5] bg-muted overflow-hidden mb-6 flex items-center justify-center p-6 md:p-8">
           {hasImage ? (
             <img
               src={product.image}
@@ -38,8 +38,9 @@ function ProductCardBase({ product, index = 0, priority = false }: ProductCardPr
               loading={priority ? 'eager' : 'lazy'}
               decoding="async"
               fetchPriority={priority ? 'high' : 'auto'}
-              className="w-full h-full object-cover object-center will-change-transform group-hover:scale-[1.03] transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
+              className="max-w-full max-h-full w-auto h-auto object-contain will-change-transform group-hover:scale-[1.03] transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
             />
+
           ) : (
             <>
               <div className="absolute inset-0 bg-gradient-to-b from-transparent to-foreground/5" />
