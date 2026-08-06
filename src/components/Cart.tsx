@@ -58,14 +58,14 @@ export function Cart() {
                 <ul className="divide-y divide-border">
                   {items.map((item) => (
                     <li key={`${item.product.id}-${item.size}`} className="flex gap-4 p-6">
-                      <div className="w-24 h-32 bg-muted flex-shrink-0 overflow-hidden">
+                      <div className="w-24 h-32 bg-background flex-shrink-0 overflow-hidden flex items-center justify-center p-1">
                         {item.product.image && (item.product.image.startsWith('/') || item.product.image.startsWith('http')) ? (
                           <img
                             src={item.product.image}
                             alt={item.product.name}
                             loading="lazy"
                             decoding="async"
-                            className="w-full h-full object-cover object-center"
+                            className="max-w-full max-h-full w-auto h-auto object-contain object-center"
                           />
                         ) : null}
                       </div>
