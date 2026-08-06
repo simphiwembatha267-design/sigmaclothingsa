@@ -121,7 +121,7 @@ export default function ProductPage() {
                     className="flex snap-x snap-mandatory overflow-x-auto scroll-smooth no-scrollbar"
                   >
                     {galleryImages.map((src, i) => (
-                      <div key={src} className="min-w-full snap-center aspect-[3/4] bg-muted overflow-hidden">
+                      <div key={src} className="min-w-full snap-center aspect-[3/4] bg-muted overflow-hidden flex items-center justify-center p-8 md:p-12">
                         <img
                           src={src}
                           alt={`${product.name} — ${i === 0 ? 'back design' : 'front design'}`}
@@ -130,8 +130,9 @@ export default function ProductPage() {
                           fetchPriority={i === 0 ? 'high' : 'auto'}
                           loading={i === 0 ? 'eager' : 'lazy'}
                           decoding="async"
-                          className="w-full h-full object-cover object-center"
+                          className="max-w-full max-h-full w-auto h-auto object-contain"
                         />
+
                       </div>
                     ))}
                   </div>
