@@ -55,9 +55,8 @@ const mobileNavGroups = [
     label: 'Shop',
     links: [
       { href: '/shop', label: 'New Arrivals' },
-      { href: '/shop?category=T-Shirts', label: 'T-Shirts' },
-      { href: '/shop?category=Hoodies', label: 'Hoodies' },
-      { href: '/shop?category=Outerwear', label: 'Outerwear' },
+      { href: '/shop?category=Tops', label: 'Tops' },
+
     ],
   },
   {
