@@ -121,14 +121,14 @@ export default function ProductPage() {
                     className="flex snap-x snap-mandatory overflow-x-auto scroll-smooth no-scrollbar"
                   >
                     {galleryImages.map((src, i) => (
-                      <div key={src} className="min-w-full snap-center aspect-[3/4] bg-background overflow-hidden flex items-center justify-center p-4">
+                      <div key={src} className="min-w-full snap-center aspect-[4/5] bg-background overflow-hidden flex items-center justify-center px-6 py-8 md:px-12 md:py-10">
                         <img
                           src={src}
                           alt={`${product.name} — ${i === 0 ? 'back design' : 'front design'}`}
                           fetchPriority={i === 0 ? 'high' : 'auto'}
                           loading={i === 0 ? 'eager' : 'lazy'}
                           decoding="async"
-                          className="max-w-full max-h-full w-auto h-auto object-contain object-center"
+                          className="block mx-auto max-w-full max-h-full w-auto h-auto object-contain object-center"
                         />
                       </div>
                     ))}
