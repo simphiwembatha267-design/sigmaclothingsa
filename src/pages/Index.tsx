@@ -67,11 +67,15 @@ const Index = () => {
             </Link>
           </div>
           
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
-            {featuredProducts.map((product, index) => (
-              <ProductCard key={product.id} product={product} index={index} priority={index < 2} />
-            ))}
-          </div>
+          <div className="overflow-x-auto pb-4 -mx-4 px-4">
+  <div className="flex gap-4 md:gap-8 min-w-min">
+    {featuredProducts.map((product, index) => (
+      <div key={product.id} className="flex-shrink-0 w-[280px] sm:w-[320px]">
+        <ProductCard product={product} index={index} priority={index < 2} />
+      </div>
+    ))}
+  </div>
+</div>
         </div>
       </section>
 
