@@ -36,7 +36,7 @@ function ProductCardBase({ product, index = 0, priority = false }: ProductCardPr
               loading={priority ? 'eager' : 'lazy'}
               decoding="async"
               fetchPriority={priority ? 'high' : 'auto'}
-              className="block mx-auto w-[90%] h-[90%] object-contain object-center will-change-transform group-hover:scale-[1.03] transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
+              className="block mx-auto max-w-full max-h-full w-auto h-auto object-contain object-center will-change-transform group-hover:scale-[1.03] transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
             />
           ) : (
             <>
