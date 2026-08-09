@@ -70,7 +70,7 @@ const Index = () => {
           <div className="overflow-x-auto pb-4 -mx-4 px-4">
   <div className="flex gap-4 md:gap-8 min-w-min">
     {featuredProducts.map((product, index) => (
-      <div key={product.id} className="flex-shrink-0 w-[280px] sm:w-[320px]">
+      <div key={product.id} className="flex-shrink-0 w-[160px] sm:w-[220px] md:w-[280px]">
         <ProductCard product={product} index={index} priority={index < 2} />
       </div>
     ))}
