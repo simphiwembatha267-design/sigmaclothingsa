@@ -4,7 +4,6 @@ import { products } from '@/lib/products';
 import { ProductCard } from '@/components/ProductCard';
 import heroImage from '@/assets/hero-main.jpg';
 import { ArrowRight } from 'lucide-react';
-import { Footer } from '@/components/Footer';
 
 const Index = () => {
   const featuredProducts = products.slice(0, 4);
@@ -80,8 +79,7 @@ const Index = () => {
         </div>
       </section>
 
-      <Footer />
-
+      
     </div>
   );
 };
