@@ -85,9 +85,6 @@ export const products: Product[] = [
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     color: 'White',
     colorVariants: ['sigma-footprint-top-black', 'sigma-footprint-top-white'],
-  {
-    id: 'sigma-footprint-top-white',
-    ...
   },
   {
     id: 'sigma-medusa-noir-top-black',
