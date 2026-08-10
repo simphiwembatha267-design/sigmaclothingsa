@@ -85,6 +85,21 @@ export const products: Product[] = [
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     color: 'White',
     colorVariants: ['sigma-footprint-top-black', 'sigma-footprint-top-white'],
+  {
+    id: 'sigma-footprint-top-white',
+    ...
+  },
+  {
+    id: 'sigma-medusa-noir-top-black',
+    name: 'Medusa Noir Collection Top',
+    price: 370,
+    image: meduseNoirTopBlack.url,
+    images: [meduseNoirTopBlack.url],
+    category: 'Tops',
+    description: 'Heavyweight cotton. Medusa Noir collection.',
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    color: 'Black',
+    colorVariants: ['sigma-medusa-noir-top-black'],
   },
 ];
 
