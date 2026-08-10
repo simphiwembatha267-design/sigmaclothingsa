@@ -91,7 +91,7 @@ export const products: Product[] = [
     name: 'Medusa Noir Collection Top',
     price: 370,
     image: meduseNoirTopBlack,
-    images: [meduseNoirTopBlack.url],
+    images: [meduseNoirTopBlack],
     category: 'Tops',
     description: 'Heavyweight cotton. Medusa Noir collection.',
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
