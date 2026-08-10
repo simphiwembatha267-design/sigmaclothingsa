@@ -11,7 +11,7 @@ import footprintTopBlack from '@/assets/sigma-footprint-top-black.jpg.asset.json
 import footprintTopBlackBack from '@/assets/sigma-footprint-top-black-back.jpg.asset.json';
 import footprintTopWhite from '@/assets/sigma-footprint-top-white.jpg.asset.json';
 import footprintTopWhiteBack from '@/assets/sigma-footprint-top-white-back.jpg.asset.json';
-import meduseNoirTopBlack from '@/assets/sigma-medusa-noir-top-black.png.asset.json';
+import meduseNoirTopBlack from '@/assets/sigma-medusa-noir-top-black.png';
 
 export const products: Product[] = [
   {
@@ -90,7 +90,7 @@ export const products: Product[] = [
     id: 'sigma-medusa-noir-top-black',
     name: 'Medusa Noir Collection Top',
     price: 370,
-    image: meduseNoirTopBlack.url,
+    image: meduseNoirTopBlack,
     images: [meduseNoirTopBlack.url],
     category: 'Tops',
     description: 'Heavyweight cotton. Medusa Noir collection.',
