@@ -37,7 +37,7 @@ export function Footer() {
   return (
     <footer className="fixed bottom-0 left-0 right-0 z-40 px-3 sm:px-5 pb-3 sm:pb-4 pointer-events-none">
       <div className="pointer-events-auto relative mx-auto max-w-[1800px]">
-        <div className="flex items-center justify-between h-12 sm:h-14 px-3 sm:px-5 rounded-[28px] bg-background/90 backdrop-blur-md shadow-[0_8px_30px_-12px_hsl(var(--foreground)/0.25)] border border-border/50">
+        <div className="flex items-center justify-between h-14 px-3 sm:px-5 rounded-[28px] bg-background/90 backdrop-blur-md shadow-[0_8px_30px_-12px_hsl(var(--foreground)/0.25)]">
           {/* Social icons */}
           <div className="flex items-center gap-2 sm:gap-3">
             {socialLinks.map(({ label, href, Icon, isLucide }) => (
