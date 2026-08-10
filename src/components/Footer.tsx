@@ -18,9 +18,9 @@ function TikTokIcon({ className }: { className?: string }) {
 }
 
 const socialLinks = [
-  { label: 'Instagram', href: 'https://instagram.com', icon: Instagram },
-  { label: 'TikTok', href: 'https://tiktok.com', icon: TikTokIcon },
-  { label: 'Facebook', href: 'https://facebook.com', icon: Facebook },
+  { label: 'Instagram', href: 'https://instagram.com', Icon: Instagram, isLucide: true },
+  { label: 'TikTok', href: 'https://tiktok.com', Icon: TikTokIcon, isLucide: false },
+  { label: 'Facebook', href: 'https://facebook.com', Icon: Facebook, isLucide: true },
 ];
 
 const helpLinks = [
@@ -40,7 +40,7 @@ export function Footer() {
         <div className="flex items-center justify-between h-12 sm:h-14 px-3 sm:px-5 rounded-[28px] bg-background/90 backdrop-blur-md shadow-[0_8px_30px_-12px_hsl(var(--foreground)/0.25)] border border-border/50">
           {/* Social icons */}
           <div className="flex items-center gap-2 sm:gap-3">
-            {socialLinks.map(({ label, href, icon: Icon }) => (
+            {socialLinks.map(({ label, href, Icon, isLucide }) => (
               <a
                 key={label}
                 href={href}
@@ -49,7 +49,11 @@ export function Footer() {
                 aria-label={label}
                 className="p-1.5 text-foreground/70 hover:text-foreground transition-colors"
               >
-                <Icon className="w-[18px] h-[18px] sm:w-5 sm:h-5" strokeWidth={1.5} />
+                {isLucide ? (
+                  <Icon className="w-[18px] h-[18px] sm:w-5 sm:h-5" strokeWidth={1.5} />
+                ) : (
+                  <Icon className="w-[18px] h-[18px] sm:w-5 sm:h-5" />
+                )}
               </a>
             ))}
           </div>
