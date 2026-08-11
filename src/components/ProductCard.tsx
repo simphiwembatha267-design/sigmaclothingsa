@@ -1,8 +1,7 @@
  import { Link } from 'react-router-dom';
-import { memo, useMemo } from 'react';
+import { memo } from 'react';
 import { Product } from '@/lib/store';
 import { motion } from 'framer-motion';
-import { products } from '@/lib/products';
 import { formatPrice } from '@/lib/format';
 
 interface ProductCardProps {
@@ -12,10 +11,7 @@ interface ProductCardProps {
 }
 
 function ProductCardBase({ product, index = 0, priority = false }: ProductCardProps) {
-  const colorVariants = useMemo(
-    () => (product.colorVariants ? products.filter((p) => product.colorVariants?.includes(p.id)) : []),
-    [product.colorVariants]
-  );
+  
 
   const hasImage = product.image.startsWith('/') || product.image.startsWith('http');
 
