@@ -11,6 +11,7 @@ import footprintTopBlack from '@/assets/sigma-footprint-top-black.jpg.asset.json
 import footprintTopBlackBack from '@/assets/sigma-footprint-top-black-back.jpg.asset.json';
 import footprintTopWhite from '@/assets/sigma-footprint-top-white.jpg.asset.json';
 import footprintTopWhiteBack from '@/assets/sigma-footprint-top-white-back.jpg.asset.json';
+import medusaNoirTopBlack from '@/assets/sigma-medusa-noir-top-black.png';
 
 export const products: Product[] = [
   {
