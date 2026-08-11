@@ -28,7 +28,7 @@ function ProductCardBase({ product, index = 0, priority = false }: ProductCardPr
       whileTap={{ scale: 0.985 }}
     >
       <Link to={`/product/${product.id}`} className="group block product-card">
-        <div className="relative aspect-[3/4] bg-background overflow-hidden mb-6 flex items-center justify-center px-3 py-4 sm:px-4 sm:py-6">
+        <div className="relative aspect-square bg-background overflow-hidden mb-6 flex items-center justify-center px-3 py-4 sm:px-4 sm:py-6">
           {hasImage ? (
             <img
               src={product.image}
