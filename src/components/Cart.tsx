@@ -2,7 +2,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { formatPrice } from '@/lib/format';
 import { useCartStore } from '@/lib/store';
 import { X, Plus, Minus, ShoppingBag } from 'lucide-react';
-import { Link } from 'react-router-dom';
+
+import { toast } from 'sonner';
+
 
 export function Cart() {
   const { items, isOpen, closeCart, removeItem, updateQuantity, total, itemCount } = useCartStore();
@@ -128,9 +130,18 @@ export function Cart() {
                 <p className="text-caption text-muted-foreground" style={{ fontFamily: 'var(--font-body), sans-serif' }}>
                   Shipping calculated at checkout
                 </p>
-                <button className="w-full h-12 bg-foreground text-background text-caption uppercase font-semibold tracking-[0.02em] hover:bg-foreground/90 transition-colors" style={{ fontFamily: 'var(--font-body), sans-serif' }}>
+                <button
+                  onClick={() =>
+                    toast('Checkout opening soon', {
+                      description: 'Message us on Instagram to complete your order.',
+                    })
+                  }
+                  className="w-full h-12 bg-foreground text-background text-caption uppercase font-semibold tracking-[0.02em] hover:bg-foreground/90 transition-colors"
+                  style={{ fontFamily: 'var(--font-body), sans-serif' }}
+                >
                   Checkout
                 </button>
+
                 <button
                   onClick={closeCart}
                   className="w-full text-center text-caption uppercase link-underline font-semibold tracking-[0.02em]"
