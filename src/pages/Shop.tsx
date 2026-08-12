@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { products, categories, getProductsByCategory } from '@/lib/products';
 import { ProductCard } from '@/components/ProductCard';
@@ -7,20 +7,20 @@ import heroImage from '@/assets/hero-main.jpg';
 
 export default function Shop() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const initialCategory = searchParams.get('category') || 'All';
-  const [selectedCategory, setSelectedCategory] = useState(initialCategory);
+  const selectedCategory = searchParams.get('category') || 'All';
   const filteredProducts = useMemo(() => {
     return getProductsByCategory(selectedCategory);
   }, [selectedCategory]);
   const handleCategoryChange = (category: string) => {
-    setSelectedCategory(category);
+    const next = new URLSearchParams(searchParams);
     if (category === 'All') {
-      searchParams.delete('category');
+      next.delete('category');
     } else {
-      searchParams.set('category', category);
+      next.set('category', category);
     }
-    setSearchParams(searchParams);
+    setSearchParams(next, { replace: true });
   };
+
 
   const heading = selectedCategory === 'All' ? 'All' : selectedCategory;
 
