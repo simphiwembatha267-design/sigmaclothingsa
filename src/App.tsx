@@ -71,7 +71,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
+      <BrowserRouter basename="/sigmaclothingsa">
         <ScrollToTop />
         <AdminAuthProvider>
           <Suspense fallback={<div className="min-h-screen" />}>
