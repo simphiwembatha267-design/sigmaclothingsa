@@ -53,32 +53,7 @@ function ProductCardBase({ product, index = 0, priority = false }: ProductCardPr
           <p className="text-xs font-light tracking-[0.08em] text-muted-foreground">{formatPrice(product.price)}</p>
 
 
-          {/* Color swatches */}
-          {colorVariants.length > 1 && (
-            <div className="flex gap-2 pt-1">
-              {colorVariants.map((variant) => (
-                <Link
-                  key={variant.id}
-                  to={`/product/${variant.id}`}
-                  onClick={(e) => e.stopPropagation()}
-                  aria-label={`View ${variant.name} in ${variant.color}`}
-                  className={`w-4 h-4 rounded-full border transition-all ${
-                    variant.id === product.id
-                      ? 'ring-1 ring-offset-2 ring-foreground'
-                      : 'hover:scale-110'
-                  }`}
-                  style={{
-                    backgroundColor: variant.color === 'Black' ? '#000' :
-                                    variant.color === 'White' ? '#fff' :
-                                    variant.color === 'Cream' ? '#f5f5dc' :
-                                    variant.color === 'Olive' ? '#556b2f' : '#888',
-                    borderColor: variant.color === 'White' ? '#ddd' : 'transparent'
-                  }}
-                  title={variant.color}
-                />
-              ))}
-            </div>
-          )}
+          
         </div>
       </Link>
     </motion.div>
