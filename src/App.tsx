@@ -71,7 +71,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter basename="/sigmaclothingsa">
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
         <ScrollToTop />
         <AdminAuthProvider>
           <Suspense fallback={<div className="min-h-screen" />}>
