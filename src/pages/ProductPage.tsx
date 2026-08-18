@@ -372,6 +372,35 @@ export default function ProductPage() {
           </>
         )}
       </AnimatePresence>
+
+      {/* Zoom Overlay */}
+      <AnimatePresence>
+        {zoomImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[60] bg-background"
+          >
+            <button
+              onClick={() => setZoomImage(null)}
+              aria-label="Close zoom"
+              className="absolute top-4 right-4 z-10 h-11 w-11 rounded-full border border-border bg-background/80 backdrop-blur-sm flex items-center justify-center hover:bg-muted transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <div className="w-full h-full overflow-auto">
+              <img
+                src={zoomImage}
+                alt={`${product.name} — zoomed`}
+                onClick={() => setZoomImage(null)}
+                className="min-w-[180%] md:min-w-[140%] max-w-none cursor-zoom-out"
+              />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
+
