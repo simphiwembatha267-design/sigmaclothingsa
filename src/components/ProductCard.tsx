@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { memo, useRef, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import { Product } from '@/lib/store';
 import { motion } from 'framer-motion';
 import { formatPrice } from '@/lib/format';
@@ -19,6 +19,14 @@ function ProductCardBase({ product, index = 0, priority = false }: ProductCardPr
   const hasImage = gallery.length > 0;
 
   const scrollFrame = useRef<number | null>(null);
+
+useEffect(() => {
+  return () => {
+    if (scrollFrame.current !== null) {
+      cancelAnimationFrame(scrollFrame.current);
+    }
+  };
+}, []);
 
 const handleScroll = () => {
   if (scrollFrame.current !== null) return;
