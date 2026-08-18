@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { getProductById, products } from '@/lib/products';
 import { useCartStore } from '@/lib/store';
 import { ProductCard } from '@/components/ProductCard';
-import { ChevronLeft, Plus, Minus, Check, X } from 'lucide-react';
+import { ChevronLeft, Plus, Minus, Check, X, ZoomIn } from 'lucide-react';
 import { formatPrice } from '@/lib/format';
 
 const sizeGuide = [
@@ -36,6 +36,8 @@ export default function ProductPage() {
   const { addItem, openCart } = useCartStore();
   const galleryRef = useRef<HTMLDivElement>(null);
   const [activeImage, setActiveImage] = useState(0);
+  const [zoomImage, setZoomImage] = useState<string | null>(null);
+
 
   const galleryImages = useMemo(() => {
     const list = product?.images?.length ? product.images : product?.image ? [product.image] : [];
@@ -121,15 +123,23 @@ export default function ProductPage() {
                     className="flex snap-x snap-mandatory overflow-x-auto scroll-smooth no-scrollbar"
                   >
                     {galleryImages.map((src, i) => (
-                      <div key={src} className="min-w-full snap-center aspect-[4/5] bg-background overflow-hidden flex items-center justify-center px-6 py-8 md:px-12 md:py-10">
+                      <div key={src} className="relative min-w-full snap-center aspect-[4/5] bg-background overflow-hidden flex items-center justify-center px-6 py-8 md:px-12 md:py-10">
                         <img
                           src={src}
-                          alt={`${product.name} — ${i === 0 ? 'back design' : 'front design'}`}
+                          alt={`${product.name} — view ${i + 1}`}
                           fetchPriority={i === 0 ? 'high' : 'auto'}
                           loading={i === 0 ? 'eager' : 'lazy'}
                           decoding="async"
                           className="block mx-auto max-w-full max-h-full w-auto h-auto object-contain object-center"
                         />
+                        <button
+                          type="button"
+                          onClick={() => setZoomImage(src)}
+                          aria-label="Zoom image"
+                          className="absolute bottom-4 right-4 h-10 w-10 rounded-full border border-border bg-background/80 backdrop-blur-sm flex items-center justify-center hover:bg-background transition-colors"
+                        >
+                          <ZoomIn className="w-4 h-4" />
+                        </button>
                       </div>
                     ))}
                   </div>
@@ -148,6 +158,7 @@ export default function ProductPage() {
                     </div>
                   )}
                 </>
+
               ) : (
                 <div className="aspect-[3/4] bg-muted relative flex items-center justify-center">
                   <span className="font-display text-[8rem] text-muted-foreground/20 uppercase">
@@ -361,6 +372,35 @@ export default function ProductPage() {
           </>
         )}
       </AnimatePresence>
+
+      {/* Zoom Overlay */}
+      <AnimatePresence>
+        {zoomImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[60] bg-background"
+          >
+            <button
+              onClick={() => setZoomImage(null)}
+              aria-label="Close zoom"
+              className="absolute top-4 right-4 z-10 h-11 w-11 rounded-full border border-border bg-background/80 backdrop-blur-sm flex items-center justify-center hover:bg-muted transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <div className="w-full h-full overflow-auto">
+              <img
+                src={zoomImage}
+                alt={`${product.name} — zoomed`}
+                onClick={() => setZoomImage(null)}
+                className="min-w-[180%] md:min-w-[140%] max-w-none cursor-zoom-out"
+              />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
+
