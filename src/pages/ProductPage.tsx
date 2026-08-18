@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { getProductById, products } from '@/lib/products';
 import { useCartStore } from '@/lib/store';
 import { ProductCard } from '@/components/ProductCard';
-import { ChevronLeft, Plus, Minus, Check, X } from 'lucide-react';
+import { ChevronLeft, Plus, Minus, Check, X, ZoomIn } from 'lucide-react';
 import { formatPrice } from '@/lib/format';
 
 const sizeGuide = [
@@ -36,6 +36,8 @@ export default function ProductPage() {
   const { addItem, openCart } = useCartStore();
   const galleryRef = useRef<HTMLDivElement>(null);
   const [activeImage, setActiveImage] = useState(0);
+  const [zoomImage, setZoomImage] = useState<string | null>(null);
+
 
   const galleryImages = useMemo(() => {
     const list = product?.images?.length ? product.images : product?.image ? [product.image] : [];
