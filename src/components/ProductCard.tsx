@@ -18,11 +18,25 @@ function ProductCardBase({ product, index = 0, priority = false }: ProductCardPr
   const gallery = (product.images?.length ? product.images : [product.image]).filter(isDisplayable);
   const hasImage = gallery.length > 0;
 
-  const handleScroll = () => {
+  const scrollFrame = useRef<number | null>(null);
+
+const handleScroll = () => {
+  if (scrollFrame.current !== null) return;
+
+  scrollFrame.current = requestAnimationFrame(() => {
     const el = scrollerRef.current;
-    if (!el) return;
-    setActive(Math.round(el.scrollLeft / el.clientWidth));
-  };
+
+    if (el) {
+      const nextActive = Math.round(el.scrollLeft / el.clientWidth);
+
+      setActive((current) =>
+        current === nextActive ? current : nextActive
+      );
+    }
+
+    scrollFrame.current = null;
+  });
+};
 
   const scrollTo = (e: React.MouseEvent, i: number) => {
     e.preventDefault();
