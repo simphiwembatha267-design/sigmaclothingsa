@@ -18,8 +18,8 @@ function TikTokIcon({ className }: { className?: string }) {
 }
 
 const socialLinks = [
-  { label: 'Instagram', href: 'https://instagram.com', Icon: Instagram, isLucide: true },
-  { label: 'TikTok', href: 'https://tiktok.com', Icon: TikTokIcon, isLucide: false },
+  { label: 'Instagram', href: 'https://instagram.com/sigma.sa25', Icon: Instagram, isLucide: true },
+  { label: 'TikTok', href: 'https://tiktok.com/@sigma.sa25', Icon: TikTokIcon, isLucide: false },
   { label: 'Facebook', href: 'https://facebook.com', Icon: Facebook, isLucide: true },
 ];
 
