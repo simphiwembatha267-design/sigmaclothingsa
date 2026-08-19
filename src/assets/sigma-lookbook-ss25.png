@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script type="module">import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () => {};
+window.$RefreshSig$ = () => (type) => type;</script>
+
+    <script type="module" src="/@vite/client"></script>
+
+    <script>
+(() => {
+  if (globalThis.__lovableErrorCollectorInstalled) return;
+  globalThis.__lovableErrorCollectorInstalled = true;
+  const endpoint = "/__lovable/error-collector";
+  const clip = (value) => String(value ?? "").slice(0, 10000);
+  const describe = (value, fallback) => {
+    if (value && typeof value === "object") {
+      const message = "message" in value ? clip(value.message) : "";
+      const stack = "stack" in value ? clip(value.stack) : "";
+      const name = "name" in value ? clip(value.name) : "";
+      if (message || stack || name) return { name: name || undefined, message: message || fallback, stack: stack || undefined };
+      try {
+        const seen = new WeakSet();
+        const json = JSON.stringify(value, (_key, nested) => {
+          if (typeof nested === "bigint") return String(nested);
+          if (nested && typeof nested === "object") {
+            if (seen.has(nested)) return "[Circular]";
+            seen.add(nested);
+          }
+          return nested;
+        });
+        if (json) return { message: clip(json) };
+      } catch {}
+    }
+    return { message: value == null ? fallback : clip(value) };
+  };
+  const post = (report) => {
+    try {
+      const body = JSON.stringify({
+        ...report,
+        timestamp: new Date().toISOString(),
+        pageUrl: location.href,
+        userAgent: navigator.userAgent,
+      });
+      void fetch(endpoint, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body,
+        keepalive: true,
+      }).catch(() => {});
+    } catch {}
+  };
+  addEventListener("error", (event) => {
+    const target = event.target;
+    if (target && target !== globalThis && typeof target === "object" && "tagName" in target) {
+      const tagName = clip(target.tagName).toLowerCase();
+      const resourceUrl = clip(target.currentSrc || target.src || target.href || "");
+      post({
+        type: "resource-error",
+        message: resourceUrl ? `Failed to load <${tagName}>: ${resourceUrl}` : `Failed to load <${tagName}>`,
+        tagName,
+        resourceUrl: resourceUrl || undefined,
+      });
+      return;
+    }
+    post({
+      type: "runtime-error",
+      ...describe(event.error || event.message, "Unknown runtime error"),
+      filename: clip(event.filename) || undefined,
+      line: Number.isFinite(event.lineno) ? event.lineno : undefined,
+      column: Number.isFinite(event.colno) ? event.colno : undefined,
+    });
+  }, true);
+  addEventListener("unhandledrejection", (event) => {
+    post({
+      type: "unhandled-rejection",
+      ...describe(event.reason, "Unhandled promise rejection"),
+    });
+  });
+})();
+</script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SIGMA — Uncommon By Design | Luxury Streetwear</title>
+    <meta name="description" content="SIGMA is a South African luxury streetwear label. Minimal tees, heavyweight hoodies and limited drops. Built for moguls." />
+    <meta name="author" content="SIGMA" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="canonical" href="/" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <meta property="og:title" content="SIGMA — Uncommon By Design" />
+    <meta property="og:description" content="Luxury streetwear from South Africa. Minimal tees, heavyweight hoodies and limited drops." />
+    <meta property="og:type" content="website" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
