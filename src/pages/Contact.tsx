@@ -1,6 +1,51 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Instagram, Mail, MapPin, Send } from 'lucide-react';
+import { Instagram, Mail, Phone, Send } from 'lucide-react';
+
+function TikTokIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
+    </svg>
+  );
+}
+
+const contactDetails = [
+  {
+    icon: Phone,
+    label: 'Phone / WhatsApp',
+    value: '071 446 9681',
+    href: 'https://wa.me/27714469681',
+    external: true,
+  },
+  {
+    icon: Mail,
+    label: 'Email',
+    value: 'sigma.sa38@gmail.com',
+    href: 'mailto:sigma.sa38@gmail.com',
+    external: false,
+  },
+  {
+    icon: Instagram,
+    label: 'Instagram',
+    value: '@sigma.sa25',
+    href: 'https://instagram.com/sigma.sa25',
+    external: true,
+  },
+  {
+    icon: TikTokIcon,
+    label: 'TikTok',
+    value: '@sigma.sa25',
+    href: 'https://tiktok.com/@sigma.sa25',
+    external: true,
+    isCustom: true,
+  },
+];
 
 export default function Contact() {
   const [formState, setFormState] = useState({
@@ -31,55 +76,37 @@ export default function Contact() {
             <p className="text-caption uppercase text-muted-foreground mb-4">Get in Touch</p>
             <h1 className="font-display text-display-lg mb-6">Contact</h1>
             <p className="text-body-lg text-muted-foreground mb-12 max-w-md">
-              Have a question about an order, want to collaborate, or just want 
+              Have a question about an order, want to collaborate, or just want
               to say hello? We'd love to hear from you.
             </p>
 
             <div className="space-y-8">
-              <div className="flex items-start gap-4">
-                <Mail className="w-5 h-5 mt-0.5 text-muted-foreground" />
-                <div>
-                  <h3 className="text-caption uppercase mb-1">Email</h3>
-                  <a
-                    href="mailto:hello@sigma.com"
-                    className="text-muted-foreground hover:text-foreground transition-colors link-underline"
-                  >
-                    hello@sigma.com
-                  </a>
+              {contactDetails.map(({ icon: Icon, label, value, href, external, isCustom }) => (
+                <div className="flex items-start gap-4" key={label}>
+                  {isCustom ? (
+                    <Icon className="w-5 h-5 mt-0.5 text-muted-foreground" />
+                  ) : (
+                    <Icon className="w-5 h-5 mt-0.5 text-muted-foreground" />
+                  )}
+                  <div>
+                    <h3 className="text-caption uppercase mb-1">{label}</h3>
+                    <a
+                      href={href}
+                      target={external ? '_blank' : undefined}
+                      rel={external ? 'noopener noreferrer' : undefined}
+                      className="text-muted-foreground hover:text-foreground transition-colors link-underline"
+                    >
+                      {value}
+                    </a>
+                  </div>
                 </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <Instagram className="w-5 h-5 mt-0.5 text-muted-foreground" />
-                <div>
-                  <h3 className="text-caption uppercase mb-1">Instagram</h3>
-                  <a
-                    href="https://instagram.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-foreground transition-colors link-underline"
-                  >
-                    @sigmaofficial
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <MapPin className="w-5 h-5 mt-0.5 text-muted-foreground" />
-                <div>
-                  <h3 className="text-caption uppercase mb-1">Headquarters</h3>
-                  <address className="text-muted-foreground not-italic">
-                    Shibuya-ku, Tokyo<br />
-                    Japan 150-0001
-                  </address>
-                </div>
-              </div>
+              ))}
             </div>
 
             <div className="mt-16 pt-8 border-t border-border">
               <h3 className="text-caption uppercase mb-4">Customer Service Hours</h3>
               <p className="text-body-sm text-muted-foreground">
-                Monday – Friday: 10:00 – 18:00 JST<br />
+                Monday – Friday: 09:00 – 17:00 SAST<br />
                 Response time: Within 24 hours
               </p>
             </div>
