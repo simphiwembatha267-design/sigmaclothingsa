@@ -1,22 +1,22 @@
 import { Product } from './store';
-import galleryBlackFront from '@/assets/sigma-gallery-top-black-front.jpg.asset.json';
-import galleryBlackBack from '@/assets/sigma-gallery-top-black-back.jpg.asset.json';
-import galleryBlackFrontBack from '@/assets/sigma-gallery-top-black-front-back.jpg.asset.json';
-import galleryWhiteFront from '@/assets/sigma-gallery-top-white-front.jpg.asset.json';
-import galleryWhiteBack from '@/assets/sigma-gallery-top-white-back.jpg.asset.json';
-import galleryWhiteFrontBack from '@/assets/sigma-gallery-top-white-front-back.jpg.asset.json';
-import lancetBlackFront from '@/assets/sigma-lancet-top-black-front.jpg.asset.json';
-import lancetBlackBack from '@/assets/sigma-lancet-top-black-back.jpg.asset.json';
-import lancetBlackFrontBack from '@/assets/sigma-lancet-top-black-front-back.jpg.asset.json';
-import lancetWhiteFront from '@/assets/sigma-lancet-top-white-front.jpg.asset.json';
-import lancetWhiteBack from '@/assets/sigma-lancet-top-white-back.jpg.asset.json';
-import lancetWhiteFrontBack from '@/assets/sigma-lancet-top-white-front-back.jpg.asset.json';
-import footprintBlackFront from '@/assets/sigma-footprint-top-black-front.jpg.asset.json';
-import footprintBlackBack from '@/assets/sigma-footprint-top-black-back.jpg.asset.json';
-import footprintBlackFrontBack from '@/assets/sigma-footprint-top-black-front-back.jpg.asset.json';
-import footprintWhiteFront from '@/assets/sigma-footprint-top-white-front.jpg.asset.json';
-import footprintWhiteBack from '@/assets/sigma-footprint-top-white-back.jpg.asset.json';
-import footprintWhiteFrontBack from '@/assets/sigma-footprint-top-white-front-back.jpg.asset.json';
+import galleryBlackFront from '@/assets/sigma-gallery-top-black-front.jpg';
+import galleryBlackBack from '@/assets/sigma-gallery-top-black-back.jpg';
+import galleryBlackFrontBack from '@/assets/sigma-gallery-top-black-front-back.jpg';
+import galleryWhiteFront from '@/assets/sigma-gallery-top-white-front.jpg';
+import galleryWhiteBack from '@/assets/sigma-gallery-top-white-back.jpg';
+import galleryWhiteFrontBack from '@/assets/sigma-gallery-top-white-front-back.jpg';
+import lancetBlackFront from '@/assets/sigma-lancet-top-black-front.jpg';
+import lancetBlackBack from '@/assets/sigma-lancet-top-black-back.jpg';
+import lancetBlackFrontBack from '@/assets/sigma-lancet-top-black-front-back.jpg';
+import lancetWhiteFront from '@/assets/sigma-lancet-top-white-front.jpg';
+import lancetWhiteBack from '@/assets/sigma-lancet-top-white-back.jpg';
+import lancetWhiteFrontBack from '@/assets/sigma-lancet-top-white-front-back.jpg';
+import footprintBlackFront from '@/assets/sigma-footprint-top-black-front.jpg';
+import footprintBlackBack from '@/assets/sigma-footprint-top-black-back.jpg';
+import footprintBlackFrontBack from '@/assets/sigma-footprint-top-black-front-back.jpg';
+import footprintWhiteFront from '@/assets/sigma-footprint-top-white-front.jpg';
+import footprintWhiteBack from '@/assets/sigma-footprint-top-white-back.jpg';
+import footprintWhiteFrontBack from '@/assets/sigma-footprint-top-white-front-back.jpg';
 import medusaNoirTopBlack from '@/assets/sigma-medusa-noir-top-black.png';
 
 export const products: Product[] = [
@@ -24,8 +24,8 @@ export const products: Product[] = [
     id: 'sigma-gallery-top-black',
     name: 'Gallery Collection Top',
     price: 370,
-    image: galleryBlackFront.url,
-    images: [galleryBlackFront.url, galleryBlackBack.url, galleryBlackFrontBack.url],
+    image: galleryBlackFront,
+    images: [galleryBlackFront, galleryBlackBack, galleryBlackFrontBack],
     category: 'Tops',
     description: 'Heavyweight 280gsm cotton jersey. Boxy oversized fit. Gallery Collection artwork printed at chest and oversized at back. Made in Portugal.',
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
@@ -36,8 +36,8 @@ export const products: Product[] = [
     id: 'sigma-gallery-top-white',
     name: 'Gallery Collection Top',
     price: 370,
-    image: galleryWhiteFront.url,
-    images: [galleryWhiteFront.url, galleryWhiteBack.url, galleryWhiteFrontBack.url],
+    image: galleryWhiteFront,
+    images: [galleryWhiteFront, galleryWhiteBack, galleryWhiteFrontBack],
     category: 'Tops',
     description: 'Heavyweight 280gsm cotton jersey. Boxy oversized fit. Gallery Collection artwork printed at chest and oversized at back. Made in Portugal.',
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
@@ -48,8 +48,8 @@ export const products: Product[] = [
     id: 'sigma-lancet-top-black',
     name: 'Lancet Collection Top',
     price: 370,
-    image: lancetBlackFront.url,
-    images: [lancetBlackFront.url, lancetBlackBack.url, lancetBlackFrontBack.url],
+    image: lancetBlackFront,
+    images: [lancetBlackFront, lancetBlackBack, lancetBlackFrontBack],
     category: 'Tops',
     description: 'Heavyweight 280gsm cotton jersey. Boxy oversized fit. Sigma loop logo at chest with Lancet arch graphic at back. Made in Portugal.',
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
@@ -60,8 +60,8 @@ export const products: Product[] = [
     id: 'sigma-lancet-top-white',
     name: 'Lancet Collection Top',
     price: 370,
-    image: lancetWhiteFront.url,
-    images: [lancetWhiteFront.url, lancetWhiteBack.url, lancetWhiteFrontBack.url],
+    image: lancetWhiteFront,
+    images: [lancetWhiteFront, lancetWhiteBack, lancetWhiteFrontBack],
     category: 'Tops',
     description: 'Heavyweight 280gsm cotton jersey. Boxy oversized fit. Sigma loop logo at chest with Lancet arch graphic at back. Made in Portugal.',
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
@@ -72,8 +72,8 @@ export const products: Product[] = [
     id: 'sigma-footprint-top-black',
     name: 'Footprint Collection Top',
     price: 370,
-    image: footprintBlackFront.url,
-    images: [footprintBlackFront.url, footprintBlackBack.url, footprintBlackFrontBack.url],
+    image: footprintBlackFront,
+    images: [footprintBlackFront, footprintBlackBack, footprintBlackFrontBack],
     category: 'Tops',
     description: 'Heavyweight 280gsm cotton jersey. Boxy oversized fit. Footprint Collection lettering printed at chest and oversized at back. Made in Portugal.',
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
@@ -84,8 +84,8 @@ export const products: Product[] = [
     id: 'sigma-footprint-top-white',
     name: 'Footprint Collection Top',
     price: 370,
-    image: footprintWhiteFront.url,
-    images: [footprintWhiteFront.url, footprintWhiteBack.url, footprintWhiteFrontBack.url],
+    image: footprintWhiteFront,
+    images: [footprintWhiteFront, footprintWhiteBack, footprintWhiteFrontBack],
     category: 'Tops',
     description: 'Heavyweight 280gsm cotton jersey. Boxy oversized fit. Footprint Collection lettering printed at chest and oversized at back. Made in Portugal.',
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
