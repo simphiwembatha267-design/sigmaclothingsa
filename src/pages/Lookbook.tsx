@@ -1,17 +1,17 @@
 import { motion } from 'framer-motion';
-import sigmaExclusiveCover from '@/assets/sigma-exclusive-cover.jpg.asset.json';
+import sigmaExclusiveCover from '@/assets/sigma-exclusive-cover.jpg';
 import lookbook2 from '@/assets/lookbook-2.jpg';
 import lookbook3 from '@/assets/lookbook-3.jpg';
-import sigmaLookbookSS25 from '@/assets/sigma-lookbook-ss25.png.asset.json';
-import lookbookSS25Cover from '@/assets/lookbook-ss25-cover.jpg.asset.json';
+import sigmaLookbookSS25 from '@/assets/sigma-lookbook-ss25.png';
+import lookbookSS25Cover from '@/assets/lookbook-ss25-cover.jpg';
 
 const images = [
-  { src: sigmaExclusiveCover.url, title: 'Sigma Exclusive', season: 'FW25' },
+  { src: sigmaExclusiveCover, title: 'Sigma Exclusive', season: 'FW25' },
   { src: lookbook2, title: 'Urban Poetry', season: 'FW25' },
   { src: lookbook3, title: 'Form & Function', season: 'FW25' },
-  { src: sigmaLookbookSS25.url, title: 'Between Shadow and Light', season: 'SS25' },
-  { src: sigmaLookbookSS25.url, title: 'Dawn Walker', season: 'SS25' },
-  { src: sigmaLookbookSS25.url, title: 'Shadow Play', season: 'SS25' },
+  { src: sigmaLookbookSS25, title: 'Between Shadow and Light', season: 'SS25' },
+  { src: sigmaLookbookSS25, title: 'Dawn Walker', season: 'SS25' },
+  { src: sigmaLookbookSS25, title: 'Shadow Play', season: 'SS25' },
 ];
 
 export default function Lookbook() {
