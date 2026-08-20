@@ -74,7 +74,7 @@ export default function Contact() {
             transition={{ duration: 0.6 }}
           >
             <p className="text-caption uppercase text-muted-foreground mb-4">Get in Touch</p>
-            <h1 className="font-display text-display-lg mb-6">Contact</h1>
+            <h1 className="font-body font-bold text-display-lg tracking-tight mb-6">Contact</h1>
             <p className="text-body-lg text-muted-foreground mb-12 max-w-md">
               Have a question about an order, want to collaborate, or just want
               to say hello? We'd love to hear from you.

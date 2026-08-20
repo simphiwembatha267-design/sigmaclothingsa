@@ -30,7 +30,7 @@ export default function About() {
           className="max-w-3xl"
         >
           <p className="text-caption uppercase text-muted-foreground mb-4">Our Story</p>
-          <h1 className="font-display text-display-xl mb-8">
+          <h1 className="font-body font-bold text-display-lg tracking-tight mb-8">
             Built for Moguls
           </h1>
           <p className="text-body-lg text-muted-foreground mb-6">
@@ -54,7 +54,7 @@ export default function About() {
           transition={{ duration: 0.6 }}
           className="max-w-3xl"
         >
-          <h2 className="font-display text-display-md mb-6">Our Philosophy</h2>
+          <h2 className="font-body font-bold text-3xl tracking-tight mb-6">Our Philosophy</h2>
           <div className="space-y-4 text-muted-foreground">
             <p>
               We believe in quality over noise. Every piece is designed to feel as
@@ -80,7 +80,7 @@ export default function About() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="font-display text-display-md">What We Stand For</h2>
+            <h2 className="font-body font-bold text-3xl tracking-tight">What We Stand For</h2>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-12">
@@ -93,7 +93,7 @@ export default function About() {
                 transition={{ delay: index * 0.1, duration: 0.5 }}
                 className="text-center"
               >
-                <h3 className="font-display text-xl mb-4">{value.title}</h3>
+                <h3 className="font-body font-bold text-lg tracking-tight mb-4">{value.title}</h3>
                 <p className="text-muted-foreground text-body-sm">{value.description}</p>
               </motion.div>
             ))}
