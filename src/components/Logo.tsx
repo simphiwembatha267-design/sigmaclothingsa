@@ -4,7 +4,7 @@ interface LogoProps {
   className?: string;
 }
 
-export function Logo({ className = "h-12" }: LogoProps) {
+export function Logo({ className = "h-8" }: LogoProps) {
   return (
     <img
       src={sigmaMark.url}

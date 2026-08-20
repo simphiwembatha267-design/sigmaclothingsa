@@ -60,7 +60,7 @@ export function Footer() {
 
           {/* Center logo */}
           <Link to="/" className="absolute left-1/2 -translate-x-1/2">
-            <Logo className="h-6 sm:h-7" />
+            <Logo className="h-5 sm:h-6" />
           </Link>
 
           {/* Need help dropdown */}
