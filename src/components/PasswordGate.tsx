@@ -105,7 +105,7 @@ export function PasswordGate({ onAuthenticated }: PasswordGateProps) {
           className="min-h-full flex flex-col items-center justify-center px-6 py-24"
         >
           <div className="w-full max-w-sm flex flex-col items-center">
-            <Logo className="h-14 mb-20" />
+            <Logo className="h-10 mb-12" />
 
             {stage === 'email' && (
               <form onSubmit={submitEmail} className="w-full">

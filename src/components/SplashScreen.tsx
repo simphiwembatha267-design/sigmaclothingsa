@@ -25,7 +25,7 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
           }}
           onAnimationComplete={onComplete}
         >
-          <Logo className="h-20 md:h-28" />
+          <Logo className="h-14 md:h-20" />
         </motion.div>
       </motion.div>
     </AnimatePresence>

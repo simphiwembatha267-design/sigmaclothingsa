@@ -112,7 +112,7 @@ export function Header() {
 
             {/* Center: logo */}
             <Link to="/" className="absolute left-1/2 -translate-x-1/2">
-              <Logo className="h-10 md:h-14" />
+              <Logo className="h-7 md:h-10" />
             </Link>
 
             {/* Right: account + bag */}
@@ -168,7 +168,7 @@ export function Header() {
             {/* Top bar */}
             <div className="relative flex items-center justify-between h-16 px-6 border-b border-white/10">
               <Link to="/" onClick={() => setIsMenuOpen(false)}>
-                <Logo className="h-10 invert" />
+                <Logo className="h-8 invert" />
               </Link>
               <button onClick={() => setIsMenuOpen(false)} className="p-2 -mr-2 text-background" aria-label="Close menu">
                 <X className="w-5 h-5" strokeWidth={1.25} />

@@ -72,7 +72,7 @@ export function NewsletterModal() {
             {/* Content */}
             <div className="flex flex-col items-center text-center">
               {/* Logo */}
-              <Logo className="h-10 sm:h-12 text-black mb-8 sm:mb-10" />
+              <Logo className="h-8 sm:h-10 text-black mb-8 sm:mb-10" />
 
               {/* Headline */}
               <h2
