@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useCartStore } from '@/lib/store';
 import { Menu, X, ShoppingBag, User } from 'lucide-react';
 import { Logo } from './Logo';
+import sigmaWordmark from '@/assets/sigma-wordmark.png.asset.json';
 import heroImage from '@/assets/hero-main.jpg';
 
 
@@ -167,8 +168,15 @@ export function Header() {
 
             {/* Top bar */}
             <div className="relative flex items-center justify-between h-16 px-6 border-b border-white/10">
-              <Link to="/" onClick={() => setIsMenuOpen(false)}>
+              <Link to="/" onClick={() => setIsMenuOpen(false)} className="flex items-center gap-2">
                 <Logo className="h-8 invert" />
+                <span className="text-background/60 font-light text-lg leading-none select-none">|</span>
+                <img
+                  src={sigmaWordmark.url}
+                  alt="Sigma"
+                  className="h-5 invert w-auto object-contain select-none"
+                  draggable={false}
+                />
               </Link>
               <button onClick={() => setIsMenuOpen(false)} className="p-2 -mr-2 text-background" aria-label="Close menu">
                 <X className="w-5 h-5" strokeWidth={1.25} />
