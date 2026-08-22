@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useCartStore } from '@/lib/store';
 import { Menu, X, ShoppingBag, User } from 'lucide-react';
 import { Logo } from './Logo';
-import sigmaWordmark from '@/assets/sigma-wordmark.png.asset.json';
+import sigmaLockup from '@/assets/sigma-lockup.png';
 import heroImage from '@/assets/hero-main.jpg';
 
 
