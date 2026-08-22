@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useCartStore } from '@/lib/store';
 import { Menu, X, ShoppingBag, User } from 'lucide-react';
 import { Logo } from './Logo';
-import sigmaWordmark from '@/assets/sigma-wordmark.png.asset.json';
+import sigmaLockup from '@/assets/sigma-lockup.png';
 import heroImage from '@/assets/hero-main.jpg';
 
 
@@ -168,13 +168,11 @@ export function Header() {
 
             {/* Top bar */}
             <div className="relative flex items-center justify-between h-16 px-6 border-b border-white/10">
-              <Link to="/" onClick={() => setIsMenuOpen(false)} className="flex items-center gap-2">
-                <Logo className="h-8 invert" />
-                <span className="text-background/60 font-light text-lg leading-none select-none">|</span>
+              <Link to="/" onClick={() => setIsMenuOpen(false)} className="flex items-center">
                 <img
-                  src={sigmaWordmark.url}
-                  alt="Sigma"
-                  className="h-5 invert w-auto object-contain select-none"
+                  src={sigmaLockup}
+                  alt="Sigma Clothing"
+                  className="h-6 invert w-auto object-contain select-none"
                   draggable={false}
                 />
               </Link>
