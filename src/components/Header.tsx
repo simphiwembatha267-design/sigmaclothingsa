@@ -151,7 +151,7 @@ export function Header() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-50 md:hidden text-background"
+            className="fixed inset-0 h-[100dvh] z-50 md:hidden text-background overflow-hidden"
           >
             {/* Background image with dark overlay */}
             <div className="absolute inset-0 -z-10">
