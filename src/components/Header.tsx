@@ -182,7 +182,10 @@ export function Header() {
             </div>
 
             {/* Content */}
-            <div className="relative flex flex-col justify-between h-[calc(100vh-4rem)] px-8 py-14 overflow-y-auto">
+            <div
+              className="relative flex flex-col justify-between h-[calc(100dvh-4rem)] px-8 pt-14 overflow-y-auto"
+              style={{ paddingBottom: 'calc(3.5rem + env(safe-area-inset-bottom))' }}
+            >
               <nav className="flex flex-col gap-16">
                 {mobileNavGroups.map((group, gIdx) => (
                   <motion.div
