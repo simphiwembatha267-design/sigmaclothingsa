@@ -77,7 +77,7 @@ export function PasswordGate({ onAuthenticated }: PasswordGateProps) {
     setError('');
     try {
       const list = JSON.parse(localStorage.getItem('sigma-early-access') || '[]');
-      list.push({ email, phone: `${dial}${phone}`, at: new Date().toISOString() });
+      list.push({ email, phone: `${country.dial}${phone}`, at: new Date().toISOString() });
       localStorage.setItem('sigma-early-access', JSON.stringify(list));
     } catch {
       /* ignore */
