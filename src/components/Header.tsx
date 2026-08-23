@@ -57,15 +57,19 @@ const mobileNavGroups = [
     links: [
       { href: '/shop', label: 'New Arrivals' },
       { href: '/shop?category=Tops', label: 'Tops' },
-
+      { href: '/shop?category=Bottoms', label: 'Bottoms' },
+      { href: '/shop?category=Outerwear', label: 'Outerwear' },
+      { href: '/shop?category=Accessories', label: 'Accessories' },
+      { href: '/shop', label: 'All Products' },
     ],
   },
   {
     label: 'Info',
     links: [
-      { href: '/about', label: 'About' },
+      { href: '/about', label: 'About Sigma' },
       { href: '/contact', label: 'Contact' },
       { href: '/shop', label: 'Size Guide' },
+      { href: '/legal', label: 'Shipping & Returns' },
     ],
   },
 ];
