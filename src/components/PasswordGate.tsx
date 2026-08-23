@@ -27,7 +27,7 @@ export function PasswordGate({ onAuthenticated }: PasswordGateProps) {
   const [stage, setStage] = useState<Stage>('email');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [dial, setDial] = useState('+27');
+  const [country, setCountry] = useState(DEFAULT_COUNTRY);
   const [phone, setPhone] = useState('');
   const [error, setError] = useState('');
   const [checking, setChecking] = useState(false);
