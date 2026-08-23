@@ -13,16 +13,7 @@ interface PasswordGateProps {
 
 type Stage = 'email' | 'password' | 'phone' | 'success';
 
-const COUNTRIES = [
-  { code: '+27', label: 'ZA' },
-  { code: '+266', label: 'LS' },
-  { code: '+267', label: 'BW' },
-  { code: '+268', label: 'SZ' },
-  { code: '+263', label: 'ZW' },
-  { code: '+44', label: 'UK' },
-  { code: '+1', label: 'US' },
-  { code: '+971', label: 'AE' },
-];
+const DEFAULT_COUNTRY = COUNTRIES.find((c) => c.iso === 'ZA')!;
 
 const fade = {
   initial: { opacity: 0, y: 8 },
