@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCartStore } from '@/lib/store';
-import { Menu, X, ShoppingBag, User } from 'lucide-react';
+import { Menu, X, ShoppingBag, User, ChevronDown } from 'lucide-react';
 import { Logo } from './Logo';
 import sigmaLockup from '@/assets/sigma-lockup.png';
 import heroImage from '@/assets/hero-main.jpg';
@@ -57,15 +57,19 @@ const mobileNavGroups = [
     links: [
       { href: '/shop', label: 'New Arrivals' },
       { href: '/shop?category=Tops', label: 'Tops' },
-
+      { href: '/shop?category=Bottoms', label: 'Bottoms' },
+      { href: '/shop?category=Outerwear', label: 'Outerwear' },
+      { href: '/shop?category=Accessories', label: 'Accessories' },
+      { href: '/shop', label: 'All Products' },
     ],
   },
   {
     label: 'Info',
     links: [
-      { href: '/about', label: 'About' },
+      { href: '/about', label: 'About Sigma' },
       { href: '/contact', label: 'Contact' },
       { href: '/shop', label: 'Size Guide' },
+      { href: '/legal', label: 'Shipping & Returns' },
     ],
   },
 ];
@@ -73,6 +77,8 @@ const mobileNavGroups = [
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [menuEmail, setMenuEmail] = useState('');
+  const [subscribed, setSubscribed] = useState(false);
   const location = useLocation();
   const { openCart, itemCount } = useCartStore();
   
@@ -143,28 +149,34 @@ export function Header() {
 
 
 
-      {/* Full-screen mobile menu overlay */}
+      {/* Full-screen navigation overlay */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            initial={{ opacity: 1 }}
+            initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 h-[100dvh] z-50 md:hidden text-background overflow-hidden"
+            transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+            className="fixed inset-0 h-[100dvh] z-50 text-background overflow-hidden"
           >
-            {/* Background image with dark overlay */}
-            <div className="absolute inset-0 -z-10">
+            {/* Homepage hero → blurred, darkened background */}
+            <motion.div
+              initial={{ scale: 1.12, opacity: 0.4 }}
+              animate={{ scale: 1.06, opacity: 1 }}
+              exit={{ scale: 1.12, opacity: 0 }}
+              transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
+              className="absolute inset-0 -z-10"
+            >
               <img
                 src={heroImage}
                 alt=""
                 loading="lazy"
                 decoding="async"
-                className="w-full h-full object-cover grayscale"
+                className="w-full h-full object-cover grayscale blur-xl"
               />
-
-              <div className="absolute inset-0 bg-black/80" />
-            </div>
+              <div className="absolute inset-0 bg-black/75" />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/80" />
+            </motion.div>
 
             {/* Top bar */}
             <div className="relative flex items-center justify-between h-16 px-6 border-b border-white/10">
@@ -183,60 +195,96 @@ export function Header() {
 
             {/* Content */}
             <div
-              className="relative flex flex-col justify-between h-[calc(100dvh-4rem)] px-8 pt-14 overflow-y-auto"
-              style={{ paddingBottom: 'calc(3.5rem + env(safe-area-inset-bottom))' }}
+              className="relative h-[calc(100dvh-4rem)] px-8 pt-12 overflow-y-auto"
+              style={{ paddingBottom: 'calc(3rem + env(safe-area-inset-bottom))' }}
             >
-              <nav className="flex flex-col gap-16">
-                {mobileNavGroups.map((group, gIdx) => (
-                  <motion.div
-                    key={group.label}
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 + gIdx * 0.08, duration: 0.5 }}
-                  >
-                    <p className="text-[10px] uppercase tracking-[0.4em] text-background/50 mb-6">
-                      {group.label}
-                    </p>
-                    <ul className="flex flex-col gap-5">
-                      {group.links.map((link) => (
-                        <li key={link.label}>
+              <div className="mx-auto w-full max-w-md md:max-w-lg">
+                <nav className="flex flex-col gap-12">
+                  {mobileNavGroups.map((group, gIdx) => (
+                    <motion.div
+                      key={group.label}
+                      initial={{ opacity: 0, y: 14 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.12 + gIdx * 0.08, duration: 0.5 }}
+                    >
+                      <p className="text-[10px] uppercase tracking-[0.4em] text-background/45 mb-6">
+                        {group.label}
+                      </p>
+                      <ul className="flex flex-col">
+                        {group.links.map((link) => (
+                          <li key={link.label} className="border-b border-white/[0.08]">
                             <Link
-                            to={link.href}
-                            className="block text-2xl font-semibold tracking-[0.02em] text-background/95 hover:text-background transition-colors"
-                            style={{ fontFamily: 'var(--font-body), sans-serif' }}
-                          >
-                            {link.label}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </motion.div>
-                ))}
-              </nav>
+                              to={link.href}
+                              className="block py-4 text-xl font-semibold tracking-[0.02em] text-background/90 hover:text-background transition-colors"
+                              style={{ fontFamily: 'var(--font-body), sans-serif' }}
+                            >
+                              {link.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                  ))}
+                </nav>
 
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4, duration: 0.6 }}
-                className="pt-12 mt-12 border-t border-white/10"
-              >
-                <button
-                  onClick={() => { openCart(); setIsMenuOpen(false); }}
-                  className="flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-background/60 hover:text-background transition-colors mb-8"
+                <motion.div
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.32, duration: 0.5 }}
+                  className="mt-14"
                 >
-                  <BagIcon className="w-4 h-4" />
-                  Cart ({itemCount()})
-                </button>
-                <p className="text-[10px] uppercase tracking-[0.4em] text-background/40">
-                  © {new Date().getFullYear()} Sigma
-                </p>
-                <p className="text-[10px] uppercase tracking-[0.4em] text-background/40 mt-2">
-                  Designed in South Africa
-                </p>
-              </motion.div>
+                  <button
+                    onClick={() => { openCart(); setIsMenuOpen(false); }}
+                    className="flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-background/70 hover:text-background transition-colors"
+                  >
+                    <BagIcon className="w-4 h-4" />
+                    Cart ({itemCount()})
+                  </button>
+
+                  {/* Country / currency */}
+                  <div className="mt-10 flex items-center justify-between gap-4 border border-white/20 px-5 py-4">
+                    <span className="text-[11px] uppercase tracking-[0.3em] text-background/85">
+                      South Africa
+                    </span>
+                    <span className="flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-background/60">
+                      ZAR R
+                      <ChevronDown className="w-4 h-4" strokeWidth={1.25} />
+                    </span>
+                  </div>
+
+                  {/* Newsletter */}
+                  <form
+                    onSubmit={(e) => { e.preventDefault(); setSubscribed(true); }}
+                    className="mt-12 flex items-center gap-4 border-b border-white/25 pb-3"
+                  >
+                    <input
+                      type="email"
+                      required
+                      value={menuEmail}
+                      onChange={(e) => setMenuEmail(e.target.value)}
+                      placeholder="EMAIL ADDRESS"
+                      className="flex-1 min-w-0 bg-transparent border-0 focus:outline-none text-[11px] uppercase tracking-[0.25em] text-background placeholder:text-background/45 py-1"
+                    />
+                    <button
+                      type="submit"
+                      className="shrink-0 text-[11px] uppercase tracking-[0.25em] text-background/80 hover:text-background transition-colors"
+                    >
+                      {subscribed ? 'Joined' : 'Sign Up'}
+                    </button>
+                  </form>
+
+                  <div className="mt-14 pt-8 border-t border-white/10">
+                    <p className="text-[10px] uppercase tracking-[0.4em] text-background/35">
+                      © {new Date().getFullYear()} Sigma
+                    </p>
+                    <p className="text-[10px] uppercase tracking-[0.4em] text-background/35 mt-2">
+                      Designed in South Africa
+                    </p>
+                  </div>
+                </motion.div>
+              </div>
             </div>
           </motion.div>
-
         )}
       </AnimatePresence>
     </>
