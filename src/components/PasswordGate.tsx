@@ -208,20 +208,8 @@ export function PasswordGate({ onAuthenticated }: PasswordGateProps) {
                 </h2>
 
                 <div className="flex w-full items-stretch gap-2">
-                  <div className="flex flex-1 min-w-0 items-center rounded-full bg-muted-foreground/10 pl-3 pr-1">
-                    <select
-                      value={dial}
-                      onChange={(e) => setDial(e.target.value)}
-                      className="shrink-0 bg-transparent border-0 focus:outline-none text-[10px] tracking-tight text-foreground/70 pr-1 cursor-pointer"
-                      style={MONO}
-                      aria-label="Country code"
-                    >
-                      {COUNTRIES.map((c) => (
-                        <option key={c.code} value={c.code}>
-                          {c.label} {c.code}
-                        </option>
-                      ))}
-                    </select>
+                  <div className="flex flex-1 min-w-0 items-center rounded-full bg-muted-foreground/10 pl-4 pr-1">
+                    <CountrySelect value={country} onChange={setCountry} />
                     <input
                       type="tel"
                       autoFocus
@@ -231,14 +219,14 @@ export function PasswordGate({ onAuthenticated }: PasswordGateProps) {
                         setError('');
                       }}
                       placeholder="PHONE NUMBER"
-                      className="w-full min-w-0 bg-transparent border-0 focus:outline-none py-3.5 text-xs tracking-[0.06em] placeholder:text-foreground/40"
+                      className="w-full min-w-0 bg-transparent border-0 focus:outline-none py-3.5 pl-2 text-xs tracking-[0.06em] placeholder:text-foreground/40"
                       style={MONO}
                       autoComplete="tel"
                     />
                   </div>
                   <button
                     type="submit"
-                    className="shrink-0 rounded-full bg-foreground text-background px-4 text-[10px] uppercase tracking-[0.14em] font-semibold hover:opacity-90 transition-opacity"
+                    className="shrink-0 rounded-full bg-foreground text-background px-5 min-h-[44px] text-[10px] uppercase tracking-[0.14em] font-semibold hover:opacity-90 transition-opacity"
                     style={{ fontFamily: 'var(--font-body)' }}
                   >
                     Sign Up
@@ -255,10 +243,20 @@ export function PasswordGate({ onAuthenticated }: PasswordGateProps) {
                 </div>
 
 
-                <p className="mt-10 text-center text-[10px] leading-relaxed tracking-wide text-muted-foreground">
-                  By signing up you agree to receive updates about future drops, launch
-                  announcements and exclusive releases from SIGMA. You can unsubscribe at any
-                  time.
+                <p className="mt-8 mx-auto max-w-xs text-center text-[10px] leading-[1.7] tracking-wide text-muted-foreground">
+                  By submitting this form, you consent to receive informational (e.g. order
+                  updates) and/or marketing texts and/or messages (e.g. cart reminders) from SIGMA
+                  including messages sent by autodialer. Consent is not a condition of purchase.
+                  Msg &amp; data rates may apply. Msg frequency varies. Unsubscribe at any time by
+                  replying STOP or clicking the unsubscribe link (where available).{' '}
+                  <a href="/legal" className="underline underline-offset-2 hover:text-foreground transition-colors">
+                    Privacy Policy
+                  </a>{' '}
+                  &amp;{' '}
+                  <a href="/legal" className="underline underline-offset-2 hover:text-foreground transition-colors">
+                    Terms
+                  </a>
+                  .
                 </p>
               </form>
             )}
