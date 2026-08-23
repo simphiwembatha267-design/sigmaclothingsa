@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Lock } from 'lucide-react';
 import { Logo } from './Logo';
 import { supabase } from '@/integrations/supabase/client';
+import { CountrySelect, COUNTRIES } from './CountrySelect';
 
 const STORAGE_KEY = 'sigma-authed';
 const MONO = { fontFamily: "'DM Mono', monospace" } as const;
