@@ -7,6 +7,7 @@ import { toast } from 'sonner';
 
 
 export function Cart() {
+  const formatPrice = useFormatPrice();
   const { items, isOpen, closeCart, removeItem, updateQuantity, total, itemCount } = useCartStore();
 
   return (

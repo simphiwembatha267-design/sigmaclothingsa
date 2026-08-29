@@ -26,6 +26,7 @@ const getColorHex = (color?: string) => {
 };
 
 export default function ProductPage() {
+  const formatPrice = useFormatPrice();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const product = getProductById(id || '');
