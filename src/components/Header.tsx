@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCartStore } from '@/lib/store';
-import { Menu, X, ShoppingBag, User, ChevronDown } from 'lucide-react';
+import { Menu, X, ShoppingBag, User } from 'lucide-react';
 import { Logo } from './Logo';
 import sigmaLockup from '@/assets/sigma-lockup.png';
 import heroImage from '@/assets/hero-main.jpg';
