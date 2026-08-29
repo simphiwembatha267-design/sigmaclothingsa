@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { memo, useEffect, useRef, useState } from 'react';
 import { Product } from '@/lib/store';
 import { motion } from 'framer-motion';
-import { formatPrice } from '@/lib/format';
+import { useFormatPrice } from '@/lib/format';
 
 interface ProductCardProps {
   product: Product;
@@ -11,6 +11,7 @@ interface ProductCardProps {
 }
 
 function ProductCardBase({ product, index = 0, priority = false }: ProductCardProps) {
+  const formatPrice = useFormatPrice();
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
 
@@ -60,7 +61,6 @@ const handleScroll = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
       transition={{ delay: Math.min(index, 4) * 0.08, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-      whileTap={{ scale: 0.985 }}
     >
       <Link to={`/product/${product.id}`} className="group block product-card">
         <div className="relative aspect-square bg-background overflow-hidden mb-6">
@@ -69,7 +69,8 @@ const handleScroll = () => {
               <div
                 ref={scrollerRef}
                 onScroll={handleScroll}
-                className="flex h-full w-full snap-x snap-mandatory overflow-x-auto scroll-smooth no-scrollbar touch-pan-x"
+                className="flex h-full w-full snap-x snap-mandatory overflow-x-auto scroll-smooth no-scrollbar"
+                style={{ touchAction: 'pan-x pan-y' }}
               >
                 {gallery.map((src, i) => (
                   <div

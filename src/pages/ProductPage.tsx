@@ -5,7 +5,7 @@ import { getProductById, products } from '@/lib/products';
 import { useCartStore } from '@/lib/store';
 import { ProductCard } from '@/components/ProductCard';
 import { ChevronLeft, Plus, Minus, Check, X, ZoomIn } from 'lucide-react';
-import { formatPrice } from '@/lib/format';
+import { useFormatPrice } from '@/lib/format';
 
 const sizeGuide = [
   { size: 'XS', chest: '86-91', waist: '71-76', hips: '86-91' },
@@ -121,6 +121,7 @@ export default function ProductPage() {
                     ref={galleryRef}
                     onScroll={handleGalleryScroll}
                     className="flex snap-x snap-mandatory overflow-x-auto scroll-smooth no-scrollbar"
+                    style={{ touchAction: 'pan-x pan-y' }}
                   >
                     {galleryImages.map((src, i) => (
                       <div key={src} className="relative min-w-full snap-center aspect-[4/5] bg-background overflow-hidden flex items-center justify-center px-6 py-8 md:px-12 md:py-10">

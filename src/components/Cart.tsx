@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { formatPrice } from '@/lib/format';
+import { useFormatPrice } from '@/lib/format';
 import { useCartStore } from '@/lib/store';
 import { X, Plus, Minus, ShoppingBag } from 'lucide-react';
 
