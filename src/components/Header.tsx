@@ -242,36 +242,57 @@ export function Header() {
                   </button>
 
                   {/* Country / currency */}
-                  <div className="mt-10 flex items-center justify-between gap-4 border border-white/20 px-5 py-4">
-                    <span className="text-[11px] uppercase tracking-[0.3em] text-background/85">
-                      South Africa
-                    </span>
-                    <span className="flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-background/60">
-                      ZAR R
-                      <ChevronDown className="w-4 h-4" strokeWidth={1.25} />
-                    </span>
-                  </div>
+                  <CurrencySelect />
 
                   {/* Newsletter */}
-                  <form
-                    onSubmit={(e) => { e.preventDefault(); setSubscribed(true); }}
-                    className="mt-12 flex items-center gap-4 border-b border-white/25 pb-3"
-                  >
-                    <input
-                      type="email"
-                      required
-                      value={menuEmail}
-                      onChange={(e) => setMenuEmail(e.target.value)}
-                      placeholder="EMAIL ADDRESS"
-                      className="flex-1 min-w-0 bg-transparent border-0 focus:outline-none text-[11px] uppercase tracking-[0.25em] text-background placeholder:text-background/45 py-1"
-                    />
-                    <button
-                      type="submit"
-                      className="shrink-0 text-[11px] uppercase tracking-[0.25em] text-background/80 hover:text-background transition-colors"
-                    >
-                      {subscribed ? 'Joined' : 'Sign Up'}
-                    </button>
+                  <form onSubmit={submitSignup} className="mt-12">
+                    <div className="flex items-center gap-4 border-b border-white/25 pb-3">
+                      <input
+                        type="email"
+                        required
+                        value={menuEmail}
+                        onChange={(e) => { setMenuEmail(e.target.value); setSignupError(''); }}
+                        placeholder="Email address"
+                        autoComplete="email"
+                        autoCapitalize="none"
+                        autoCorrect="off"
+                        spellCheck={false}
+                        inputMode="email"
+                        aria-label="Email address"
+                        className="flex-1 min-w-0 bg-transparent border-0 focus:outline-none text-[12px] normal-case tracking-[0.06em] lowercase text-background placeholder:text-background/45 placeholder:normal-case py-1"
+                      />
+                    </div>
+                    <div className="mt-5 flex items-center gap-4 border-b border-white/25 pb-3">
+                      <input
+                        type="tel"
+                        required
+                        value={menuPhone}
+                        onChange={(e) => { setMenuPhone(e.target.value); setSignupError(''); }}
+                        placeholder="PHONE NUMBER"
+                        autoComplete="tel"
+                        aria-label="Phone number"
+                        className="flex-1 min-w-0 bg-transparent border-0 focus:outline-none text-[11px] uppercase tracking-[0.25em] text-background placeholder:text-background/45 py-1"
+                      />
+                      <button
+                        type="submit"
+                        disabled={signupState === 'loading' || signupState === 'success'}
+                        className="shrink-0 text-[11px] uppercase tracking-[0.25em] text-background/80 hover:text-background disabled:opacity-60 transition-colors"
+                      >
+                        {signupState === 'loading' ? 'Sending' : signupState === 'success' ? 'Joined' : 'Sign Up'}
+                      </button>
+                    </div>
+                    <div className="min-h-[1.25rem] mt-3">
+                      {signupError && (
+                        <p className="text-[10px] tracking-[0.15em] text-background/60">{signupError}</p>
+                      )}
+                      {signupState === 'success' && (
+                        <p className="text-[10px] uppercase tracking-[0.25em] text-background/60">
+                          You're on the list.
+                        </p>
+                      )}
+                    </div>
                   </form>
+
 
                   <div className="mt-14 pt-8 border-t border-white/10">
                     <p className="text-[10px] uppercase tracking-[0.4em] text-background/35">
