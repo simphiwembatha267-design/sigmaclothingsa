@@ -6,6 +6,8 @@ import { Menu, X, ShoppingBag, User, ChevronDown } from 'lucide-react';
 import { Logo } from './Logo';
 import sigmaLockup from '@/assets/sigma-lockup.png';
 import heroImage from '@/assets/hero-main.jpg';
+import { CurrencySelect } from './CurrencySelect';
+import { supabase } from '@/integrations/supabase/client';
 
 
 
@@ -78,7 +80,9 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuEmail, setMenuEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
+  const [menuPhone, setMenuPhone] = useState('');
+  const [signupState, setSignupState] = useState<'idle' | 'loading' | 'success'>('idle');
+  const [signupError, setSignupError] = useState('');
   const location = useLocation();
   const { openCart, itemCount } = useCartStore();
   
@@ -91,6 +95,42 @@ export function Header() {
   }, []);
 
   useEffect(() => { setIsMenuOpen(false); }, [location]);
+
+  const submitSignup = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (signupState === 'loading') return;
+
+    const email = menuEmail.trim().toLowerCase();
+    const phone = menuPhone.trim();
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+      setSignupError('Please enter a valid email address.');
+      return;
+    }
+    if (phone.replace(/\D/g, '').length < 7) {
+      setSignupError('Please enter a valid phone number.');
+      return;
+    }
+
+    setSignupError('');
+    setSignupState('loading');
+    try {
+      const { data, error } = await supabase.functions.invoke('newsletter-signup', {
+        body: { email, phone, source: 'menu' },
+      });
+      if (error || !data?.ok) {
+        setSignupError('Something went wrong. Please try again.');
+        setSignupState('idle');
+        return;
+      }
+      setSignupState('success');
+      setMenuEmail('');
+      setMenuPhone('');
+    } catch {
+      setSignupError('Something went wrong. Please try again.');
+      setSignupState('idle');
+    }
+  };
 
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? 'hidden' : '';
