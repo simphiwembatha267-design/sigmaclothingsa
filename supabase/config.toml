@@ -4,3 +4,6 @@ verify_jwt = false
 
 [functions.site-access]
 verify_jwt = false
+
+[functions.newsletter-signup]
+verify_jwt = false
