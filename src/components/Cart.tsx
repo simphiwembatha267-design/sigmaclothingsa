@@ -46,7 +46,7 @@ export function Cart() {
             aria-label="Shopping cart"
           >
             <header className="flex h-[72px] shrink-0 items-center justify-between border-b border-border bg-muted px-5 sm:px-8">
-              <h2 className="text-sm font-bold uppercase">Cart</h2>
+              <h2 className="font-body text-sm font-bold uppercase">Cart</h2>
               <Button
                 type="button"
                 variant="ghost"
@@ -88,7 +88,7 @@ export function Cart() {
                       <div className="flex min-w-0 flex-col">
                         <div className="flex items-start justify-between gap-3">
                           <div className="min-w-0">
-                            <h3 className="text-sm font-bold leading-5">{item.product.name}</h3>
+                            <h3 className="font-body text-sm font-bold leading-5">{item.product.name}</h3>
                             <p className="mt-1 text-xs font-medium uppercase">{formatPrice(item.product.price)}</p>
                             <p className="mt-1 text-xs font-medium uppercase text-muted-foreground">Size {item.size}</p>
                           </div>
@@ -133,7 +133,7 @@ export function Cart() {
 
                 {recommendations.length > 0 && (
                   <section className="mx-5 border-b border-border py-7 sm:mx-8" aria-labelledby="cart-recommendations">
-                    <h3 id="cart-recommendations" className="mb-5 text-sm font-bold uppercase">Don't Miss These</h3>
+                    <h3 id="cart-recommendations" className="mb-5 font-body text-sm font-bold uppercase">Don't Miss These</h3>
                     <div className="grid grid-cols-3 gap-3 sm:gap-5">
                       {recommendations.map((product) => (
                         <article key={product.id} className="min-w-0">
@@ -146,7 +146,7 @@ export function Cart() {
                               className="h-full w-full object-contain object-center"
                             />
                           </div>
-                          <h4 className="line-clamp-2 min-h-8 text-[11px] font-semibold leading-4 sm:text-xs">{product.name}</h4>
+                          <h4 className="line-clamp-2 min-h-8 font-body text-[11px] font-semibold leading-4 sm:text-xs">{product.name}</h4>
                           <p className="mt-1 text-[11px] font-medium sm:text-xs">{formatPrice(product.price)}</p>
                           <Button
                             type="button"
