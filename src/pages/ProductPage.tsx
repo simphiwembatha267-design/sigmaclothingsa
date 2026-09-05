@@ -96,14 +96,7 @@ export default function ProductPage() {
       id: 'details',
       title: 'Product Details',
       content: (
-        <div className="space-y-3 text-sm leading-6 text-muted-foreground">
-          <p>{product.description}</p>
-          <ul className="space-y-1">
-            <li>Premium heavyweight cotton</li>
-            <li>Relaxed, boxy silhouette</li>
-            <li>Made in Portugal</li>
-          </ul>
-        </div>
+        <p className="text-sm leading-6 text-muted-foreground">{product.description}</p>
       ),
     },
     {
@@ -328,7 +321,10 @@ export default function ProductPage() {
             <Accordion type="single" collapsible defaultValue="details" className="mt-10 border-t border-border">
               {informationSections.map((section) => (
                 <AccordionItem key={section.id} value={section.id}>
-                  <AccordionTrigger className="py-5 text-left text-xs font-semibold uppercase hover:no-underline">
+                  <AccordionTrigger
+                    className="py-5 text-left text-sm font-semibold hover:no-underline"
+                    style={{ fontFamily: 'var(--font-body)' }}
+                  >
                     {section.title}
                   </AccordionTrigger>
                   <AccordionContent className="pb-6">{section.content}</AccordionContent>
