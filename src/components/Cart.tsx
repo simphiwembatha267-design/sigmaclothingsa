@@ -1,158 +1,199 @@
-import { motion, AnimatePresence } from 'framer-motion';
-import { useFormatPrice } from '@/lib/format';
-import { useCartStore } from '@/lib/store';
-import { X, Plus, Minus, ShoppingBag } from 'lucide-react';
-
+import { useMemo, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Minus, Plus, ShoppingBag } from 'lucide-react';
 import { toast } from 'sonner';
-
+import { Button } from '@/components/ui/button';
+import { useFormatPrice } from '@/lib/format';
+import { products } from '@/lib/products';
+import { useCartStore } from '@/lib/store';
 
 export function Cart() {
   const formatPrice = useFormatPrice();
-  const { items, isOpen, closeCart, removeItem, updateQuantity, total, itemCount } = useCartStore();
+  const [termsAccepted, setTermsAccepted] = useState(false);
+  const { items, isOpen, closeCart, addItem, removeItem, updateQuantity, total } = useCartStore();
+
+  const recommendations = useMemo(() => {
+    const cartIds = new Set(items.map((item) => item.product.id));
+    return products.filter((product) => !cartIds.has(product.id)).slice(0, 3);
+  }, [items]);
+
+  const addRecommendation = (productId: string) => {
+    const product = products.find((candidate) => candidate.id === productId);
+    const size = product?.sizes[0];
+    if (!product || !size) return;
+    addItem(product, size);
+    toast(`${product.name} added`, { description: `Size ${size}` });
+  };
 
   return (
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-foreground/40 backdrop-blur-sm z-50"
+            className="fixed inset-0 z-50 bg-foreground/55 backdrop-blur-sm"
             onClick={closeCart}
           />
-          
-          {/* Cart panel */}
-          <motion.div
+
+          <motion.aside
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
-            transition={{ type: 'tween', duration: 0.3 }}
-            className="fixed top-0 right-0 bottom-0 w-full max-w-md bg-background z-50 flex flex-col"
+            transition={{ type: 'tween', duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed inset-y-0 right-0 z-50 flex w-full flex-col overflow-hidden bg-background sm:inset-y-3 sm:right-3 sm:max-w-2xl sm:rounded-lg"
+            aria-label="Shopping cart"
           >
-            {/* Header */}
-            <div className="flex items-center justify-between h-16 px-6 border-b border-border">
-              <h2 className="text-caption uppercase font-semibold tracking-[0.02em]" style={{ fontFamily: 'var(--font-body), sans-serif' }}>Cart ({itemCount()})</h2>
-              <button
+            <header className="flex h-[72px] shrink-0 items-center justify-between border-b border-border bg-muted px-5 sm:px-8">
+              <h2 className="font-body text-sm font-bold uppercase">Cart</h2>
+              <Button
+                type="button"
+                variant="ghost"
                 onClick={closeCart}
-                className="p-2 -mr-2 hover:opacity-60 transition-opacity"
-                aria-label="Close cart"
+                className="h-auto rounded-none px-0 py-2 text-sm font-bold uppercase hover:bg-transparent hover:opacity-60"
               >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
+                [ Close ]
+              </Button>
+            </header>
 
-            {/* Items */}
-            <div className="flex-1 overflow-y-auto">
-              {items.length === 0 ? (
-                <div className="flex flex-col items-center justify-center h-full text-center px-6">
-                  <ShoppingBag className="w-12 h-12 text-muted-foreground mb-4" strokeWidth={2} />
-                  <p className="text-muted-foreground mb-6" style={{ fontFamily: 'var(--font-body), sans-serif' }}>Your cart is empty</p>
-                  <button
-                    onClick={closeCart}
-                    className="text-caption uppercase link-underline font-semibold tracking-[0.02em]"
-                    style={{ fontFamily: 'var(--font-body), sans-serif' }}
-                  >
-                    Continue Shopping
-                  </button>
-                </div>
-              ) : (
-                <ul className="divide-y divide-border">
+            {items.length === 0 ? (
+              <div className="flex flex-1 flex-col items-center justify-center px-6 text-center">
+                <ShoppingBag className="mb-5 h-10 w-10 text-muted-foreground" strokeWidth={1.5} />
+                <p className="mb-7 text-sm font-semibold">Your cart is empty</p>
+                <Button onClick={closeCart} className="h-12 rounded-full px-8 text-xs font-semibold uppercase">
+                  Continue Shopping
+                </Button>
+              </div>
+            ) : (
+              <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
+                <ul className="px-5 sm:px-8">
                   {items.map((item) => (
-                    <li key={`${item.product.id}-${item.size}`} className="flex gap-4 p-6">
-                      <div className="w-24 h-32 bg-background flex-shrink-0 overflow-hidden flex items-center justify-center p-1">
+                    <li
+                      key={`${item.product.id}-${item.size}`}
+                      className="grid grid-cols-[108px_minmax(0,1fr)] gap-4 border-b border-border py-7 sm:grid-cols-[140px_minmax(0,1fr)] sm:gap-7"
+                    >
+                      <div className="flex aspect-square items-center justify-center overflow-hidden bg-background p-1">
                         {item.product.image && (item.product.image.startsWith('/') || item.product.image.startsWith('http')) ? (
                           <img
                             src={item.product.image}
                             alt={item.product.name}
                             loading="lazy"
                             decoding="async"
-                            className="max-w-full max-h-full w-auto h-auto object-contain object-center"
+                            className="h-full w-full object-contain object-center"
                           />
                         ) : null}
                       </div>
-                      
-                      <div className="flex-1 flex flex-col">
-                        <div className="flex justify-between">
-                          <div>
-                            <h3 className="text-sm font-bold tracking-wide" style={{ fontFamily: 'var(--font-body), sans-serif' }}>{item.product.name}</h3>
-                            <p className="text-caption text-muted-foreground mt-0.5" style={{ fontFamily: 'var(--font-body), sans-serif' }}>
-                              Size: {item.size}
-                            </p>
+
+                      <div className="flex min-w-0 flex-col">
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="min-w-0">
+                            <h3 className="font-body text-sm font-bold leading-5">{item.product.name}</h3>
+                            <p className="mt-1 text-xs font-medium uppercase">{formatPrice(item.product.price)}</p>
+                            <p className="mt-1 text-xs font-medium uppercase text-muted-foreground">Size {item.size}</p>
                           </div>
-                          <button
+                          <Button
+                            type="button"
+                            variant="ghost"
                             onClick={() => removeItem(item.product.id, item.size)}
-                            className="p-1 -mr-1 hover:opacity-60 transition-opacity"
-                            aria-label="Remove item"
+                            className="h-auto rounded-none px-0 py-0 text-[11px] font-medium uppercase text-muted-foreground hover:bg-transparent hover:text-foreground"
+                            aria-label={`Remove ${item.product.name}`}
                           >
-                            <X className="w-4 h-4" />
-                          </button>
+                            Remove
+                          </Button>
                         </div>
-                        
-                        <div className="flex items-center justify-between mt-auto">
-                          <div className="flex items-center border border-border">
-                            <button
-                              onClick={() =>
-                                updateQuantity(item.product.id, item.size, item.quantity - 1)
-                              }
-                              className="p-2 hover:bg-muted transition-colors"
-                              aria-label="Decrease quantity"
-                            >
-                              <Minus className="w-3 h-3" />
-                            </button>
-                            <span className="w-8 text-center text-body-sm" style={{ fontFamily: 'var(--font-body), sans-serif' }}>{item.quantity}</span>
-                            <button
-                              onClick={() =>
-                                updateQuantity(item.product.id, item.size, item.quantity + 1)
-                              }
-                              className="p-2 hover:bg-muted transition-colors"
-                              aria-label="Increase quantity"
-                            >
-                              <Plus className="w-3 h-3" />
-                            </button>
-                          </div>
-                          <p className="text-body-sm" style={{ fontFamily: 'var(--font-body), sans-serif' }}>{formatPrice(item.product.price * item.quantity)}</p>
+
+                        <div className="mt-auto flex items-center gap-1 pt-4" aria-label={`Quantity for ${item.product.name}`}>
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => updateQuantity(item.product.id, item.size, item.quantity - 1)}
+                            className="h-8 w-8 rounded-none hover:bg-muted"
+                            aria-label="Decrease quantity"
+                          >
+                            <Minus className="h-3.5 w-3.5" />
+                          </Button>
+                          <span className="w-8 text-center text-sm font-medium">{item.quantity}</span>
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => updateQuantity(item.product.id, item.size, item.quantity + 1)}
+                            className="h-8 w-8 rounded-none hover:bg-muted"
+                            aria-label="Increase quantity"
+                          >
+                            <Plus className="h-3.5 w-3.5" />
+                          </Button>
                         </div>
                       </div>
                     </li>
                   ))}
                 </ul>
-              )}
-            </div>
 
-            {/* Footer */}
-            {items.length > 0 && (
-              <div className="border-t border-border p-6 space-y-4">
-                <div className="flex justify-between text-body-sm" style={{ fontFamily: 'var(--font-body), sans-serif' }}>
-                  <span>Subtotal</span>
-                  <span>{formatPrice(total())}</span>
-                </div>
-                <p className="text-caption text-muted-foreground" style={{ fontFamily: 'var(--font-body), sans-serif' }}>
-                  Shipping calculated at checkout
-                </p>
-                <button
-                  onClick={() =>
-                    toast('Checkout opening soon', {
-                      description: 'Message us on Instagram to complete your order.',
-                    })
-                  }
-                  className="w-full h-12 bg-foreground text-background text-caption uppercase font-semibold tracking-[0.02em] hover:bg-foreground/90 transition-colors"
-                  style={{ fontFamily: 'var(--font-body), sans-serif' }}
-                >
-                  Checkout
-                </button>
+                {recommendations.length > 0 && (
+                  <section className="mx-5 border-b border-border py-7 sm:mx-8" aria-labelledby="cart-recommendations">
+                    <h3 id="cart-recommendations" className="mb-5 font-body text-sm font-bold uppercase">Don't Miss These</h3>
+                    <div className="grid grid-cols-3 gap-3 sm:gap-5">
+                      {recommendations.map((product) => (
+                        <article key={product.id} className="min-w-0">
+                          <div className="mb-3 flex aspect-square items-center justify-center overflow-hidden bg-background p-1">
+                            <img
+                              src={product.image}
+                              alt={product.name}
+                              loading="lazy"
+                              decoding="async"
+                              className="h-full w-full object-contain object-center"
+                            />
+                          </div>
+                          <h4 className="line-clamp-2 min-h-8 font-body text-[11px] font-semibold leading-4 sm:text-xs">{product.name}</h4>
+                          <p className="mt-1 text-[11px] font-medium sm:text-xs">{formatPrice(product.price)}</p>
+                          <Button
+                            type="button"
+                            variant="secondary"
+                            onClick={() => addRecommendation(product.id)}
+                            className="mt-3 h-9 w-full rounded-full px-2 text-[10px] font-semibold uppercase sm:text-[11px]"
+                          >
+                            Add to Cart
+                          </Button>
+                        </article>
+                      ))}
+                    </div>
+                  </section>
+                )}
 
-                <button
-                  onClick={closeCart}
-                  className="w-full text-center text-caption uppercase link-underline font-semibold tracking-[0.02em]"
-                  style={{ fontFamily: 'var(--font-body), sans-serif' }}
-                >
-                  Continue Shopping
-                </button>
+                <footer className="px-5 pb-[max(24px,env(safe-area-inset-bottom))] pt-7 sm:px-8 sm:pb-8">
+                  <label className="flex cursor-pointer items-start gap-3">
+                    <input
+                      type="checkbox"
+                      checked={termsAccepted}
+                      onChange={(event) => setTermsAccepted(event.target.checked)}
+                      className="mt-0.5 h-5 w-5 shrink-0 accent-foreground"
+                    />
+                    <span className="text-xs font-semibold uppercase leading-5">
+                      I agree to SIGMA's <span className="underline underline-offset-4">shipping policy</span> &amp;{' '}
+                      <span className="underline underline-offset-4">terms and conditions</span>
+                    </span>
+                  </label>
+
+                  <div className="mt-9 flex items-center justify-between text-sm font-bold uppercase">
+                    <span>Subtotal</span>
+                    <span>{formatPrice(total())}</span>
+                  </div>
+                  <p className="mt-2 text-[11px] text-muted-foreground">Shipping calculated at checkout</p>
+
+                  <Button
+                    type="button"
+                    disabled={!termsAccepted}
+                    onClick={() => toast('Checkout opening soon', { description: 'Message us on Instagram to complete your order.' })}
+                    className="mt-5 h-14 w-full rounded-md text-sm font-semibold uppercase"
+                  >
+                    Checkout
+                  </Button>
+                </footer>
               </div>
             )}
-          </motion.div>
+          </motion.aside>
         </>
       )}
     </AnimatePresence>
