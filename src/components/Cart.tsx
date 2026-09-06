@@ -156,6 +156,7 @@ export function Cart() {
                   Checkout
                 </Button>
               </footer>
+              </>
             )}
           </motion.aside>
         </>
