@@ -46,32 +46,25 @@ function BagIcon({ className }: { className?: string }) {
 
 
 
-const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/shop', label: 'Shop' },
-  { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' },
-];
-
 const mobileNavGroups = [
   {
     label: 'Shop',
     links: [
       { href: '/shop', label: 'New Arrivals' },
+      { href: '/shop', label: 'All Products' },
       { href: '/shop?category=Tops', label: 'Tops' },
       { href: '/shop?category=Bottoms', label: 'Bottoms' },
       { href: '/shop?category=Outerwear', label: 'Outerwear' },
       { href: '/shop?category=Accessories', label: 'Accessories' },
-      { href: '/shop', label: 'All Products' },
     ],
   },
   {
-    label: 'Info',
+    label: 'More',
     links: [
-      { href: '/about', label: 'About Sigma' },
-      { href: '/contact', label: 'Contact' },
+      { href: '/about', label: 'About' },
       { href: '/shop', label: 'Size Guide' },
       { href: '/legal', label: 'Shipping & Returns' },
+      { href: '/contact', label: 'Contact' },
     ],
   },
 ];
@@ -212,14 +205,14 @@ export function Header() {
                 alt=""
                 loading="lazy"
                 decoding="async"
-                className="w-full h-full object-cover grayscale blur-xl"
+                className="h-full w-full object-cover grayscale blur-lg"
               />
-              <div className="absolute inset-0 bg-black/75" />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/80" />
+              <div className="absolute inset-0 bg-foreground/80" />
+              <div className="absolute inset-0 bg-gradient-to-b from-foreground/40 via-foreground/25 to-foreground/85" />
             </motion.div>
 
             {/* Top bar */}
-            <div className="relative flex items-center justify-between h-16 px-6 border-b border-white/10">
+            <div className="relative flex h-16 items-center justify-between border-b border-background/10 px-6">
               <Link to="/" onClick={() => setIsMenuOpen(false)} className="flex items-center">
                 <img
                   src={sigmaLockup}
@@ -235,27 +228,28 @@ export function Header() {
 
             {/* Content */}
             <div
-              className="relative h-[calc(100dvh-4rem)] px-8 pt-12 overflow-y-auto"
-              style={{ paddingBottom: 'calc(3rem + env(safe-area-inset-bottom))' }}
+              className="no-scrollbar relative h-[calc(100dvh-4rem)] overflow-y-auto px-6 pt-8 sm:px-8 sm:pt-10"
+              style={{ paddingBottom: 'calc(2rem + env(safe-area-inset-bottom))' }}
             >
               <div className="mx-auto w-full max-w-md md:max-w-lg">
-                <nav className="flex flex-col gap-12">
+                <nav className="flex flex-col">
                   {mobileNavGroups.map((group, gIdx) => (
                     <motion.div
                       key={group.label}
                       initial={{ opacity: 0, y: 14 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.12 + gIdx * 0.08, duration: 0.5 }}
+                      className="border-b border-background/15 py-7 first:pt-0"
                     >
-                      <p className="text-[10px] uppercase tracking-[0.4em] text-background/45 mb-6">
+                      <p className="mb-3 font-body text-[10px] font-medium uppercase tracking-[0.32em] text-background/50">
                         {group.label}
                       </p>
-                      <ul className="flex flex-col">
+                      <ul className="flex flex-col gap-0.5">
                         {group.links.map((link) => (
-                          <li key={link.label} className="border-b border-white/[0.08]">
+                          <li key={link.label}>
                             <Link
                               to={link.href}
-                              className="block py-4 text-xl font-semibold tracking-[0.02em] text-background/90 hover:text-background transition-colors"
+                              className="block py-2.5 font-body text-[15px] font-semibold uppercase tracking-[0.16em] text-background/90 transition-colors hover:text-background sm:text-base"
                               style={{ fontFamily: 'var(--font-body), sans-serif' }}
                             >
                               {link.label}
@@ -271,11 +265,11 @@ export function Header() {
                   initial={{ opacity: 0, y: 14 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.32, duration: 0.5 }}
-                  className="mt-14"
+                  className="pt-7"
                 >
                   <button
                     onClick={() => { openCart(); setIsMenuOpen(false); }}
-                    className="flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-background/70 hover:text-background transition-colors"
+                    className="flex items-center gap-3 font-body text-[11px] font-semibold uppercase tracking-[0.24em] text-background/80 transition-colors hover:text-background"
                   >
                     <BagIcon className="w-4 h-4" />
                     Cart ({itemCount()})
@@ -285,7 +279,7 @@ export function Header() {
                   <CurrencySelect />
 
                   {/* Newsletter */}
-                  <form onSubmit={submitSignup} className="mt-12">
+                  <form onSubmit={submitSignup} className="mt-9">
                     <div className="flex items-center gap-4 border-b border-white/25 pb-3">
                       <input
                         type="email"
@@ -334,7 +328,7 @@ export function Header() {
                   </form>
 
 
-                  <div className="mt-14 pt-8 border-t border-white/10">
+                  <div className="mt-10 border-t border-background/10 pt-7">
                     <p className="text-[10px] uppercase tracking-[0.4em] text-background/35">
                       © {new Date().getFullYear()} Sigma
                     </p>
