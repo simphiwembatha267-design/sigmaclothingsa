@@ -1,10 +1,94 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Minus, Plus, ShoppingBag } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { useFormatPrice } from '@/lib/format';
-import { useCartStore } from '@/lib/store';
+import { useCartStore, type Product } from '@/lib/store';
+import { getProductById } from '@/lib/products';
+
+const hatProduct: Product = {
+  id: 'sigma-hat',
+  name: 'SIGMA Hat',
+  price: 250,
+  image: '',
+  category: 'Accessories',
+  description: 'SIGMA hat.',
+  sizes: ['OS'],
+};
+
+const beanieProduct: Product = {
+  id: 'sigma-beanie',
+  name: 'SIGMA Beanie',
+  price: 220,
+  image: '',
+  category: 'Accessories',
+  description: 'SIGMA beanie.',
+  sizes: ['OS'],
+};
+
+const recommendedTee = getProductById('sigma-gallery-top-black');
+
+function RecommendationCard({ product, needsSize }: { product: Product; needsSize: boolean }) {
+  const formatPrice = useFormatPrice();
+  const addItem = useCartStore((state) => state.addItem);
+  const [size, setSize] = useState('');
+
+  const handleAdd = () => {
+    if (needsSize && !size) {
+      toast('Select a size first');
+      return;
+    }
+    addItem(product, needsSize ? size : 'OS');
+    toast(`${product.name} added to cart`);
+  };
+
+  return (
+    <div className="flex w-28 shrink-0 snap-start flex-col">
+      <div className="flex aspect-square items-center justify-center overflow-hidden bg-muted">
+        {product.image ? (
+          <img
+            src={product.image}
+            alt={product.name}
+            loading="lazy"
+            decoding="async"
+            className="h-full w-full object-contain object-center p-1"
+          />
+        ) : (
+          <span className="font-display text-lg text-muted-foreground/40">S.</span>
+        )}
+      </div>
+      <p className="mt-2 truncate font-body text-[11px] font-bold leading-4">{product.name}</p>
+      <p className="mt-0.5 text-[11px] font-medium uppercase text-muted-foreground">{formatPrice(product.price)}</p>
+      {needsSize && (
+        <select
+          value={size}
+          onChange={(event) => setSize(event.target.value)}
+          className="mt-1.5 h-7 w-full border border-border bg-background px-1 text-[11px] font-semibold uppercase outline-none"
+          aria-label={`Size for ${product.name}`}
+        >
+          <option value="" disabled>
+            Size ▼
+          </option>
+          {product.sizes.map((s) => (
+            <option key={s} value={s}>
+              {s}
+            </option>
+          ))}
+        </select>
+      )}
+      <Button
+        type="button"
+        variant="ghost"
+        onClick={handleAdd}
+        className="mt-1.5 h-7 w-full rounded-none border border-foreground px-0 text-[10px] font-bold uppercase hover:bg-foreground hover:text-background"
+      >
+        Add to cart
+      </Button>
+    </div>
+  );
+}
 
 export function Cart() {
   const formatPrice = useFormatPrice();
@@ -61,7 +145,7 @@ export function Cart() {
                       className="grid grid-cols-[88px_minmax(0,1fr)] gap-4 border-b border-border py-5 sm:grid-cols-[112px_minmax(0,1fr)] sm:gap-6 sm:py-6"
                     >
                       <div className="flex aspect-square items-center justify-center overflow-hidden bg-background p-1">
-                        {item.product.image && (item.product.image.startsWith('/') || item.product.image.startsWith('http')) ? (
+                        {item.product.image && (item.product.image.startsWith('/') || item.product.image.startsWith('http') || item.product.image.startsWith('data:')) ? (
                           <img
                             src={item.product.image}
                             alt={item.product.name}
@@ -118,28 +202,41 @@ export function Cart() {
                   ))}
                 </ul>
 
-                <section className="mx-4 border-b border-border py-5 sm:mx-7 sm:py-6" aria-labelledby="cart-recommendations">
+                <section className="border-b border-border px-4 py-5 sm:px-7 sm:py-6" aria-labelledby="cart-recommendations">
                   <h3 id="cart-recommendations" className="font-body text-xs font-bold uppercase">Don't Miss These</h3>
                   <div
                     className="no-scrollbar mt-4 flex snap-x snap-mandatory gap-3 overflow-x-auto overscroll-x-contain"
-                    aria-label="Recommended accessories"
-                  />
+                    aria-label="Recommended products"
+                  >
+                    <RecommendationCard product={hatProduct} needsSize={false} />
+                    <RecommendationCard product={beanieProduct} needsSize={false} />
+                    {recommendedTee && <RecommendationCard product={recommendedTee} needsSize />}
+                  </div>
                 </section>
               </div>
 
               <footer className="shrink-0 border-t border-border bg-background px-4 pb-[max(20px,env(safe-area-inset-bottom))] pt-5 sm:px-7 sm:pb-6">
-                <label className="flex cursor-pointer items-start gap-3">
+                <div className="flex items-start gap-3">
                   <input
+                    id="cart-terms"
                     type="checkbox"
                     checked={termsAccepted}
                     onChange={(event) => setTermsAccepted(event.target.checked)}
-                    className="mt-0.5 h-5 w-5 shrink-0 accent-foreground"
+                    className="mt-0.5 h-5 w-5 shrink-0 cursor-pointer accent-foreground"
                   />
                   <span className="text-xs font-semibold uppercase leading-5">
-                    I agree to SIGMA's <span className="underline underline-offset-4">shipping policy</span> &amp;{' '}
-                    <span className="underline underline-offset-4">terms and conditions</span>
+                    <label htmlFor="cart-terms" className="cursor-pointer">
+                      I agree to SIGMA's{' '}
+                    </label>
+                    <Link to="/legal#faqs" onClick={closeCart} className="underline underline-offset-4">
+                      shipping policy
+                    </Link>{' '}
+                    &amp;{' '}
+                    <Link to="/legal#terms" onClick={closeCart} className="underline underline-offset-4">
+                      terms and conditions
+                    </Link>
                   </span>
-                </label>
+                </div>
 
                 <div className="mt-4 flex items-center justify-between text-sm font-bold uppercase">
                   <span>Subtotal</span>
