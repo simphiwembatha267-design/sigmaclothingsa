@@ -123,7 +123,38 @@ export function Cart() {
                     className="no-scrollbar mt-4 flex snap-x snap-mandatory gap-3 overflow-x-auto overscroll-x-contain"
                     aria-label="Recommended accessories"
                   />
+                </section>
               </div>
+
+              <footer className="shrink-0 border-t border-border bg-background px-4 pb-[max(20px,env(safe-area-inset-bottom))] pt-5 sm:px-7 sm:pb-6">
+                <label className="flex cursor-pointer items-start gap-3">
+                  <input
+                    type="checkbox"
+                    checked={termsAccepted}
+                    onChange={(event) => setTermsAccepted(event.target.checked)}
+                    className="mt-0.5 h-5 w-5 shrink-0 accent-foreground"
+                  />
+                  <span className="text-xs font-semibold uppercase leading-5">
+                    I agree to SIGMA's <span className="underline underline-offset-4">shipping policy</span> &amp;{' '}
+                    <span className="underline underline-offset-4">terms and conditions</span>
+                  </span>
+                </label>
+
+                <div className="mt-4 flex items-center justify-between text-sm font-bold uppercase">
+                  <span>Subtotal</span>
+                  <span>{formatPrice(total())}</span>
+                </div>
+                <p className="mt-1.5 text-[11px] text-muted-foreground">Shipping calculated at checkout</p>
+
+                <Button
+                  type="button"
+                  disabled={!termsAccepted}
+                  onClick={() => toast('Checkout opening soon', { description: 'Message us on Instagram to complete your order.' })}
+                  className="mt-4 h-14 w-full rounded-md text-sm font-semibold uppercase"
+                >
+                  Checkout
+                </Button>
+              </footer>
             )}
           </motion.aside>
         </>
