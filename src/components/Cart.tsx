@@ -1,29 +1,15 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Minus, Plus, ShoppingBag } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { useFormatPrice } from '@/lib/format';
-import { products } from '@/lib/products';
 import { useCartStore } from '@/lib/store';
 
 export function Cart() {
   const formatPrice = useFormatPrice();
   const [termsAccepted, setTermsAccepted] = useState(false);
-  const { items, isOpen, closeCart, addItem, removeItem, updateQuantity, total } = useCartStore();
-
-  const recommendations = useMemo(() => {
-    const cartIds = new Set(items.map((item) => item.product.id));
-    return products.filter((product) => !cartIds.has(product.id)).slice(0, 3);
-  }, [items]);
-
-  const addRecommendation = (productId: string) => {
-    const product = products.find((candidate) => candidate.id === productId);
-    const size = product?.sizes[0];
-    if (!product || !size) return;
-    addItem(product, size);
-    toast(`${product.name} added`, { description: `Size ${size}` });
-  };
+  const { items, isOpen, closeCart, removeItem, updateQuantity, total } = useCartStore();
 
   return (
     <AnimatePresence>
@@ -42,10 +28,10 @@ export function Cart() {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'tween', duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-y-0 right-0 z-50 flex w-full flex-col overflow-hidden bg-background sm:inset-y-3 sm:right-3 sm:max-w-2xl sm:rounded-lg"
+            className="fixed inset-y-0 left-4 right-0 z-50 flex flex-col overflow-hidden rounded-l-lg bg-background sm:inset-y-3 sm:left-auto sm:right-3 sm:w-[min(94vw,640px)] sm:rounded-lg"
             aria-label="Shopping cart"
           >
-            <header className="flex h-[72px] shrink-0 items-center justify-between border-b border-border bg-muted px-5 sm:px-8">
+            <header className="flex h-16 shrink-0 items-center justify-between border-b border-border bg-muted px-4 sm:px-7">
               <h2 className="font-body text-sm font-bold uppercase">Cart</h2>
               <Button
                 type="button"
@@ -67,11 +53,11 @@ export function Cart() {
               </div>
             ) : (
               <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
-                <ul className="px-5 sm:px-8">
+                <ul className="px-4 sm:px-7">
                   {items.map((item) => (
                     <li
                       key={`${item.product.id}-${item.size}`}
-                      className="grid grid-cols-[108px_minmax(0,1fr)] gap-4 border-b border-border py-7 sm:grid-cols-[140px_minmax(0,1fr)] sm:gap-7"
+                      className="grid grid-cols-[88px_minmax(0,1fr)] gap-4 border-b border-border py-5 sm:grid-cols-[112px_minmax(0,1fr)] sm:gap-6 sm:py-6"
                     >
                       <div className="flex aspect-square items-center justify-center overflow-hidden bg-background p-1">
                         {item.product.image && (item.product.image.startsWith('/') || item.product.image.startsWith('http')) ? (
@@ -103,7 +89,7 @@ export function Cart() {
                           </Button>
                         </div>
 
-                        <div className="mt-auto flex items-center gap-1 pt-4" aria-label={`Quantity for ${item.product.name}`}>
+                        <div className="mt-auto flex items-center gap-1 pt-3" aria-label={`Quantity for ${item.product.name}`}>
                           <Button
                             type="button"
                             variant="ghost"
@@ -131,38 +117,15 @@ export function Cart() {
                   ))}
                 </ul>
 
-                {recommendations.length > 0 && (
-                  <section className="mx-5 border-b border-border py-7 sm:mx-8" aria-labelledby="cart-recommendations">
-                    <h3 id="cart-recommendations" className="mb-5 font-body text-sm font-bold uppercase">Don't Miss These</h3>
-                    <div className="grid grid-cols-3 gap-3 sm:gap-5">
-                      {recommendations.map((product) => (
-                        <article key={product.id} className="min-w-0">
-                          <div className="mb-3 flex aspect-square items-center justify-center overflow-hidden bg-background p-1">
-                            <img
-                              src={product.image}
-                              alt={product.name}
-                              loading="lazy"
-                              decoding="async"
-                              className="h-full w-full object-contain object-center"
-                            />
-                          </div>
-                          <h4 className="line-clamp-2 min-h-8 font-body text-[11px] font-semibold leading-4 sm:text-xs">{product.name}</h4>
-                          <p className="mt-1 text-[11px] font-medium sm:text-xs">{formatPrice(product.price)}</p>
-                          <Button
-                            type="button"
-                            variant="secondary"
-                            onClick={() => addRecommendation(product.id)}
-                            className="mt-3 h-9 w-full rounded-full px-2 text-[10px] font-semibold uppercase sm:text-[11px]"
-                          >
-                            Add to Cart
-                          </Button>
-                        </article>
-                      ))}
-                    </div>
-                  </section>
-                )}
+                <section className="mx-4 border-b border-border py-5 sm:mx-7 sm:py-6" aria-labelledby="cart-recommendations">
+                  <h3 id="cart-recommendations" className="font-body text-xs font-bold uppercase">Don't Miss These</h3>
+                  <div
+                    className="no-scrollbar mt-4 flex snap-x snap-mandatory gap-3 overflow-x-auto overscroll-x-contain"
+                    aria-label="Recommended accessories"
+                  />
+                </section>
 
-                <footer className="px-5 pb-[max(24px,env(safe-area-inset-bottom))] pt-7 sm:px-8 sm:pb-8">
+                <footer className="px-4 pb-[max(24px,env(safe-area-inset-bottom))] pt-6 sm:px-7 sm:pb-7">
                   <label className="flex cursor-pointer items-start gap-3">
                     <input
                       type="checkbox"
@@ -176,7 +139,7 @@ export function Cart() {
                     </span>
                   </label>
 
-                  <div className="mt-9 flex items-center justify-between text-sm font-bold uppercase">
+                  <div className="mt-7 flex items-center justify-between text-sm font-bold uppercase">
                     <span>Subtotal</span>
                     <span>{formatPrice(total())}</span>
                   </div>
