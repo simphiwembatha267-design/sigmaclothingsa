@@ -52,6 +52,7 @@ export function Cart() {
                 </Button>
               </div>
             ) : (
+              <>
               <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
                 <ul className="px-4 sm:px-7">
                   {items.map((item) => (
