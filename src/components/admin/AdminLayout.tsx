@@ -24,6 +24,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { useAdminAuth } from '@/hooks/useAdminAuth';
 import { cn } from '@/lib/utils';
 import { formatZAR, formatDateTime } from '@/lib/admin-format';
+import sigmaLockup from '@/assets/sigma-lockup.png';
 
 const NAV = [
   { to: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -46,7 +47,12 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <div className="flex h-full flex-col">
       <div className="px-6 py-7">
-        <p className="text-lg font-bold tracking-[0.35em]">SIGMA</p>
+        <img
+          src={sigmaLockup}
+          alt="Sigma Clothing"
+          className="h-7 w-auto object-contain select-none"
+          draggable={false}
+        />
         <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
           Admin Portal
         </p>
