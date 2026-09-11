@@ -60,6 +60,10 @@ export default function ProductPage() {
     setAdded(false);
   }, [product?.id]);
 
+  if (!product && isLoading) {
+    return <div className="min-h-screen pt-28" />;
+  }
+
   if (!product) {
     return (
       <div className="min-h-screen pt-28 flex items-center justify-center px-5">

@@ -6,6 +6,7 @@ import heroImage from '@/assets/hero-main.jpg';
 import { ArrowRight } from 'lucide-react';
 
 const Index = () => {
+  const { products } = useCatalog();
   const featuredProducts = products.slice(0, 4);
 
   return (
