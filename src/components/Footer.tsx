@@ -47,10 +47,10 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="p-1.5 text-foreground/70 hover:text-foreground transition-colors"
+                className="p-1.5 text-foreground hover:text-foreground transition-colors"
               >
                 {isLucide ? (
-                  <Icon className="w-[18px] h-[18px] sm:w-5 sm:h-5" strokeWidth={1.5} />
+                  <Icon className="w-[18px] h-[18px] sm:w-5 sm:h-5" strokeWidth={2.25} />
                 ) : (
                   <Icon className="w-[18px] h-[18px] sm:w-5 sm:h-5" />
                 )}
@@ -67,7 +67,7 @@ export function Footer() {
           <div className="relative">
             <button
               onClick={() => setHelpOpen((v) => !v)}
-              className="flex items-center gap-1 sm:gap-1.5 py-1.5 pl-2 pr-1 sm:pl-2.5 sm:pr-1.5 text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.12em] text-foreground/80 hover:text-foreground transition-colors"
+              className="flex items-center gap-1 sm:gap-1.5 py-1.5 pl-2 pr-1 sm:pl-2.5 sm:pr-1.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.12em] text-foreground hover:text-foreground transition-colors"
               style={{ fontFamily: 'var(--font-body), sans-serif' }}
               aria-expanded={helpOpen}
               aria-label="Need help"
@@ -93,7 +93,7 @@ export function Footer() {
                       key={link.label}
                       to={link.href}
                       onClick={() => setHelpOpen(false)}
-                      className="block px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.1em] text-foreground/70 hover:text-foreground hover:bg-muted/50 transition-colors"
+                      className="block px-4 py-2 text-[11px] font-bold uppercase tracking-[0.1em] text-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
                       style={{ fontFamily: 'var(--font-body), sans-serif' }}
                     >
                       {link.label}
