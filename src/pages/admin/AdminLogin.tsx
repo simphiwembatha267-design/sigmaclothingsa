@@ -5,6 +5,7 @@ import { ArrowRight } from 'lucide-react';
 import { useAdminAuth } from '@/hooks/useAdminAuth';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
+import sigmaLockup from '@/assets/sigma-lockup.png';
 
 type Mode = 'login' | 'forgot' | 'setup';
 
@@ -88,9 +89,14 @@ export default function AdminLogin() {
         transition={{ duration: 0.5 }}
         className="w-full max-w-sm"
       >
-        <div className="mb-12 text-center">
-          <p className="text-xl font-bold tracking-[0.4em]">SIGMA</p>
-          <p className="mt-2 text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+        <div className="mb-12 flex flex-col items-center text-center">
+          <img
+            src={sigmaLockup}
+            alt="Sigma"
+            className="h-8 w-auto object-contain select-none"
+            draggable={false}
+          />
+          <p className="mt-3 text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
             Admin Portal
           </p>
         </div>

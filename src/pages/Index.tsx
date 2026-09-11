@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { products } from '@/lib/products';
+import { useCatalog } from '@/lib/catalog';
 import { ProductCard } from '@/components/ProductCard';
 import heroImage from '@/assets/hero-main.jpg';
 import { ArrowRight } from 'lucide-react';
 
 const Index = () => {
+  const { products } = useCatalog();
   const featuredProducts = products.slice(0, 4);
 
   return (
