@@ -11,7 +11,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { useFormatPrice } from '@/lib/format';
-import { getProductById, products } from '@/lib/products';
+import { useCatalogProduct } from '@/lib/catalog';
 import { useCartStore } from '@/lib/store';
 import { cn } from '@/lib/utils';
 
@@ -37,7 +37,7 @@ export default function ProductPage() {
   const formatPrice = useFormatPrice();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const product = getProductById(id || '');
+  const { product, products, isLoading } = useCatalogProduct(id);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [activeImage, setActiveImage] = useState(0);
   const [zoomImage, setZoomImage] = useState<string | null>(null);
