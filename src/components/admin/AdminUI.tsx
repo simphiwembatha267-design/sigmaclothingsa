@@ -125,3 +125,107 @@ export function TableSkeleton({ rows = 5 }: { rows?: number }) {
     </div>
   );
 }
+
+export function ErrorState({ message, onRetry }: { message?: string; onRetry?: () => void }) {
+  return (
+    <div className="py-16 text-center">
+      <p className="text-sm font-semibold">Something went wrong</p>
+      <p className="mt-2 text-xs text-muted-foreground">{message ?? 'Please try again.'}</p>
+      {onRetry && (
+        <button
+          onClick={onRetry}
+          className="mt-4 rounded-full border border-border px-5 py-2 text-[11px] font-semibold uppercase tracking-[0.18em]"
+        >
+          Retry
+        </button>
+      )}
+    </div>
+  );
+}
+
+export function Pagination({
+  page,
+  pageCount,
+  onChange,
+  total,
+}: {
+  page: number;
+  pageCount: number;
+  onChange: (p: number) => void;
+  total?: number;
+}) {
+  if (pageCount <= 1) return null;
+  return (
+    <div className="mt-5 flex items-center justify-between">
+      <p className="text-xs text-muted-foreground">
+        Page {page} of {pageCount}
+        {typeof total === 'number' ? ` · ${total} total` : ''}
+      </p>
+      <div className="flex gap-2">
+        <button
+          disabled={page === 1}
+          onClick={() => onChange(page - 1)}
+          className="rounded-full border border-border px-4 py-2 text-xs disabled:opacity-40"
+        >
+          Previous
+        </button>
+        <button
+          disabled={page >= pageCount}
+          onClick={() => onChange(page + 1)}
+          className="rounded-full border border-border px-4 py-2 text-xs disabled:opacity-40"
+        >
+          Next
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export type StockStatus = 'in_stock' | 'low_stock' | 'sold_out' | 'untracked';
+
+export function stockStatus(p: {
+  stock_quantity?: number | null;
+  low_stock_threshold?: number | null;
+  track_inventory?: boolean | null;
+}): StockStatus {
+  if (p.track_inventory === false) return 'untracked';
+  const qty = p.stock_quantity ?? 0;
+  if (qty <= 0) return 'sold_out';
+  if (qty <= (p.low_stock_threshold ?? 0)) return 'low_stock';
+  return 'in_stock';
+}
+
+export const STOCK_LABEL: Record<StockStatus, string> = {
+  in_stock: 'In Stock',
+  low_stock: 'Low Stock',
+  sold_out: 'Sold Out',
+  untracked: 'Untracked',
+};
+
+export function stockTone(s: StockStatus): 'neutral' | 'positive' | 'warning' | 'danger' {
+  if (s === 'sold_out') return 'danger';
+  if (s === 'low_stock') return 'warning';
+  if (s === 'in_stock') return 'positive';
+  return 'neutral';
+}
+
+/** Download rows as a CSV file. */
+export function downloadCsv(filename: string, rows: Record<string, unknown>[]) {
+  if (!rows.length) return;
+  const headers = Object.keys(rows[0]);
+  const escape = (v: unknown) => {
+    const s = v === null || v === undefined ? '' : String(v);
+    return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+  };
+  const csv = [
+    headers.join(','),
+    ...rows.map((r) => headers.map((h) => escape(r[h])).join(',')),
+  ].join('\n');
+  const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8;' }));
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
