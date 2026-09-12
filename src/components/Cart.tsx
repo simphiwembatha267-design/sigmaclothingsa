@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { useFormatPrice } from '@/lib/format';
 import { useCartStore, type Product } from '@/lib/store';
 import { getProductById } from '@/lib/products';
+import { supabase } from '@/integrations/supabase/client';
 
 const hatProduct: Product = {
   id: 'sigma-hat',
@@ -238,11 +239,8 @@ export function Cart() {
                   </span>
                 </div>
 
-                <div className="mt-4 flex items-center justify-between text-sm font-bold uppercase">
-                  <span>Subtotal</span>
-                  <span>{formatPrice(total())}</span>
-                </div>
-                <p className="mt-1.5 text-[11px] text-muted-foreground">Shipping calculated at checkout</p>
+                <PromoAndTotals subtotal={total()} />
+
 
                 <Button
                   type="button"
@@ -259,5 +257,100 @@ export function Cart() {
         </>
       )}
     </AnimatePresence>
+  );
+}
+
+type Quote = {
+  subtotal: number;
+  shipping: number;
+  shippingLabel: string;
+  discount: number;
+  discountLabel: string;
+  discountError: string;
+  total: number;
+};
+
+function PromoAndTotals({ subtotal }: { subtotal: number }) {
+  const formatPrice = useFormatPrice();
+  const items = useCartStore((s) => s.items);
+  const [code, setCode] = useState('');
+  const [quote, setQuote] = useState<Quote | null>(null);
+  const [checking, setChecking] = useState(false);
+
+  const applyCode = async () => {
+    if (!code.trim()) return;
+    setChecking(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('checkout-quote', {
+        body: {
+          code: code.trim(),
+          subtotal,
+          items: items.map((i) => ({ productId: i.product.id, quantity: i.quantity })),
+        },
+      });
+      if (error) throw error;
+      const q = data as Quote;
+      setQuote(q);
+      if (q.discountError) toast.error(q.discountError);
+      else if (q.discountLabel) toast.success(`Code applied · ${q.discountLabel}`);
+      else toast.error('That code is not valid.');
+    } catch {
+      toast.error('Could not check that code right now.');
+    } finally {
+      setChecking(false);
+    }
+  };
+
+  const discount = quote && !quote.discountError ? quote.discount : 0;
+  const shipping = quote && !quote.discountError ? quote.shipping : 0;
+  const showShipping = Boolean(quote && !quote.discountError && quote.shippingLabel);
+  const grandTotal = Math.max(0, subtotal - discount + shipping);
+
+  return (
+    <div className="mt-4">
+      <div className="flex gap-2">
+        <input
+          value={code}
+          onChange={(e) => setCode(e.target.value.toUpperCase())}
+          placeholder="PROMO CODE"
+          aria-label="Promo code"
+          className="h-11 w-full rounded-md border border-border bg-transparent px-3 text-xs uppercase tracking-[0.12em] outline-none placeholder:text-muted-foreground"
+        />
+        <button
+          type="button"
+          onClick={applyCode}
+          disabled={checking || !code.trim()}
+          className="h-11 shrink-0 rounded-md border border-foreground px-4 text-[11px] font-semibold uppercase tracking-[0.14em] disabled:opacity-40"
+        >
+          {checking ? 'Checking' : 'Apply'}
+        </button>
+      </div>
+
+      <div className="mt-4 space-y-1.5 text-xs uppercase">
+        <div className="flex items-center justify-between">
+          <span>Subtotal</span>
+          <span>{formatPrice(subtotal)}</span>
+        </div>
+        {discount > 0 && (
+          <div className="flex items-center justify-between text-muted-foreground">
+            <span className="truncate pr-3">{quote?.discountLabel || 'Discount'}</span>
+            <span>-{formatPrice(discount)}</span>
+          </div>
+        )}
+        {showShipping && (
+          <div className="flex items-center justify-between text-muted-foreground">
+            <span className="truncate pr-3">{quote?.shippingLabel}</span>
+            <span>{shipping > 0 ? formatPrice(shipping) : 'Free'}</span>
+          </div>
+        )}
+        <div className="flex items-center justify-between pt-1 text-sm font-bold">
+          <span>Total</span>
+          <span>{formatPrice(grandTotal)}</span>
+        </div>
+      </div>
+      {!showShipping && (
+        <p className="mt-1.5 text-[11px] text-muted-foreground">Shipping calculated at checkout</p>
+      )}
+    </div>
   );
 }
