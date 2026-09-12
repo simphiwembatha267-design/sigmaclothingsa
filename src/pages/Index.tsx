@@ -29,7 +29,7 @@ const Index = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="absolute inset-x-6 top-[19%] flex flex-col items-start text-left text-primary-foreground md:inset-x-auto md:left-[8%] md:top-[21%] md:max-w-3xl"
+          className="absolute inset-x-6 top-[23%] flex flex-col items-start text-left text-primary-foreground md:inset-x-auto md:left-[8%] md:top-[24%] md:max-w-3xl"
         >
           <p className="mb-4 font-body text-[10px] font-medium uppercase tracking-[0.3em] md:mb-5 md:text-xs">
             FW25 Collection
