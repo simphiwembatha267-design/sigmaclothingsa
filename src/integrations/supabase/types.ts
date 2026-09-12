@@ -328,6 +328,30 @@ export type Database = {
         }
         Relationships: []
       }
+      site_settings: {
+        Row: {
+          bool_value: boolean
+          created_at: string
+          id: string
+          key: string
+          updated_at: string
+        }
+        Insert: {
+          bool_value?: boolean
+          created_at?: string
+          id?: string
+          key: string
+          updated_at?: string
+        }
+        Update: {
+          bool_value?: boolean
+          created_at?: string
+          id?: string
+          key?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
