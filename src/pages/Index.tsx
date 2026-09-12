@@ -40,15 +40,15 @@ const Index = () => {
             <p className="text-body-lg opacity-80 mb-8 max-w-md">
               Built for moguls.
             </p>
-            <Link
-              to="/shop"
-              className="inline-flex items-center gap-3 text-caption uppercase group"
-            >
-              <span className="link-underline">Shop Collection</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
           </motion.div>
         </div>
+
+        <Link
+          to="/shop"
+          className="absolute left-1/2 top-[62%] -translate-x-1/2 -translate-y-1/2 inline-flex items-center justify-center w-[150px] md:w-[164px] h-11 md:h-12 rounded-lg border border-foreground/10 bg-background/80 backdrop-blur-sm text-foreground text-caption uppercase tracking-[0.22em] transition-all duration-300 hover:bg-background/95"
+        >
+          Find Yours
+        </Link>
       </section>
 
 
