@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 import { useCatalog } from '@/lib/catalog';
 import { ProductCard } from '@/components/ProductCard';
 import heroImage from '@/assets/hero-main.jpg';
