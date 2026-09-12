@@ -33,10 +33,13 @@ const Index = () => {
           >
             <Link
               to="/shop"
-              className="inline-flex items-center justify-center w-[118px] md:w-[130px] h-9 md:h-10 rounded-xl border border-foreground/10 bg-background/80 backdrop-blur-sm text-foreground text-[11px] font-bold uppercase tracking-[0.18em] transition-all duration-300 hover:bg-background/95"
+              className="inline-flex items-center justify-center gap-2.5 h-9 md:h-10 pl-4 md:pl-5 pr-1.5 md:pr-2 rounded-xl border border-foreground/10 bg-background/80 backdrop-blur-sm text-foreground text-[11px] font-bold uppercase tracking-[0.18em] transition-all duration-300 hover:bg-background/95"
               style={{ fontFamily: 'var(--font-body)' }}
             >
               Find Yours
+              <span className="grid h-6 w-6 md:h-7 md:w-7 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground transition-transform duration-300 group-hover:translate-x-0.5">
+                <ArrowRight size={12} strokeWidth={2.5} />
+              </span>
             </Link>
           </motion.div>
         </div>
