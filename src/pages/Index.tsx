@@ -32,23 +32,25 @@ const Index = () => {
             className="max-w-2xl"
           >
             <p className="text-caption uppercase mb-4 opacity-80">FW25 Collection</p>
-            <h1 className="font-display text-display-xl mb-6">
-              Uncommon
-              <br />
-              By Design
-            </h1>
+            <div className="flex items-end gap-4 mb-6 flex-wrap">
+              <h1 className="font-display text-display-xl">
+                Uncommon
+                <br />
+                By Design
+              </h1>
+              <Link
+                to="/shop"
+                className="mb-1 inline-flex items-center justify-center w-[118px] md:w-[130px] h-9 md:h-10 rounded-xl border border-foreground/10 bg-background/80 backdrop-blur-sm text-foreground text-[11px] font-bold uppercase tracking-[0.18em] transition-all duration-300 hover:bg-background/95"
+                style={{ fontFamily: 'var(--font-body)' }}
+              >
+                Find Yours
+              </Link>
+            </div>
             <p className="text-body-lg opacity-80 mb-8 max-w-md">
               Built for moguls.
             </p>
           </motion.div>
         </div>
-
-        <Link
-          to="/shop"
-          className="absolute left-1/2 top-[62%] -translate-x-1/2 -translate-y-1/2 inline-flex items-center justify-center w-[150px] md:w-[164px] h-11 md:h-12 rounded-lg border border-foreground/10 bg-background/80 backdrop-blur-sm text-foreground text-caption uppercase tracking-[0.22em] transition-all duration-300 hover:bg-background/95"
-        >
-          Find Yours
-        </Link>
       </section>
 
 
