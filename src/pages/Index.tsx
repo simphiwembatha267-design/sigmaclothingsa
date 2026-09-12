@@ -30,14 +30,15 @@ const Index = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-          <Link
-            to="/shop"
-            className="inline-flex items-center justify-center w-[118px] md:w-[130px] h-9 md:h-10 rounded-xl border border-foreground/10 bg-background/80 backdrop-blur-sm text-foreground text-[11px] font-bold uppercase tracking-[0.18em] transition-all duration-300 hover:bg-background/95"
-            style={{ fontFamily: 'var(--font-body)' }}
-          >
-            Find Yours
-          </Link>
-        </motion.div>
+            <Link
+              to="/shop"
+              className="inline-flex items-center justify-center w-[118px] md:w-[130px] h-9 md:h-10 rounded-xl border border-foreground/10 bg-background/80 backdrop-blur-sm text-foreground text-[11px] font-bold uppercase tracking-[0.18em] transition-all duration-300 hover:bg-background/95"
+              style={{ fontFamily: 'var(--font-body)' }}
+            >
+              Find Yours
+            </Link>
+          </motion.div>
+        </div>
       </section>
 
 
