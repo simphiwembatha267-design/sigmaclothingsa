@@ -59,7 +59,14 @@ Deno.serve(async (req) => {
       lines.push({ productId: p.id, name: p.name, quantity: qty, unitPrice, lineTotal: unitPrice * qty });
     }
 
-    const subtotal = lines.reduce((s, l) => s + l.lineTotal, 0);
+    // Some catalogue items are not database-backed yet; fall back to the cart's own
+    // subtotal for an estimate in that case, and flag it as an estimate.
+    const dbSubtotal = lines.reduce((s, l) => s + l.lineTotal, 0);
+    const clientSubtotal = Number.isFinite(Number(body.subtotal))
+      ? Math.max(0, Math.min(10_000_000, Number(body.subtotal)))
+      : 0;
+    const estimateOnly = lines.length === 0 && clientSubtotal > 0;
+    const subtotal = estimateOnly ? clientSubtotal : dbSubtotal;
 
     // Shipping: first matching active rate in a zone that covers the country.
     let shipping = 0;
@@ -150,6 +157,7 @@ Deno.serve(async (req) => {
       discountLabel,
       discountError,
       total,
+      estimateOnly,
       currency: 'ZAR',
     });
   } catch (e) {
