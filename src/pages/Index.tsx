@@ -34,7 +34,10 @@ const Index = () => {
           <p className="mb-4 font-body text-[10px] font-medium uppercase tracking-[0.3em] md:mb-5 md:text-xs">
             FW25 Collection
           </p>
-          <h1 className="max-w-4xl text-[clamp(3rem,9vw,7.5rem)] leading-[0.86] tracking-[0] text-balance">
+          <h1
+            className="max-w-5xl font-body text-[clamp(3rem,9vw,7.5rem)] font-bold uppercase leading-[0.86] tracking-[-0.02em] text-balance"
+            style={{ fontFamily: 'var(--font-body), sans-serif' }}
+          >
             Uncommon By Design
           </h1>
           <p className="mt-4 font-display text-xl font-light tracking-[0] md:mt-5 md:text-2xl">
