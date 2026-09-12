@@ -35,9 +35,9 @@ export function Footer() {
   const [helpOpen, setHelpOpen] = useState(false);
 
   return (
-    <footer className="fixed bottom-0 left-0 right-0 z-40 px-3 sm:px-5 pb-3 sm:pb-4 pointer-events-none">
-      <div className="pointer-events-auto relative mx-auto max-w-[1800px]">
-        <div className="flex items-center justify-between h-14 px-3 sm:px-5 rounded-[28px] bg-background/90 backdrop-blur-md shadow-[0_8px_30px_-12px_hsl(var(--foreground)/0.25)]">
+    <footer className="relative z-30 w-full border-t border-border bg-background">
+      <div className="relative mx-auto max-w-[1800px] px-4 sm:px-8">
+        <div className="flex h-16 items-center justify-between sm:h-[72px]">
           {/* Social icons */}
           <div className="flex items-center gap-2 sm:gap-3">
             {socialLinks.map(({ label, href, Icon, isLucide }) => (
@@ -86,7 +86,7 @@ export function Footer() {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 10, scale: 0.96 }}
                   transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
-                  className="absolute bottom-full right-0 mb-2 min-w-[140px] rounded-[20px] bg-background/95 backdrop-blur-md shadow-[0_8px_30px_-12px_hsl(var(--foreground)/0.25)] border border-border/50 overflow-hidden py-2"
+                  className="absolute bottom-full right-0 mb-2 min-w-[140px] overflow-hidden rounded-[20px] border border-border/50 bg-background/95 py-2 shadow-[0_8px_30px_-12px_hsl(var(--foreground)/0.25)] backdrop-blur-md"
                 >
                   {helpLinks.map((link) => (
                     <Link
