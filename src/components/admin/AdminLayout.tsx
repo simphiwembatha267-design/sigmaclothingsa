@@ -5,6 +5,7 @@ import {
   LayoutDashboard,
   ShoppingBag,
   Package,
+  Boxes,
   Layers,
   Users,
   Mail,
@@ -12,6 +13,7 @@ import {
   CreditCard,
   Truck,
   BarChart3,
+  History,
   Settings,
   LogOut,
   Menu,
@@ -24,12 +26,14 @@ import { supabase } from '@/integrations/supabase/client';
 import { useAdminAuth } from '@/hooks/useAdminAuth';
 import { cn } from '@/lib/utils';
 import { formatZAR, formatDateTime } from '@/lib/admin-format';
+import { useJsonSetting } from '@/lib/site-settings';
 import sigmaLockup from '@/assets/sigma-lockup.png';
 
 const NAV = [
   { to: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { to: '/admin/orders', label: 'Orders', icon: ShoppingBag },
   { to: '/admin/products', label: 'Products', icon: Package },
+  { to: '/admin/inventory', label: 'Inventory', icon: Boxes },
   { to: '/admin/collections', label: 'Collections', icon: Layers },
   { to: '/admin/customers', label: 'Customers', icon: Users },
   { to: '/admin/subscribers', label: 'Subscribers', icon: Mail },
@@ -37,8 +41,10 @@ const NAV = [
   { to: '/admin/payments', label: 'Payments', icon: CreditCard },
   { to: '/admin/shipping', label: 'Shipping', icon: Truck },
   { to: '/admin/analytics', label: 'Analytics', icon: BarChart3 },
+  { to: '/admin/activity', label: 'Activity Log', icon: History },
   { to: '/admin/settings', label: 'Settings', icon: Settings },
 ];
+
 
 function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
   const { signOut, user, role } = useAdminAuth();
@@ -104,17 +110,18 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
 function GlobalSearch({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [term, setTerm] = useState('');
   const navigate = useNavigate();
+  const trimmed = term.trim();
 
-  const { data } = useQuery({
-    queryKey: ['global-search', term],
-    enabled: open && term.trim().length > 1,
+  const { data, isFetching } = useQuery({
+    queryKey: ['global-search', trimmed],
+    enabled: open && trimmed.length > 1,
     queryFn: async () => {
-      const q = `%${term.trim()}%`;
-      const [orders, products, customers, subs] = await Promise.all([
+      const q = `%${trimmed}%`;
+      const [orders, products, customers, subs, discounts] = await Promise.all([
         supabase
           .from('orders')
           .select('id, order_number, customer_name, total')
-          .or(`order_number.ilike.${q},customer_name.ilike.${q},customer_email.ilike.${q}`)
+          .or(`order_number.ilike.${q},customer_name.ilike.${q},customer_email.ilike.${q},tracking_number.ilike.${q}`)
           .limit(5),
         supabase.from('products').select('id, name, price').ilike('name', q).limit(5),
         supabase
@@ -122,17 +129,15 @@ function GlobalSearch({ open, onClose }: { open: boolean; onClose: () => void })
           .select('id, full_name, email')
           .or(`full_name.ilike.${q},email.ilike.${q}`)
           .limit(5),
-        supabase
-          .from('newsletter_subscribers')
-          .select('id, email')
-          .ilike('email', q)
-          .limit(5),
+        supabase.from('newsletter_subscribers').select('id, email').ilike('email', q).limit(5),
+        supabase.from('discount_codes').select('id, code, type, value').ilike('code', q).limit(5),
       ]);
       return {
         orders: orders.data ?? [],
         products: products.data ?? [],
         customers: customers.data ?? [],
         subs: subs.data ?? [],
+        discounts: discounts.data ?? [],
       };
     },
   });
@@ -145,6 +150,13 @@ function GlobalSearch({ open, onClose }: { open: boolean; onClose: () => void })
     onClose();
     navigate(path);
   };
+
+  const total =
+    (data?.orders.length ?? 0) +
+    (data?.products.length ?? 0) +
+    (data?.customers.length ?? 0) +
+    (data?.subs.length ?? 0) +
+    (data?.discounts.length ?? 0);
 
   return (
     <AnimatePresence>
@@ -162,7 +174,7 @@ function GlobalSearch({ open, onClose }: { open: boolean; onClose: () => void })
                 autoFocus
                 value={term}
                 onChange={(e) => setTerm(e.target.value)}
-                placeholder="Search orders, products, customers, subscribers"
+                placeholder="Search orders, products, customers, subscribers, codes"
                 className="w-full bg-transparent text-base outline-none placeholder:text-muted-foreground"
               />
               <button onClick={onClose} aria-label="Close search">
@@ -171,12 +183,15 @@ function GlobalSearch({ open, onClose }: { open: boolean; onClose: () => void })
             </div>
 
             <div className="mt-6 max-h-[60vh] space-y-6 overflow-y-auto">
+              {trimmed.length > 1 && !isFetching && total === 0 && (
+                <p className="py-10 text-center text-sm text-muted-foreground">No results found.</p>
+              )}
               {data?.orders.length ? (
                 <SearchGroup title="Orders">
                   {data.orders.map((o) => (
                     <SearchRow
                       key={o.id}
-                      onClick={() => go('/admin/orders')}
+                      onClick={() => go(`/admin/orders?order=${o.id}`)}
                       left={`${o.order_number} · ${o.customer_name ?? 'Guest'}`}
                       right={formatZAR(o.total as unknown as number)}
                     />
@@ -188,7 +203,7 @@ function GlobalSearch({ open, onClose }: { open: boolean; onClose: () => void })
                   {data.products.map((p) => (
                     <SearchRow
                       key={p.id}
-                      onClick={() => go('/admin/products')}
+                      onClick={() => go(`/admin/products?product=${p.id}`)}
                       left={p.name}
                       right={formatZAR(p.price as unknown as number)}
                     />
@@ -200,7 +215,7 @@ function GlobalSearch({ open, onClose }: { open: boolean; onClose: () => void })
                   {data.customers.map((c) => (
                     <SearchRow
                       key={c.id}
-                      onClick={() => go('/admin/customers')}
+                      onClick={() => go(`/admin/customers?customer=${c.id}`)}
                       left={c.full_name ?? c.email}
                       right={c.email}
                     />
@@ -211,6 +226,18 @@ function GlobalSearch({ open, onClose }: { open: boolean; onClose: () => void })
                 <SearchGroup title="Subscribers">
                   {data.subs.map((s) => (
                     <SearchRow key={s.id} onClick={() => go('/admin/subscribers')} left={s.email} />
+                  ))}
+                </SearchGroup>
+              ) : null}
+              {data?.discounts.length ? (
+                <SearchGroup title="Discount Codes">
+                  {data.discounts.map((d) => (
+                    <SearchRow
+                      key={d.id}
+                      onClick={() => go('/admin/discounts')}
+                      left={d.code}
+                      right={d.type === 'percentage' ? `${d.value}%` : d.type}
+                    />
                   ))}
                 </SearchGroup>
               ) : null}
@@ -253,52 +280,112 @@ function SearchRow({
   );
 }
 
+type NotificationItem = { id: string; title: string; meta: string; to: string; urgent?: boolean };
+
 function Notifications() {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  const { value: prefs } = useJsonSetting('notification_settings', {
+    orders: true,
+    payments: true,
+    shipping: true,
+    subscribers: false,
+  });
 
   const { data } = useQuery({
-    queryKey: ['admin-notifications'],
+    queryKey: ['admin-notifications', prefs],
+    staleTime: 30_000,
     queryFn: async () => {
-      const [orders, lowStock, subs] = await Promise.all([
-        supabase
-          .from('orders')
-          .select('id, order_number, total, payment_status, created_at')
-          .order('created_at', { ascending: false })
-          .limit(5),
+      const since = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+      const [newOrders, failed, unfulfilled, stock, subs] = await Promise.all([
+        prefs.orders
+          ? supabase
+              .from('orders')
+              .select('id, order_number, total, created_at')
+              .gte('created_at', since)
+              .eq('shipping_status', 'unfulfilled')
+              .order('created_at', { ascending: false })
+              .limit(5)
+          : Promise.resolve({ data: [] }),
+        prefs.payments
+          ? supabase
+              .from('orders')
+              .select('id, order_number, total, created_at')
+              .eq('payment_status', 'failed')
+              .order('created_at', { ascending: false })
+              .limit(5)
+          : Promise.resolve({ data: [] }),
+        prefs.shipping
+          ? supabase
+              .from('orders')
+              .select('id, order_number, created_at')
+              .eq('shipping_status', 'packed')
+              .order('created_at', { ascending: true })
+              .limit(5)
+          : Promise.resolve({ data: [] }),
         supabase
           .from('products')
           .select('id, name, stock_quantity, low_stock_threshold')
+          .is('archived_at', null)
+          .eq('track_inventory', true)
           .order('stock_quantity', { ascending: true })
           .limit(20),
-        supabase
-          .from('newsletter_subscribers')
-          .select('id, email, created_at')
-          .order('created_at', { ascending: false })
-          .limit(3),
+        prefs.subscribers
+          ? supabase
+              .from('newsletter_subscribers')
+              .select('id, email, created_at')
+              .gte('created_at', since)
+              .order('created_at', { ascending: false })
+              .limit(5)
+          : Promise.resolve({ data: [] }),
       ]);
-      const low = (lowStock.data ?? []).filter(
-        (p) => (p.stock_quantity ?? 0) <= (p.low_stock_threshold ?? 0),
-      );
-      const items = [
-        ...(orders.data ?? []).map((o) => ({
-          id: `o-${o.id}`,
-          title:
-            o.payment_status === 'failed'
-              ? `Payment failed · ${o.order_number}`
-              : o.payment_status === 'paid'
-                ? `Payment received · ${o.order_number}`
-                : `New order · ${o.order_number}`,
-          meta: `${formatZAR(o.total as unknown as number)} · ${formatDateTime(o.created_at)}`,
+
+      const products = (stock.data ?? []) as { id: string; name: string; stock_quantity: number; low_stock_threshold: number }[];
+
+      const items: NotificationItem[] = [
+        ...((failed.data ?? []) as { id: string; order_number: string; total: number; created_at: string }[]).map((o) => ({
+          id: `f-${o.id}`,
+          title: `Payment failed · ${o.order_number}`,
+          meta: `${formatZAR(o.total)} · ${formatDateTime(o.created_at)}`,
+          to: `/admin/orders?order=${o.id}`,
+          urgent: true,
         })),
-        ...low.slice(0, 5).map((p) => ({
-          id: `p-${p.id}`,
-          title: `Low stock · ${p.name}`,
-          meta: `${p.stock_quantity} left`,
+        ...((newOrders.data ?? []) as { id: string; order_number: string; total: number; created_at: string }[]).map((o) => ({
+          id: `n-${o.id}`,
+          title: `New order · ${o.order_number}`,
+          meta: `${formatZAR(o.total)} · ${formatDateTime(o.created_at)}`,
+          to: `/admin/orders?order=${o.id}`,
         })),
-        ...(subs.data ?? []).map((s) => ({
+        ...((unfulfilled.data ?? []) as { id: string; order_number: string; created_at: string }[]).map((o) => ({
+          id: `p-${o.id}`,
+          title: `Packed, awaiting shipping · ${o.order_number}`,
+          meta: formatDateTime(o.created_at),
+          to: `/admin/orders?order=${o.id}`,
+        })),
+        ...products
+          .filter((p) => (p.stock_quantity ?? 0) <= 0)
+          .slice(0, 5)
+          .map((p) => ({
+            id: `so-${p.id}`,
+            title: `Sold out · ${p.name}`,
+            meta: 'Restock or hide from the shop',
+            to: `/admin/products?product=${p.id}`,
+            urgent: true,
+          })),
+        ...products
+          .filter((p) => (p.stock_quantity ?? 0) > 0 && (p.stock_quantity ?? 0) <= (p.low_stock_threshold ?? 0))
+          .slice(0, 5)
+          .map((p) => ({
+            id: `ls-${p.id}`,
+            title: `Low stock · ${p.name}`,
+            meta: `${p.stock_quantity} left`,
+            to: `/admin/products?product=${p.id}`,
+          })),
+        ...((subs.data ?? []) as { id: string; email: string; created_at: string }[]).map((s) => ({
           id: `s-${s.id}`,
           title: `New subscriber · ${s.email}`,
           meta: formatDateTime(s.created_at),
+          to: '/admin/subscribers',
         })),
       ];
       return items;
@@ -330,19 +417,26 @@ function Notifications() {
             className="absolute right-0 z-50 mt-2 w-80 overflow-hidden rounded-2xl border border-border bg-card shadow-lg"
           >
             <div className="border-b border-border px-4 py-3">
-              <p className="text-[10px] uppercase tracking-[0.2em] font-semibold">Notifications</p>
+              <p className="text-[10px] uppercase tracking-[0.2em] font-semibold">Needs Attention</p>
             </div>
             <div className="max-h-80 divide-y divide-border overflow-y-auto">
               {count === 0 && (
                 <p className="px-4 py-8 text-center text-xs text-muted-foreground">
-                  Nothing new right now.
+                  Nothing needs your attention.
                 </p>
               )}
               {data?.map((n) => (
-                <div key={n.id} className="px-4 py-3">
-                  <p className="text-xs font-semibold">{n.title}</p>
+                <button
+                  key={n.id}
+                  onClick={() => {
+                    setOpen(false);
+                    navigate(n.to);
+                  }}
+                  className="block w-full px-4 py-3 text-left hover:bg-foreground/5"
+                >
+                  <p className={cn('text-xs font-semibold', n.urgent && 'text-destructive')}>{n.title}</p>
                   <p className="mt-0.5 text-[11px] text-muted-foreground">{n.meta}</p>
-                </div>
+                </button>
               ))}
             </div>
           </motion.div>
@@ -351,6 +445,8 @@ function Notifications() {
     </div>
   );
 }
+
+
 
 export function AdminLayout() {
   const [mobileOpen, setMobileOpen] = useState(false);

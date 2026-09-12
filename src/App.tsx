@@ -19,7 +19,15 @@ const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
 const AdminOrders = lazy(() => import("./pages/admin/AdminOrders"));
 const AdminProducts = lazy(() => import("./pages/admin/AdminProducts"));
 const AdminSettings = lazy(() => import("./pages/admin/AdminSettings"));
-const AdminPlaceholder = lazy(() => import("./pages/admin/AdminPlaceholder"));
+const AdminInventory = lazy(() => import("./pages/admin/AdminInventory"));
+const AdminCollections = lazy(() => import("./pages/admin/AdminCollections"));
+const AdminCustomers = lazy(() => import("./pages/admin/AdminCustomers"));
+const AdminSubscribers = lazy(() => import("./pages/admin/AdminSubscribers"));
+const AdminDiscounts = lazy(() => import("./pages/admin/AdminDiscounts"));
+const AdminPayments = lazy(() => import("./pages/admin/AdminPayments"));
+const AdminShipping = lazy(() => import("./pages/admin/AdminShipping"));
+const AdminAnalytics = lazy(() => import("./pages/admin/AdminAnalytics"));
+const AdminActivity = lazy(() => import("./pages/admin/AdminActivity"));
 import Index from "./pages/Index";
 const Shop = lazy(() => import("./pages/Shop"));
 const ProductPage = lazy(() => import("./pages/ProductPage"));
@@ -91,124 +99,16 @@ const App = () => (
               <Route path="/admin/dashboard" element={<AdminDashboard />} />
               <Route path="/admin/orders" element={<AdminOrders />} />
               <Route path="/admin/products" element={<AdminProducts />} />
-              <Route
-                path="/admin/collections"
-                element={
-                  <AdminPlaceholder
-                    title="Collections"
-                    description="Group products into curated drops and edits."
-                    features={[
-                      "Create and edit collections",
-                      "Tops, Hoodies, Accessories",
-                      "New Arrivals and Best Sellers",
-                      "Limited Drops and Archive",
-                      "Assign products to collections",
-                      "Order collections on the storefront",
-                    ]}
-                  />
-                }
-              />
-              <Route
-                path="/admin/customers"
-                element={
-                  <AdminPlaceholder
-                    title="Customers"
-                    description="Your customer database and purchase history."
-                    features={[
-                      "Name, email, phone and address",
-                      "Full order history",
-                      "Total spent and number of orders",
-                      "Last purchase date",
-                      "Private customer notes",
-                      "Export customer list",
-                    ]}
-                  />
-                }
-              />
-              <Route
-                path="/admin/subscribers"
-                element={
-                  <AdminPlaceholder
-                    title="Newsletter Subscribers"
-                    description="Everyone who signed up for SIGMA drops."
-                    features={[
-                      "Search subscribers",
-                      "Export to CSV",
-                      "Delete a subscriber",
-                      "Signup date and source",
-                      "Ready for email campaigns",
-                    ]}
-                  />
-                }
-              />
-              <Route
-                path="/admin/discounts"
-                element={
-                  <AdminPlaceholder
-                    title="Discount Codes"
-                    description="Promotional codes for drops and campaigns."
-                    features={[
-                      "Percentage and fixed discounts",
-                      "Free shipping codes",
-                      "Expiry dates",
-                      "Usage limits and maximum uses",
-                      "Minimum purchase amount",
-                    ]}
-                  />
-                }
-              />
-              <Route
-                path="/admin/payments"
-                element={
-                  <AdminPlaceholder
-                    title="Payments"
-                    description="Revenue and transaction health."
-                    features={[
-                      "Revenue and transactions",
-                      "Successful and failed payments",
-                      "Refunds and pending payments",
-                      "Ready for PayFast, Yoco, Peach and Stripe",
-                    ]}
-                  />
-                }
-              />
-              <Route
-                path="/admin/shipping"
-                element={
-                  <AdminPlaceholder
-                    title="Shipping"
-                    description="Zones, rates and fulfilment."
-                    features={[
-                      "Shipping zones",
-                      "Shipping rates",
-                      "Courier tracking numbers",
-                      "Shipment status",
-                      "Order fulfilment queue",
-                    ]}
-                  />
-                }
-              />
-              <Route
-                path="/admin/analytics"
-                element={
-                  <AdminPlaceholder
-                    title="Analytics"
-                    description="Performance across the store."
-                    features={[
-                      "Revenue and sales",
-                      "Conversion rate",
-                      "Average order value",
-                      "Best selling products",
-                      "Returning customers",
-                      "Revenue and orders by month",
-                    ]}
-                  />
-                }
-              />
-              <Route
-                path="/admin/settings"
-                element={<AdminSettings />}
-              />
+              <Route path="/admin/inventory" element={<AdminInventory />} />
+              <Route path="/admin/collections" element={<AdminCollections />} />
+              <Route path="/admin/customers" element={<AdminCustomers />} />
+              <Route path="/admin/subscribers" element={<AdminSubscribers />} />
+              <Route path="/admin/discounts" element={<AdminDiscounts />} />
+              <Route path="/admin/payments" element={<AdminPayments />} />
+              <Route path="/admin/shipping" element={<AdminShipping />} />
+              <Route path="/admin/analytics" element={<AdminAnalytics />} />
+              <Route path="/admin/activity" element={<AdminActivity />} />
+              <Route path="/admin/settings" element={<AdminSettings />} />
               <Route path="/admin/*" element={<Navigate to="/admin/dashboard" replace />} />
             </Route>
             <Route path="*" element={<Storefront />} />
