@@ -238,11 +238,8 @@ export function Cart() {
                   </span>
                 </div>
 
-                <div className="mt-4 flex items-center justify-between text-sm font-bold uppercase">
-                  <span>Subtotal</span>
-                  <span>{formatPrice(total())}</span>
-                </div>
-                <p className="mt-1.5 text-[11px] text-muted-foreground">Shipping calculated at checkout</p>
+                <PromoAndTotals subtotal={total()} />
+
 
                 <Button
                   type="button"
