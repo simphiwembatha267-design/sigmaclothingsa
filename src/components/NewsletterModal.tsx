@@ -9,7 +9,7 @@ import { supabase } from '@/integrations/supabase/client';
 import sigmaLockup from '@/assets/sigma-lockup.png';
 import newsletterImage from '@/assets/sigma-newsletter-orange.jpg';
 
-const STORAGE_KEY = 'sigma-newsletter-dismissed';
+const STORAGE_KEY = 'sigma-newsletter-dismissed-v2';
 
 export function NewsletterModal() {
   const [isVisible, setIsVisible] = useState(false);
