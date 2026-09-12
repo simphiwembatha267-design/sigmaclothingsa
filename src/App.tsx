@@ -9,6 +9,7 @@ import { Layout } from "./components/Layout";
 import { SplashScreen } from "./components/SplashScreen";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { PasswordGate, isAuthenticated } from "./components/PasswordGate";
+import { useSiteGate } from "./lib/site-settings";
 import { AdminAuthProvider } from "./hooks/useAdminAuth";
 import { AdminLayout } from "./components/admin/AdminLayout";
 import { AdminProtectedRoute } from "./components/admin/AdminProtectedRoute";
