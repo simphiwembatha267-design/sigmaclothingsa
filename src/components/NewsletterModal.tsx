@@ -1,35 +1,69 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { X } from 'lucide-react';
-import { Logo } from './Logo';
-import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Input } from '@/components/ui/input';
+import { supabase } from '@/integrations/supabase/client';
+import sigmaLockup from '@/assets/sigma-lockup.png';
+import newsletterImage from '@/assets/sigma-newsletter-orange.jpg';
 
 const STORAGE_KEY = 'sigma-newsletter-dismissed';
 
 export function NewsletterModal() {
   const [isVisible, setIsVisible] = useState(false);
   const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
   const [agreed, setAgreed] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success'>('idle');
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    const dismissed = localStorage.getItem(STORAGE_KEY);
-    if (!dismissed) {
-      const timer = setTimeout(() => setIsVisible(true), 1000);
-      return () => clearTimeout(timer);
+    if (!localStorage.getItem(STORAGE_KEY)) {
+      const timer = window.setTimeout(() => setIsVisible(true), 1000);
+      return () => window.clearTimeout(timer);
     }
   }, []);
+
+  useEffect(() => {
+    if (!isVisible) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = previousOverflow; };
+  }, [isVisible]);
 
   const handleClose = () => {
     setIsVisible(false);
     localStorage.setItem(STORAGE_KEY, 'true');
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email || !agreed) return;
-    handleClose();
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (!agreed || status === 'loading') return;
+
+    const normalizedEmail = email.trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(normalizedEmail)) {
+      setError('Please enter a valid email address.');
+      return;
+    }
+
+    setError('');
+    setStatus('loading');
+    try {
+      const { data, error: signupError } = await supabase.functions.invoke('newsletter-signup', {
+        body: { email: normalizedEmail, source: 'popup' },
+      });
+      if (signupError || !data?.ok) {
+        setError('Something went wrong. Please try again.');
+        setStatus('idle');
+        return;
+      }
+      setStatus('success');
+      localStorage.setItem(STORAGE_KEY, 'true');
+    } catch {
+      setError('Something went wrong. Please try again.');
+      setStatus('idle');
+    }
   };
 
   return (
@@ -39,104 +73,119 @@ export function NewsletterModal() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          className="fixed inset-0 z-[60] flex items-center justify-center p-4 sm:p-6"
+          transition={{ duration: 0.25 }}
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-foreground/70 px-5 py-6 sm:px-8"
           role="dialog"
           aria-modal="true"
           aria-label="Join the SIGMA newsletter"
         >
-          {/* Backdrop */}
-          <div
-            className="absolute inset-0 bg-black/70"
-            onClick={handleClose}
-          />
+          <button className="absolute inset-0 cursor-default" onClick={handleClose} aria-label="Close newsletter backdrop" />
 
-          {/* Modal */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+          <motion.section
+            initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
-            className="relative w-full max-w-[520px] bg-white rounded-[18px] p-8 sm:p-12 shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
+            exit={{ opacity: 0, scale: 0.98 }}
+            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+            className="relative h-[min(720px,calc(100dvh-32px))] w-full max-w-[430px] overflow-hidden bg-foreground text-background shadow-2xl sm:h-[min(760px,calc(100dvh-48px))]"
           >
-            {/* Close button */}
-            <button
+            <img
+              src={newsletterImage}
+              alt="SIGMA orange back design"
+              className="absolute inset-0 h-full w-full object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-foreground/42" />
+
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
               onClick={handleClose}
-              className="absolute top-5 right-5 sm:top-6 sm:right-6 p-2 text-black/60 hover:text-black transition-colors"
+              className="absolute right-3 top-3 z-10 text-background hover:bg-background/10 hover:text-background"
               aria-label="Close newsletter modal"
             >
-              <X className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.5} />
-            </button>
+              <X className="h-7 w-7" strokeWidth={3} />
+            </Button>
 
-            {/* Content */}
-            <div className="flex flex-col items-center text-center">
-              {/* Logo */}
-              <Logo className="h-8 sm:h-10 text-black mb-8 sm:mb-10" />
-
-              {/* Headline */}
-              <h2
-                className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-black mb-3"
-                style={{ fontFamily: 'var(--font-body), sans-serif' }}
-              >
-                Join the Movement
-              </h2>
-
-              {/* Subheading */}
-              <p
-                className="text-sm sm:text-base font-semibold tracking-wide text-black/70 mb-8 sm:mb-10"
-                style={{ fontFamily: 'var(--font-body), sans-serif' }}
-              >
-                Get exclusive access to every drop.
-              </p>
-
-              {/* Form */}
-              <form onSubmit={handleSubmit} className="w-full space-y-4 sm:space-y-5">
-                <Input
-                  type="email"
-                  placeholder="Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className="h-12 sm:h-14 w-full rounded-none border-0 border-b border-black bg-transparent px-0 text-sm sm:text-base font-medium text-black placeholder:text-black/40 focus-visible:ring-0 focus-visible:border-black"
-                  style={{ fontFamily: 'var(--font-body), sans-serif' }}
-                />
-                <Input
-                  type="text"
-                  placeholder="Name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="h-12 sm:h-14 w-full rounded-none border-0 border-b border-black bg-transparent px-0 text-sm sm:text-base font-medium text-black placeholder:text-black/40 focus-visible:ring-0 focus-visible:border-black"
-                  style={{ fontFamily: 'var(--font-body), sans-serif' }}
-                />
-
-                <div className="flex items-start gap-3 pt-2">
-                  <Checkbox
-                    id="agree"
-                    checked={agreed}
-                    onCheckedChange={(checked) => setAgreed(checked === true)}
-                    required
-                    className="mt-0.5 h-4 w-4 rounded-none border-black data-[state=checked]:bg-black data-[state=checked]:text-white"
-                  />
-                  <label
-                    htmlFor="agree"
-                    className="text-xs sm:text-sm font-medium text-black/70 text-left leading-relaxed cursor-pointer"
-                    style={{ fontFamily: 'var(--font-body), sans-serif' }}
+            <div className="relative z-[1] flex h-full flex-col px-5 pb-7 pt-[19%] text-center sm:px-7 sm:pb-9">
+              {status === 'success' ? (
+                <div className="flex h-full flex-col items-center">
+                  <div>
+                    <h2 className="font-body text-[30px] font-bold uppercase leading-none sm:text-[34px]">You're In</h2>
+                    <p className="mt-3 font-body text-sm font-semibold uppercase sm:text-base">Check Your Email</p>
+                  </div>
+                  <img src={sigmaLockup} alt="SIGMA Clothing" className="mt-[40%] h-auto w-44 invert sm:w-52" />
+                  <Button
+                    type="button"
+                    variant="link"
+                    onClick={handleClose}
+                    className="mt-auto h-auto p-0 font-body text-base font-medium uppercase text-background underline underline-offset-2 hover:text-background/80 sm:text-lg"
                   >
-                    I agree to receive emails from SIGMA and accept the Privacy Policy.
-                  </label>
+                    Continue Shopping
+                  </Button>
                 </div>
+              ) : (
+                <>
+                  <div>
+                    <h2 className="font-body text-[27px] font-bold uppercase leading-none sm:text-[32px]">Never Miss A Drop</h2>
+                    <p className="mt-2 font-body text-sm font-semibold uppercase sm:text-base">Get The Updates</p>
+                  </div>
 
-                <button
-                  type="submit"
-                  className="mt-4 sm:mt-6 h-11 sm:h-12 px-8 sm:px-10 rounded-full border border-black bg-white text-black text-xs sm:text-sm font-semibold tracking-wide uppercase hover:bg-black hover:text-white transition-colors duration-300"
-                  style={{ fontFamily: 'var(--font-body), sans-serif' }}
-                >
-                  Join Now
-                </button>
-              </form>
+                  <img src={sigmaLockup} alt="SIGMA Clothing" className="mx-auto mt-[25%] h-auto w-44 invert sm:mt-[27%] sm:w-52" />
+
+                  <form onSubmit={handleSubmit} className="mt-auto w-full">
+                    <Input
+                      type="email"
+                      value={email}
+                      onChange={(event) => { setEmail(event.target.value); setError(''); }}
+                      placeholder="Email Address"
+                      required
+                      autoComplete="email"
+                      autoCapitalize="none"
+                      autoCorrect="off"
+                      spellCheck={false}
+                      className="h-14 rounded-none border-0 bg-foreground px-4 text-center font-body text-base normal-case text-background placeholder:text-background/65 focus-visible:ring-1 focus-visible:ring-background sm:h-16 sm:text-lg"
+                    />
+                    <Button
+                      type="submit"
+                      disabled={!agreed || status === 'loading'}
+                      className="mt-3 h-14 w-full rounded-none bg-foreground font-body text-base font-semibold uppercase text-background hover:bg-foreground/90 disabled:opacity-70 sm:h-16 sm:text-lg"
+                    >
+                      {status === 'loading' ? 'Joining' : 'Get On The List'}
+                    </Button>
+
+                    <div className="mt-4 flex items-start gap-3 px-3 text-left">
+                      <Checkbox
+                        id="newsletter-terms"
+                        checked={agreed}
+                        onCheckedChange={(checked) => setAgreed(checked === true)}
+                        className="mt-0.5 h-5 w-5 shrink-0 rounded-sm border-background bg-background data-[state=checked]:bg-background data-[state=checked]:text-foreground"
+                      />
+                      <label htmlFor="newsletter-terms" className="font-body text-[11px] leading-relaxed text-background sm:text-xs">
+                        Terms apply. See{' '}
+                        <Link to="/legal#privacy" onClick={(event) => event.stopPropagation()} className="underline underline-offset-2">privacy policy</Link>
+                        {' '}and{' '}
+                        <Link to="/legal#faqs" onClick={(event) => event.stopPropagation()} className="underline underline-offset-2">FAQ</Link>
+                        {' '}for more details.
+                      </label>
+                    </div>
+
+                    <div className="min-h-5 pt-2">
+                      {error && <p className="font-body text-[11px] text-background">{error}</p>}
+                    </div>
+
+                    <Button
+                      type="button"
+                      variant="link"
+                      onClick={handleClose}
+                      className="mt-2 h-auto p-0 font-body text-base font-medium uppercase text-background underline underline-offset-2 hover:text-background/80 sm:text-lg"
+                    >
+                      No, Thanks
+                    </Button>
+                  </form>
+                </>
+              )}
             </div>
-          </motion.div>
+          </motion.section>
         </motion.div>
       )}
     </AnimatePresence>

@@ -4,7 +4,7 @@ import { z } from 'npm:zod@3.23.8';
 
 const BodySchema = z.object({
   email: z.string().trim().email().max(255),
-  phone: z.string().trim().min(7).max(30),
+  phone: z.string().trim().min(7).max(30).optional(),
   source: z.string().trim().max(50).optional(),
 });
 
@@ -28,7 +28,7 @@ Deno.serve(async (req) => {
     }
 
     const email = parsed.data.email.toLowerCase();
-    const phone = parsed.data.phone.replace(/\s+/g, ' ');
+    const phone = parsed.data.phone?.replace(/\s+/g, ' ') ?? null;
     const source = parsed.data.source ?? 'menu';
 
     const supabase = createClient(
@@ -45,7 +45,7 @@ Deno.serve(async (req) => {
     if (existing) {
       await supabase
         .from('newsletter_subscribers')
-        .update({ phone, source })
+        .update({ ...(phone ? { phone } : {}), source })
         .eq('id', existing.id);
     } else {
       const { error } = await supabase
