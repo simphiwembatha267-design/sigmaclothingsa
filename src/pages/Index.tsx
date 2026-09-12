@@ -17,32 +17,42 @@ const Index = () => {
         <div className="absolute inset-0">
           <img
             src={heroImage}
-            alt="Sigma Collection"
+            alt="SIGMA FW25 collection campaign"
             fetchPriority="high"
             decoding="async"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover grayscale"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-foreground/75 via-foreground/25 to-foreground/15" />
         </div>
 
-        <div className="absolute left-1/2 -translate-x-1/2 bottom-[15%] md:bottom-[21%]">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="absolute inset-x-5 bottom-[18%] flex flex-col items-center text-center text-primary-foreground md:bottom-[24%]"
+        >
+          <p className="mb-4 font-body text-[10px] font-medium uppercase tracking-[0.3em] md:mb-5 md:text-xs">
+            FW25 Collection
+          </p>
+          <h1 className="max-w-4xl text-[clamp(3rem,9vw,7.5rem)] leading-[0.86] tracking-[0] text-balance">
+            Uncommon By Design
+          </h1>
+          <p className="mt-4 font-display text-xl font-light tracking-[0] md:mt-5 md:text-2xl">
+            Built for moguls.
+          </p>
+
+          <div className="mt-7 md:mt-9">
             <Link
               to="/shop"
-              className="group inline-flex items-center justify-center gap-2.5 h-9 md:h-10 pl-4 md:pl-5 pr-1.5 md:pr-2 rounded-xl border border-foreground/10 bg-background/80 backdrop-blur-sm text-foreground text-[11px] font-bold uppercase tracking-[0.18em] transition-all duration-300 hover:bg-background/95"
-              style={{ fontFamily: 'var(--font-body)' }}
+              className="group inline-flex h-11 items-center justify-center gap-3 rounded-full border border-primary-foreground/80 bg-background/10 py-1 pl-5 pr-1 font-body text-[10px] font-semibold uppercase tracking-[0.18em] text-primary-foreground backdrop-blur-md transition-colors duration-300 hover:bg-background/20 md:h-12 md:gap-4 md:pl-6 md:text-[11px]"
             >
-              Find Yours
-              <span className="grid h-6 w-6 md:h-7 md:w-7 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground transition-transform duration-300 group-hover:translate-x-0.5">
-                <ArrowRight size={12} strokeWidth={2.5} />
+              Shop Collection
+              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-primary-foreground text-foreground transition-transform duration-300 group-hover:translate-x-0.5 md:h-10 md:w-10">
+                <ArrowRight size={14} strokeWidth={2} />
               </span>
             </Link>
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
       </section>
 
 
