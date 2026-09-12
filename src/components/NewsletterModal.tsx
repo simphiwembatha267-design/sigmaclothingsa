@@ -7,7 +7,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { supabase } from '@/integrations/supabase/client';
 import sigmaLockup from '@/assets/sigma-lockup.png';
-import newsletterImageAsset from '@/assets/sigma-newsletter-orange.jpg.asset.json';
+import newsletterImage from '@/assets/sigma-newsletter-orange.jpg';
 
 const STORAGE_KEY = 'sigma-newsletter-dismissed';
 
@@ -89,7 +89,7 @@ export function NewsletterModal() {
             className="relative h-[min(720px,calc(100dvh-32px))] w-full max-w-[430px] overflow-hidden bg-foreground text-background shadow-2xl sm:h-[min(760px,calc(100dvh-48px))]"
           >
             <img
-              src={newsletterImageAsset.url}
+              src={newsletterImage}
               alt="SIGMA orange back design"
               className="absolute inset-0 h-full w-full object-cover object-center"
             />
