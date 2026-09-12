@@ -39,15 +39,30 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
 
+function StoreClosedScreen() {
+  return (
+    <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-background px-6 text-center">
+      <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">SIGMA</p>
+      <h1 className="text-3xl font-bold tracking-[-0.02em]">The store is closed</h1>
+      <p className="max-w-sm text-sm text-muted-foreground">
+        We are taking a short break. Follow us on Instagram to hear the moment we reopen.
+      </p>
+    </div>
+  );
+}
+
 function Storefront() {
   const [authed, setAuthed] = useState(() => isAuthenticated());
   const [showSplash, setShowSplash] = useState(true);
   const { gateEnabled } = useSiteGate();
+  const { closed } = useStoreClosed();
 
   return (
     <AnimatePresence mode="wait">
       {!authed && gateEnabled ? (
         <PasswordGate key="gate" onAuthenticated={() => setAuthed(true)} />
+      ) : closed ? (
+        <StoreClosedScreen key="closed" />
       ) : showSplash ? (
         <SplashScreen key="splash" onComplete={() => setShowSplash(false)} />
       ) : (
