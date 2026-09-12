@@ -17,6 +17,7 @@ const AdminResetPassword = lazy(() => import("./pages/admin/AdminResetPassword")
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
 const AdminOrders = lazy(() => import("./pages/admin/AdminOrders"));
 const AdminProducts = lazy(() => import("./pages/admin/AdminProducts"));
+const AdminSettings = lazy(() => import("./pages/admin/AdminSettings"));
 const AdminPlaceholder = lazy(() => import("./pages/admin/AdminPlaceholder"));
 import Index from "./pages/Index";
 const Shop = lazy(() => import("./pages/Shop"));
@@ -32,10 +33,11 @@ const queryClient = new QueryClient();
 function Storefront() {
   const [authed, setAuthed] = useState(() => isAuthenticated());
   const [showSplash, setShowSplash] = useState(true);
+  const { gateEnabled } = useSiteGate();
 
   return (
     <AnimatePresence mode="wait">
-      {!authed ? (
+      {!authed && gateEnabled ? (
         <PasswordGate key="gate" onAuthenticated={() => setAuthed(true)} />
       ) : showSplash ? (
         <SplashScreen key="splash" onComplete={() => setShowSplash(false)} />
@@ -204,20 +206,7 @@ const App = () => (
               />
               <Route
                 path="/admin/settings"
-                element={
-                  <AdminPlaceholder
-                    title="Settings"
-                    description="Store, brand and staff configuration."
-                    features={[
-                      "Store name, logo and brand colours",
-                      "Domain and store email",
-                      "Business information",
-                      "Tax and shipping settings",
-                      "Payment settings",
-                      "Social media and staff accounts",
-                    ]}
-                  />
-                }
+                element={<AdminSettings />}
               />
               <Route path="/admin/*" element={<Navigate to="/admin/dashboard" replace />} />
             </Route>
