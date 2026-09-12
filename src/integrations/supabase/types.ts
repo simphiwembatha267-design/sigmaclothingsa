@@ -14,6 +14,123 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_activity_log: {
+        Row: {
+          action: string
+          actor_email: string | null
+          actor_id: string | null
+          created_at: string
+          detail: string | null
+          entity_id: string | null
+          entity_label: string | null
+          entity_type: string | null
+          id: string
+        }
+        Insert: {
+          action: string
+          actor_email?: string | null
+          actor_id?: string | null
+          created_at?: string
+          detail?: string | null
+          entity_id?: string | null
+          entity_label?: string | null
+          entity_type?: string | null
+          id?: string
+        }
+        Update: {
+          action?: string
+          actor_email?: string | null
+          actor_id?: string | null
+          created_at?: string
+          detail?: string | null
+          entity_id?: string | null
+          entity_label?: string | null
+          entity_type?: string | null
+          id?: string
+        }
+        Relationships: []
+      }
+      collection_products: {
+        Row: {
+          collection_id: string
+          created_at: string
+          id: string
+          position: number
+          product_id: string
+        }
+        Insert: {
+          collection_id: string
+          created_at?: string
+          id?: string
+          position?: number
+          product_id: string
+        }
+        Update: {
+          collection_id?: string
+          created_at?: string
+          id?: string
+          position?: number
+          product_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "collection_products_collection_id_fkey"
+            columns: ["collection_id"]
+            isOneToOne: false
+            referencedRelation: "collections"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "collection_products_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      collections: {
+        Row: {
+          archived_at: string | null
+          cover_image: string | null
+          created_at: string
+          description: string | null
+          featured: boolean
+          handle: string
+          id: string
+          position: number
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          archived_at?: string | null
+          cover_image?: string | null
+          created_at?: string
+          description?: string | null
+          featured?: boolean
+          handle: string
+          id?: string
+          position?: number
+          status?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          archived_at?: string | null
+          cover_image?: string | null
+          created_at?: string
+          description?: string | null
+          featured?: boolean
+          handle?: string
+          id?: string
+          position?: number
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       customers: {
         Row: {
           address: string | null
@@ -64,6 +181,141 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      discount_codes: {
+        Row: {
+          active: boolean
+          code: string
+          created_at: string
+          expires_at: string | null
+          id: string
+          max_uses: number | null
+          min_purchase: number
+          starts_at: string | null
+          type: string
+          updated_at: string
+          used_count: number
+          value: number
+        }
+        Insert: {
+          active?: boolean
+          code: string
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          max_uses?: number | null
+          min_purchase?: number
+          starts_at?: string | null
+          type?: string
+          updated_at?: string
+          used_count?: number
+          value?: number
+        }
+        Update: {
+          active?: boolean
+          code?: string
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          max_uses?: number | null
+          min_purchase?: number
+          starts_at?: string | null
+          type?: string
+          updated_at?: string
+          used_count?: number
+          value?: number
+        }
+        Relationships: []
+      }
+      discount_redemptions: {
+        Row: {
+          amount: number
+          created_at: string
+          discount_id: string
+          id: string
+          order_id: string | null
+        }
+        Insert: {
+          amount?: number
+          created_at?: string
+          discount_id: string
+          id?: string
+          order_id?: string | null
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          discount_id?: string
+          id?: string
+          order_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "discount_redemptions_discount_id_fkey"
+            columns: ["discount_id"]
+            isOneToOne: false
+            referencedRelation: "discount_codes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discount_redemptions_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      inventory_movements: {
+        Row: {
+          change: number
+          created_at: string
+          created_by: string | null
+          id: string
+          note: string | null
+          order_id: string | null
+          product_id: string
+          reason: string
+          resulting_stock: number
+        }
+        Insert: {
+          change: number
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          note?: string | null
+          order_id?: string | null
+          product_id: string
+          reason?: string
+          resulting_stock: number
+        }
+        Update: {
+          change?: number
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          note?: string | null
+          order_id?: string | null
+          product_id?: string
+          reason?: string
+          resulting_stock?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "inventory_movements_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "inventory_movements_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       newsletter_subscribers: {
         Row: {
@@ -234,10 +486,12 @@ export type Database = {
       }
       products: {
         Row: {
+          archived_at: string | null
           barcode: string | null
           category: string | null
           colors: string[]
           compare_at_price: number | null
+          cost_price: number | null
           created_at: string
           description: string | null
           featured: boolean
@@ -257,10 +511,12 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          archived_at?: string | null
           barcode?: string | null
           category?: string | null
           colors?: string[]
           compare_at_price?: number | null
+          cost_price?: number | null
           created_at?: string
           description?: string | null
           featured?: boolean
@@ -280,10 +536,12 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          archived_at?: string | null
           barcode?: string | null
           category?: string | null
           colors?: string[]
           compare_at_price?: number | null
+          cost_price?: number | null
           created_at?: string
           description?: string | null
           featured?: boolean
@@ -328,6 +586,89 @@ export type Database = {
         }
         Relationships: []
       }
+      shipping_rates: {
+        Row: {
+          active: boolean
+          created_at: string
+          estimated_days: string | null
+          id: string
+          max_order_total: number | null
+          min_order_total: number
+          name: string
+          position: number
+          price: number
+          updated_at: string
+          zone_id: string
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          estimated_days?: string | null
+          id?: string
+          max_order_total?: number | null
+          min_order_total?: number
+          name: string
+          position?: number
+          price?: number
+          updated_at?: string
+          zone_id: string
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          estimated_days?: string | null
+          id?: string
+          max_order_total?: number | null
+          min_order_total?: number
+          name?: string
+          position?: number
+          price?: number
+          updated_at?: string
+          zone_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "shipping_rates_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "shipping_zones"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      shipping_zones: {
+        Row: {
+          active: boolean
+          countries: string[]
+          created_at: string
+          free_shipping_threshold: number | null
+          id: string
+          name: string
+          position: number
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          countries?: string[]
+          created_at?: string
+          free_shipping_threshold?: number | null
+          id?: string
+          name: string
+          position?: number
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          countries?: string[]
+          created_at?: string
+          free_shipping_threshold?: number | null
+          id?: string
+          name?: string
+          position?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       site_settings: {
         Row: {
           bool_value: boolean
@@ -335,6 +676,7 @@ export type Database = {
           id: string
           key: string
           updated_at: string
+          value: Json | null
         }
         Insert: {
           bool_value?: boolean
@@ -342,6 +684,7 @@ export type Database = {
           id?: string
           key: string
           updated_at?: string
+          value?: Json | null
         }
         Update: {
           bool_value?: boolean
@@ -349,6 +692,7 @@ export type Database = {
           id?: string
           key?: string
           updated_at?: string
+          value?: Json | null
         }
         Relationships: []
       }
@@ -378,7 +722,12 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      admin_analytics: {
+        Args: { range_end: string; range_start: string }
+        Returns: Json
+      }
+      admin_dashboard_stats: { Args: never; Returns: Json }
+      admin_payment_totals: { Args: never; Returns: Json }
     }
     Enums: {
       app_role: "admin" | "staff"
