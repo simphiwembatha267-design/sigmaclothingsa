@@ -35,9 +35,9 @@ export function Footer() {
   const [helpOpen, setHelpOpen] = useState(false);
 
   return (
-    <footer className="relative z-30 w-full border-t border-border bg-background">
-      <div className="relative mx-auto max-w-[1800px] px-4 sm:px-8">
-        <div className="flex h-16 items-center justify-between sm:h-[72px]">
+    <footer className="relative z-40 px-3 pb-3 sm:px-5 sm:pb-4">
+      <div className="relative mx-auto max-w-[1800px]">
+        <div className="flex h-14 items-center justify-between rounded-[28px] bg-background/90 px-3 shadow-[0_8px_30px_-12px_hsl(var(--foreground)/0.25)] backdrop-blur-md sm:px-5">
           {/* Social icons */}
           <div className="flex items-center gap-2 sm:gap-3">
             {socialLinks.map(({ label, href, Icon, isLucide }) => (
