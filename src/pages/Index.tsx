@@ -33,7 +33,7 @@ const Index = () => {
           >
             <Link
               to="/shop"
-              className="inline-flex items-center justify-center gap-2.5 h-9 md:h-10 pl-4 md:pl-5 pr-1.5 md:pr-2 rounded-xl border border-foreground/10 bg-background/80 backdrop-blur-sm text-foreground text-[11px] font-bold uppercase tracking-[0.18em] transition-all duration-300 hover:bg-background/95"
+              className="group inline-flex items-center justify-center gap-2.5 h-9 md:h-10 pl-4 md:pl-5 pr-1.5 md:pr-2 rounded-xl border border-foreground/10 bg-background/80 backdrop-blur-sm text-foreground text-[11px] font-bold uppercase tracking-[0.18em] transition-all duration-300 hover:bg-background/95"
               style={{ fontFamily: 'var(--font-body)' }}
             >
               Find Yours
