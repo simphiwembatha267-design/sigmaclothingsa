@@ -12,7 +12,7 @@ const Index = () => {
   return (
     <div className="overflow-hidden">
       {/* Hero Section */}
-      <section className="relative h-screen min-h-[600px] flex items-end">
+      <section className="relative h-screen min-h-[600px]">
         <div className="absolute inset-0">
           <img
             src={heroImage}
@@ -23,32 +23,20 @@ const Index = () => {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent" />
         </div>
-        
-        <div className="relative container-editorial pb-16 md:pb-24 text-background">
+
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="max-w-2xl"
           >
-            <p className="text-caption uppercase mb-4 opacity-80">FW25 Collection</p>
-            <div className="flex items-end gap-4 mb-6 flex-wrap">
-              <h1 className="font-display text-display-xl">
-                Uncommon
-                <br />
-                By Design
-              </h1>
-              <Link
-                to="/shop"
-                className="mb-1 inline-flex items-center justify-center w-[118px] md:w-[130px] h-9 md:h-10 rounded-xl border border-foreground/10 bg-background/80 backdrop-blur-sm text-foreground text-[11px] font-bold uppercase tracking-[0.18em] transition-all duration-300 hover:bg-background/95"
-                style={{ fontFamily: 'var(--font-body)' }}
-              >
-                Find Yours
-              </Link>
-            </div>
-            <p className="text-body-lg opacity-80 mb-8 max-w-md">
-              Built for moguls.
-            </p>
+            <Link
+              to="/shop"
+              className="inline-flex items-center justify-center w-[118px] md:w-[130px] h-9 md:h-10 rounded-xl border border-foreground/10 bg-background/80 backdrop-blur-sm text-foreground text-[11px] font-bold uppercase tracking-[0.18em] transition-all duration-300 hover:bg-background/95"
+              style={{ fontFamily: 'var(--font-body)' }}
+            >
+              Find Yours
+            </Link>
           </motion.div>
         </div>
       </section>
